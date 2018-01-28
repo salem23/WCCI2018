@@ -10,10 +10,12 @@
     T\kern-.1667em\lower.7ex\hbox{E}\kern-.125emX}}
 \begin{document}
 
-\title{WCCI Paper*\\
+\title{Analyzing and Enhancing the Evaluation Process of Evolutionary Drivers for TORCS\\
 {\footnotesize \textsuperscript{*}Note: Sub-titles are not captured in Xplore and
 should not be used}
-\thanks{Identify applicable funding agency here. If none, delete this.}
+\thanks{This work has been supported in part by: Ministerio espa\~{n}ol de
+Econom\'{\i}a y Competitividad under project TIN2014-56494-C4-3-P
+(UGR-EPHEMECH), TIN2017-85727-C4-2-P (UGR-DeepBio) and TEC2015-68752 (also funded by FEDER).}
 }
 
 \author{\IEEEauthorblockN{1\textsuperscript{st} Mohammed Salem}
@@ -45,29 +47,13 @@ pablo.garciasanchez@uca.es}
 
 \begin{abstract}
 	
-	% Need to edit to reflect new results
-	Games offer a suitable testbed where new methodologies and algorithms can be tested in a near-real life environment. For example, in a card driving game, using transfer learning or other techniques results can be
-	generalized to autonomous driving environments. 
-	In this work, we use evolutionary algorithms to optimize a fuzzy autonomous driver for the open simulated car racing
-	game TORCS. The Genetic Algorithm applied 
-	%Pablo: How many? Why different?
-	% Antonio - It is just one GA
-	improves the fuzzy systems to set an optimal target speed as well as
-	the instantaneous steering angle during the race.
-	Thus, the approach offer an automatic way to define the
-	membership functions, instead of a manual or hill-climbing descent method.
-	However, the main issue with this kind of algorithms is to define a proper fitness function that best delivers the obtained result, which is eventually %Pablo: "delivers the obtained result"? Better "models the desired result"
-	to win as many races as possible. In this paper we define two different evaluation functions, and prove that fine-tuning the controller via evolutionary algorithms 
-	%Pablo: Algorithm or algorithms? Are the parameters tuned?
-	% Antonio - just one, but this is the general term. No parameter tuning has been done
-	robustly finds good results and that, in many cases, they are able to play very competitively against other published results, 
-	%Pablo: our previous work?
-	% Antonio - also other drivers for the SotA
-	with a more relying approach that needs very few parameters to tune.
-	The optimized fuzzy-controllers (one per fitness) yield a very good performance, mainly in tracks that have many turning points, which are, in turn, the most
-	difficult for any autonomous agent. 
-	Experimental results show that the enhanced controllers are very competitive with respect to the embedded TORCS drivers, and much more efficient in driving than the original fuzzy-controller.
-	% comment new results Pablo: the objective should still be clarified, I still don't know what has been done in this paper by only reading the abstract
+In Evolutionary Algorithms, designing a reliable and effective evaluation process for the individuals is a key aspect to care about. This process involves not only the design of a proper fitness function, but also the selection of the best solution for the optimization problem being solved; since this decision might not be easy when uncertainty or `noise' is present in the problem environment.
+Automatically improving the behavioural engine of an autonomous driver for a car racing simulator such as TORCS, is an optimization problem which owns these difficulties. 
+Thus, in this paper we describe an analysis and some proposals to improve the evaluation of optimized fuzzy drivers for TORCS. It starts from preliminary results obtained in previous papers and aims to obtain a more competitive autonomous driver.
+To this end, two different fitness functions are studied in several experiments, along with two  
+% Antonio - don't know how many approaches will we try
+approaches for the selection of the best individual in the evolution, considering the noisy nature of the problem, which leads to the fact that the same individual could obtain very good or very bad results in the same races, and against the same opponents, due to the stochasticity present in the game and in the rivals' AI.
+% Antonio - Complete this with the obtained resulst and conclusions
 \end{abstract}
 \begin{IEEEkeywords}
 Videogames, Fuzzy Controller, TORCS, Steering control, Optimization, Genetic Algorithms
