@@ -63,14 +63,28 @@ Videogames, Fuzzy Controller, TORCS, Steering control, Optimization, Genetic Alg
 \section{Introduction}
 \label{sec:intro}
 
-The Open Racing Car Simulator (TORCS) \cite{WebTORCS} is a very realistic racing simulator which offers a great testbed for the implementation and evaluation of autonomous drivers. 
-It has been used several times for the celebration of Artificial Intelligence (AI) competitions, where the aim is to create the best autonomous driver for racings \cite{torcs5,manualTORCS,Torcs3,torcs7,oponnents2010}. 
+Autonomous driving is a problem that shows up in many environments,
+including the realm of self-driving cars but also in drones, ships,
+trains and underwater vehicles. In general, there will be a series of
+sensor inputs that include real speed, obstacles and other vehicles,
+and based on those sensors, the bot will have to take a decision on
+speed and steering that is optimal in several different
+senses \cite{Autodriv2006}. Testing different autonomous driving methodologies in real
+life is usually reserved to just a few big players, and methodologies
+as well as algorithms are usually tested in simulated environments;
+these simulated environments, at the same time, offer the incentive of
+competition among your system and others. In this paper, we will be
+using the Open Racing Car Simulator (TORCS) \cite{WebTORCS} is a very
+realistic racing simulator which offers a great testbed for the
+implementation and evaluation of autonomous drivers.  
+It has been used several times for the celebration of Artificial
+Intelligence (AI) competitions, where the aim is to create the best
+autonomous driver for racings
+\cite{torcs5,manualTORCS,Torcs3,torcs7,oponnents2010}. Besides being
+able to test your car against other cars that have been published, it
+can be used as a standalone environment to optimize driving in a
+solo race. 
 
-%Automotive industry
-%needs the creation of real self-driving cars that can travel in everyday roads and streets or, for
-%that matter, in a desert or hostile environment. However, this is only an
-%objective; autonomous vehicles should also optimize fuel consumption as
-%well as car safety and, in some cases, occupant comfort \cite{Autodriv2006}.
 
 Evolutionary Algorithms (EAs) \cite{EAs_Back96} have been frequently applied in this scope, normally as an optimization tool to improve different kinds of behavioural engines \cite{Floreano2004,CarRacing_Pelta09,SAES2012,QuadfliegMO,torcs2012}, also including Fuzzy-based ones \cite{Guadarrama2008, LFAG, PerezEvolvingFuzzy09}.
 
