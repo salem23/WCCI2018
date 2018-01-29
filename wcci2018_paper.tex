@@ -47,13 +47,31 @@ pablo.garciasanchez@uca.es}
 
 \begin{abstract}
 	
-In Evolutionary Algorithms, designing a reliable and effective evaluation process for the individuals is a key aspect to care about. This process involves not only the design of a proper fitness function, but also the selection of the best solution for the optimization problem being solved; since this decision might not be easy when uncertainty or `noise' is present in the problem environment.
-Automatically improving the behavioural engine of an autonomous driver for a car racing simulator such as TORCS, is an optimization problem which owns these difficulties. 
-Thus, in this paper we describe an analysis and some proposals to improve the evaluation of optimized fuzzy drivers for TORCS. It starts from preliminary results obtained in previous papers and aims to obtain a more competitive autonomous driver.
-To this end, two different fitness functions are studied in several experiments, along with two  
+In Evolutionary Algorithms, designing a reliable and effective
+evaluation process for the individuals is a key aspect to care
+about. This process involves not only the design of a proper fitness
+function, but also the selection of the best solution for the
+optimization problem being solved; since this decision might not be
+easy when uncertainty or `noise' is present in the problem
+environment. Automatically improving the behavioural engine of an
+autonomous driver for a car racing simulator such as TORCS is an
+optimization problem which offers these challenges. Thus, in this
+paper we describe an analysis and some proposals to improve the
+evaluation of optimized fuzzy drivers for TORCS. It starts from
+preliminary results obtained in previous papers and aims to obtain a
+more competitive autonomous driver via redesign of the fitness
+evaluation procedure; to this end, several different fitness functions are
+studied in several experiments, along with several
 % Antonio - don't know how many approaches will we try
-approaches for the selection of the best individual in the evolution, considering the noisy nature of the problem, which leads to the fact that the same individual could obtain very good or very bad results in the same races, and against the same opponents, due to the stochasticity present in the game and in the rivals' AI.
+% JJ - several
+approaches for the selection of the best individual in the evolution,
+considering the noisy nature of the problem, which leads to the fact
+that the same individual could obtain very good or very bad results in
+the same races, and against the same opponents, due to the
+stochasticity present in the game and in the rivals' AI. 
 % Antonio - Complete this with the obtained resulst and conclusions
+% We don't deal with noise explicitly, we just reevaluate all cars
+% every generation - JJ
 \end{abstract}
 \begin{IEEEkeywords}
 Videogames, Fuzzy Controller, TORCS, Steering control, Optimization, Genetic Algorithms
