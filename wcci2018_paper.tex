@@ -47,13 +47,31 @@ pablo.garciasanchez@uca.es}
 
 \begin{abstract}
 	
-In Evolutionary Algorithms, designing a reliable and effective evaluation process for the individuals is a key aspect to care about. This process involves not only the design of a proper fitness function, but also the selection of the best solution for the optimization problem being solved; since this decision might not be easy when uncertainty or `noise' is present in the problem environment.
-Automatically improving the behavioural engine of an autonomous driver for a car racing simulator such as TORCS, is an optimization problem which owns these difficulties. 
-Thus, in this paper we describe an analysis and some proposals to improve the evaluation of optimized fuzzy drivers for TORCS. It starts from preliminary results obtained in previous papers and aims to obtain a more competitive autonomous driver.
-To this end, two different fitness functions are studied in several experiments, along with two  
+In Evolutionary Algorithms, designing a reliable and effective
+evaluation process for the individuals is a key aspect to care
+about. This process involves not only the design of a proper fitness
+function, but also the selection of the best solution for the
+optimization problem being solved; since this decision might not be
+easy when uncertainty or `noise' is present in the problem
+environment. Automatically improving the behavioural engine of an
+autonomous driver for a car racing simulator such as TORCS is an
+optimization problem which offers these challenges. Thus, in this
+paper we describe an analysis and some proposals to improve the
+evaluation of optimized fuzzy drivers for TORCS. It starts from
+preliminary results obtained in previous papers and aims to obtain a
+more competitive autonomous driver via redesign of the fitness
+evaluation procedure; to this end, several different fitness functions are
+studied in several experiments, along with several
 % Antonio - don't know how many approaches will we try
-approaches for the selection of the best individual in the evolution, considering the noisy nature of the problem, which leads to the fact that the same individual could obtain very good or very bad results in the same races, and against the same opponents, due to the stochasticity present in the game and in the rivals' AI.
+% JJ - several
+approaches for the selection of the best individual in the evolution,
+considering the noisy nature of the problem, which leads to the fact
+that the same individual could obtain very good or very bad results in
+the same races, and against the same opponents, due to the
+stochasticity present in the game and in the rivals' AI. 
 % Antonio - Complete this with the obtained resulst and conclusions
+% We don't deal with noise explicitly, we just reevaluate all cars
+% every generation - JJ
 \end{abstract}
 \begin{IEEEkeywords}
 Videogames, Fuzzy Controller, TORCS, Steering control, Optimization, Genetic Algorithms
@@ -63,25 +81,86 @@ Videogames, Fuzzy Controller, TORCS, Steering control, Optimization, Genetic Alg
 \section{Introduction}
 \label{sec:intro}
 
-The Open Racing Car Simulator (TORCS) \cite{WebTORCS} is a very realistic racing simulator which offers a great testbed for the implementation and evaluation of autonomous drivers. 
-It has been used several times for the celebration of Artificial Intelligence (AI) competitions, where the aim is to create the best autonomous driver for racings \cite{torcs5,manualTORCS,Torcs3,torcs7,oponnents2010}. 
+Autonomous driving is a problem that shows up in many environments,
+including of course self-driving cars, but also in drones, ships,
+trains and underwater vehicles. In general, there will be a series of
+sensor inputs that include real speed, obstacles and other vehicles,
+and based on those sensors, the bot will have to take a decision on
+speed and steering that is optimal in several different
+senses \cite{Autodriv2006}. Testing different autonomous driving methodologies in real
+life is usually reserved to just a few big players, and methodologies
+as well as algorithms are usually tested in simulated environments;
+these simulated environments, at the same time, offer the incentive of
+competition among your system and others. In this paper, we will be
+using the Open Racing Car Simulator (TORCS) \cite{WebTORCS} is a very
+realistic racing simulator which offers a great testbed for the
+implementation and evaluation of autonomous drivers.  
+It has been used several times for the celebration of Artificial
+Intelligence (AI) competitions, where the aim is to create the best
+autonomous driver for racings
+\cite{torcs5,manualTORCS,Torcs3,torcs7,oponnents2010}. Besides being
+able to test your car against other cars that have been published, it
+can be used as a standalone environment to optimize driving in a
+solo race. 
 
-%Automotive industry
-%needs the creation of real self-driving cars that can travel in everyday roads and streets or, for
-%that matter, in a desert or hostile environment. However, this is only an
-%objective; autonomous vehicles should also optimize fuel consumption as
-%well as car safety and, in some cases, occupant comfort \cite{Autodriv2006}.
+Evolutionary Algorithms (EAs) \cite{EAs_Back96} have been frequently
+applied as a general-purpose optimization method in this area,
+generally combined with behavioural engines that rule different parts
+of the car
+\cite{Floreano2004,CarRacing_Pelta09,SAES2012,QuadfliegMO,torcs2012}. These
+driving engines have included lately fuzzy controllers
+\cite{Guadarrama2008, LFAG, PerezEvolvingFuzzy09}. These controllers
+use fuzzy Logic \cite{Fuzzy2011}, a  technique that is quite suitable
+for defining this kind of autonomous agents, since they are in part
+inspired by the human reasoning when driving. A fuzzy controller works
+with linguistic variables, and will for instance turn {\em slightly}
+to the right when the next curve is {\em close}, but these controllers
+have to be designed to map properly input to desired outputs in
+particular situations. Previously, the authors presented an approach
+combining two specialized fuzzy controllers, designed by hand, that
+were able to decide the car's proper steering angle and desired speed
+at every single point (or tick) during a race \cite{evo17}. This
+driver was later improved \cite{evo18} optimizing the parameters of
+their membership functions by means of a Genetic Algorithm
+\cite{GAs_Goldberg89}; this automated design improved manual one
+obtaining several controllers that were able to beat the initial
+hand-designed controller in a race, as well as other published
+controllers. 
 
-Evolutionary Algorithms (EAs) \cite{EAs_Back96} have been frequently applied in this scope, normally as an optimization tool to improve different kinds of behavioural engines \cite{Floreano2004,CarRacing_Pelta09,SAES2012,QuadfliegMO,torcs2012}, also including Fuzzy-based ones \cite{Guadarrama2008, LFAG, PerezEvolvingFuzzy09}.
+This proved that evolutionary algorithms were able to get the fuzzy
+controller parameters better than a hand-made design, but at the same
+time revealed several challenges. In general, evolutionary algorithms
+optimize the fitness function that is used; evolved fuzzy controllers
+(hereafter FCs)
+will be eventually as good as the fitness function allows. But in this
+particular case we cannot use as fitness function the position
+obtained by the FC in every possible race on every possible track with
+every possible opponent, so we have to settle for a {\em surrogate} of
+the fitness in a very limited environment. First we opted for
+eliminating opponents and making evaluations in solo races; then we
+chose a particular track that combined straight segments as well as
+some curves and did not take too long to run, and eventually we had to
+decide what factors related to speed, damage and lap time were going
+to be effectively included in the final fitness function. 
 
-Fuzzy Logic \cite{Fuzzy2011} represents a very good technique to define this kind of autonomous agents, since they model in part the human reasoning when driving.
-For this reason the authors presented previously an approach combining two specialized fuzzy controllers able to decide the car's steering angle and desired speed at every single point (or tick) during a race \cite{evo17}. This driver were later improved \cite{evo18} optimizing the parameters of their membership functions by means of a Genetic Algorithm \cite{GAs_Goldberg89} which showed a more efficient behaviour.
+Results were encouraging, but it is still a surrogate model. As such a
+model, we need to decide on the best track to perform {\em training}
+and also the solo race measures with the biggest impact in the
+eventual racing performance. This is why in this paper we have
+designed different speed-and-damage related measures, and also taken
+into account damages, as we will present later on. Besides, the
+fitness evaluation process has a certain amount of uncertainty because
+damages and some track conditions can randomly vary in different
+evaluations. This is why instead of selecting directly the driver as
+we did before, we will be using an actual race among the best drivers
+to select the best one.
 
-% Antonio - Improve the motivation... I'm not inspired tonight. :_(
-However, the proposed optimization method was a first step, which let the door open for many different ways of improvement. Thus, in this paper we propose and analyze different evaluation methods to create a more reliable and efficient evolutionary driver. First, two novel different fitness functions have been designed in order to find the best set of factors influencing in the performance of the driver during the race.
-And Second,  other evaluation-related factors have been analyzed, such as the consideration of a track combining easy and difficult parts (i.e. curves).
+The main objective of the three new techniques introduced in this
+paper, namely, heuristic track selection, fitness function design and
+{\em winner} selection have as the main objective to create a better
+model of the racing environment. Its results will be commented in the
+corresponding section. 
 
-Moreover, there is uncertainty/noise present in this environment, which means that the evaluation of the same individual/driver in the same conditions could yield very different results (due to the presence of stochastic factors). Thus, in order to better deal with this issue, we have also studied different approaches to choose the best individual of the every execution, i.e. the best driver.
 
 % Antonio - comment on the results
 
@@ -100,6 +179,8 @@ be presented in section \ref{sec:conclusions}.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%  STATE OF THE ART  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{State of the Art}
 \label{sec:soa}
+
+TORCS has become one of the main environments for research on AI since its launch in 2007 \cite{WebTORCS}. It offers different kind of problems to solve, such as the definition of the optimal parameters for the cars (before the race) and the main one which is the design of competitive autonomous drivers aiming to win races against other cars.
 
 Evolutionary algorithms have targeted TORCS almost since its
 publication, for instance, for determining the
