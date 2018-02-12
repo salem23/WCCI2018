@@ -465,13 +465,13 @@ const char *path = a.c_str();
         acce=accel; brak=brake;
      //   CarControl cc(accel,brake,gear,steer,clutch);
        // return cc;
+if (cs.getSpeedX()>20) fitest<<cs.getSpeedX()<< endl<<cs.getDamage()<<endl;//<<","<<targetSpeed <<endl;
     }
     
 
     
    CarControl cc(acce,brak,gear,steer,clutch);
-     fitest<<cs.getSpeedX()<< endl<<cs.getDamage()<<endl;//<<","<<targetSpeed <<endl;
-          
+       
 //fitest<<"in:"<<cs.getTrack(9)<<","<<fmax(cs.getTrack(8),cs.getTrack(10))<<","<<fmax(cs.getTrack(7),cs.getTrack(11))<<","<<cs.getAngle()<<","<<cs.getSpeedZ()<<","<<cs.getSpeedX()<<","<<cs.getSpeedY()<<"\n out:"<<steer<<","<<acce<<","<<targetSpeed <<endl;
  
  //	fprintf(resultFile1,"in: %f,%f,%f,%f,%f,%f,%f\n out:%f,%f,%f\n", cs.getTrack(9),max(cs.getTrack(8),cs.getTrack(10)),max(cs.getTrack(7),cs.getTrack(11)),cs.getAngle(),cs.getSpeedZ(),cs.getSpeedX(),cs.getSpeedY(),steer,acce,targetSpeed );

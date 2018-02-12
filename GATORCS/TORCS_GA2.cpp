@@ -12,7 +12,7 @@
 
 typedef int vect[x];
 using namespace std;
-const int taille_pop= 20;// POP SIZE
+const int taille_pop= 20;
 int tournamentSize=2;
 int mutationRate=5;
 int crossoverRate = 90;
@@ -21,10 +21,11 @@ const int NG= 36;
 int pop[taille_pop][NG];
 double fit[taille_pop];
 vect ind; 
-double best=0;
+double CR=0.7;
+double best;
 int besti[NG];
 int tab[x][x];
-
+float tabfit[x];
 float sommeFitness=0;
 string ExePath() {
     char buffer[MAX_PATH];
@@ -225,9 +226,30 @@ int selection_tournois(){ int i1,i2,i3,imax;
                                          if (fit[i3]>fit[imax])imax=i3;
                                          return (imax);}
 /*on utilise la selection_tournois pour selectionner des individus de telles sortent a ne pas dépasser le pourcentage des individus à sélectionner ici 0,7.*/ 
-
+void selection_croisement(int *nc, int C[]){
+                                     
+                                         double som1=somme();        
+                                         int j=0;
+                                         float pc=0;
+                                         while (pc<=CR){ int id;
+                                                          id=selection_tournois();
+                                                          pc+=fit[id]/som1;
+/* ici on associe a chaque individu selectioner un segmentrelatif a sa fitness */ 
+                                                          C[j]=id;
+// on stok les indices des individus selectionner dans un tabeau pour les croiser aprés
+                                                          *nc=j+1;
+/*on incremente chaque fois la taille du tableau des ind selectioner que on selectionent pr savoir dans le croisment combien on va croiser*/ 
+                                                          j++;}}
 /*le même principe pour la selection pour la mutation*/ 
-
+int *selection_mutation(int *nm, int M[]){
+                         int j=0;
+                         float pm=0;
+                           double som1=somme();   
+                         while (pm<=0.3){ int id;
+                                          id=selection_tournois();
+                                          pm+=fit[id]/som1;
+                                          M[j]=id;*nm=j+1;j++;}
+                         return M;}
 /*on fait le croisement un point des ind sélectionner pour le croisement*/ 
 /*
 void croisement(int P1[], int P2[], int E1[], int E2[]){
@@ -287,17 +309,17 @@ void Mutation( const int& index )
 int a,f,e,u;srand(time(NULL));  
 int E0[NG];
 for(int j=0;j<NG;j++)E0[j]=pop[index][j]; 
-a=rand()%(9)+1;srand(time(NULL));
+a=rand()%(9)+1;
 if (a%4==0){ e=0;f=a-1;} else{ e=a-1;f=a+1;};
-u=rand()%(f)+e;srand(time(NULL));
+u=rand()%(f)+e;
 E0[a]=u;
 a=rand()%(9)+13;
 if (a%4==0){ e=0;f=a-1;} else{ e=a-1;f=a+1;};
-u=rand()%(f)+e;srand(time(NULL));
+u=rand()%(f)+e;
 E0[a]=u;
 a=rand()%(9)+25;
 if (a%4==0){ e=0;f=a-1;} else{ e=a-1;f=a+1;};
-u=rand()%(f)+e;srand(time(NULL));
+u=rand()%(f)+e;
 E0[a]=u;
 fit[index]=fitness(E0);
 for(int j=0;j<NG;j++)pop[index][j]=E0[j];
@@ -305,7 +327,7 @@ for(int j=0;j<NG;j++)pop[index][j]=E0[j];
 }
 
 void Crossover()
-{srand(time(NULL));
+{
 for ( int i = 0; i < taille_pop; i++ ) {
 int r = rand() % 100;
 if ( r < crossoverRate ) {
@@ -329,7 +351,7 @@ int tmp = point1;
 point1 = point2;
 point2 = tmp;
 }
-// Do 2-point crossover
+// Do 1-point crossover
 Crossover( index1, index2, point1, point2 );
 }
 }
@@ -385,6 +407,8 @@ while ( i < tournamentSize )
 int main(int argc, char *argv[]){
 //time_t ti;srand ((unsigned) time(&ti));
 vect ind;   
+//time_t ti; srand ((unsigned) time(&ti));
+
 int r;
 //int solution [NG]={0, 50, 86, 87, 91, 100, 0, 40, 52, 74, 91, 100, 0, 97, 97, 99, 100, 100};
 int h=0; 
@@ -413,16 +437,13 @@ path = z.c_str();
 std::ofstream fiche(path, ios::trunc); 
 fiche.close();
 
-
+gen_population(); 
 cout <<"Starting";
-b = "\\WCCI\\results\\best.txt";
-z=a;
-z += b;
-path = z.c_str(); 
-fiche1.open(path, ios::trunc); 
- fiche1.close(); 
- 
- gen_population(); 
+
+  
+// system("D:\journal\\conferences\\2018\\torcs\\GA\\WCCI\\client.exe" );
+ /// ShellExecute(NULL, "open", "D:\\journal\\conferences\\2018\\torcs\\GA\\WCCI\\client.exe", NULL, NULL, SW_SHOWDEFAULT);
+
 while(h<iteration_number) 
 {       
       //gen_population(pop);   
@@ -430,30 +451,59 @@ while(h<iteration_number)
       int nm=0;
       int C[taille_pop];
       int M[taille_pop];
+      selection_mutation(&nm,M);
+      selection_croisement(&nc, C);
       int E[taille_pop];
 ///////////
 
 Select();
 Crossover();
 Mutate();
-b = "\\WCCI\\results\\best.txt";
-z=a;
-z += b;
-path = z.c_str(); 
-fiche1.open(path, ios::app);  
+
+//////////////////////////////
+/*
+
+      int E1[taille_pop];
+      int E2[taille_pop];
+      int i=0;
+      cout <<"Evolution";
+      while(i<nc-1){
+//maintenant on vas faire la croisement de tt les individus de la population dans leur indices on étéselectioner par la sélection croisement  
+                    croisement ( pop[C[i]], pop[C[i+1]], E1, E2);
+                    double f1=fitness(E1);
+                    double f2=fitness(E2);
+                    
+//on fait le remplacement pour garder que les meilleurs entre lesenfants est les parents*/ /* on a choisit de remplacer le pire des parents par le meilleur enfant si la fitness de ce dernier est plusgrande de celle du pire parent  
+                    if(f1>=f2){
+                         if((fit[C[i]]<f1)&&(fit[C[i]]<=fit[C[i+1]])){
+                                int j; for(j=0;j<NG;j++)pop[C[i]][j]=E1[j];fit[C[i]]=f1;}
+                         else if((fit[C[i+1]]<f1)&&(fit[C[i+1]]<fit[C[i]])){
+                                int j; for (j=0;j<NG;j++)pop[C[i+1]][j]=E1[j];fit[C[i+1]]<f1;}}
+                    else{if((fit[C[i]]<f2)&&(fit[C[i]]<=fit[C[i+1]])){
+                              int j; for(j=0;j<NG;j++)pop[C[i]][j]=E2[j];fit[C[i]]=f2;}
+                         else if((fit[C[i+1]]<f2)&&(fit[C[i+1]]<fit[C[i]])){
+                              int j; for(j=0;j<NG;j++)pop[C[i+1]][j]=E2[j];fit[C[i+1]]=f2;}}
+       i=i+2;}
+// on mute la individu de la population sélectionner en sélection mutation et on remplace si enfant estmeilleur 
+       while(i<nm){  mutation( pop[C[i]], E);
+       double f=fitness(E);
+                     if(fit[C[i]]<f){int j; for(j=0;j<NG;j++)pop[C[i]][j]=E[j];fit[C[i]]=f;}
+                     i++;}
+// a chaque itération on trouve l'indice de meilleur individu après tous les étapes
+
+ */   
 r=meilleur_ind();
  int t=pire_ind();   
 if (best>fit[t]){ 
-for(int j=0;j<NG;j++)pop[t][j]=besti[j];fit[t]=best; }      
-fiche1<<"gen "<<h<<" MFs :";
-if (fit[r]>best){  for(int j=0;j<NG;j++){besti[j]=pop[r][j];fiche1<<besti[j]<<" ";}best=fit[r];fiche1<<" best : "<<best<<endl; }      
-fiche1.close();
+                   for(int j=0;j<NG;j++)pop[t][j]=besti[j]; }      
+
+if (fit[r]>best){  for(int j=0;j<NG;j++)best=pop[r][j];best=fit[r]; }      
 h++;
 }                 
-
-
-printf("\n");printf("best solution is ");printf("%d\t", best);
-for(int i=0;i<NG;i++)printf("%d\t",besti[i]);
+int i;
+printf("%d\t", best);
+printf("\n");printf("la soultion est "); printf("\n");
+for(i=0;i<NG;i++)printf("%d\t",besti[i]);
 
 getch(); return 0;    
 }
