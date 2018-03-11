@@ -11,8 +11,7 @@
 \begin{document}
 
 \title{Analyzing and Enhancing the Evaluation Process of Evolutionary Drivers for TORCS\\
-{\footnotesize \textsuperscript{*}Note: Sub-titles are not captured in Xplore and
-should not be used}
+{\footnotesize \textsuperscript{*}Note: Sub-titles are not captured in Xplore and should not be used}
 \thanks{This work has been supported in part by: Ministerio espa\~{n}ol de
 Econom\'{\i}a y Competitividad under project TIN2014-56494-C4-3-P
 (UGR-EPHEMECH), TIN2017-85727-C4-2-P (UGR-DeepBio) and TEC2015-68752 (also funded by FEDER).}
@@ -60,18 +59,13 @@ paper we describe an analysis and some proposals to improve the
 evaluation of optimized fuzzy drivers for TORCS. It starts from
 preliminary results obtained in previous papers and aims to obtain a
 more competitive autonomous driver via redesign of the fitness
-evaluation procedure; to this end, several different fitness functions are
-studied in several experiments, along with several
+evaluation procedure; to this end, ***XXX*** different fitness functions are
+studied in ***YYY*** experiments, along with ***XXX***
 % Antonio - don't know how many approaches will we try
 % JJ - several
-approaches for the selection of the best individual in the evolution,
-considering the noisy nature of the problem, which leads to the fact
-that the same individual could obtain very good or very bad results in
-the same races, and against the same opponents, due to the
-stochasticity present in the game and in the rivals' AI. 
+% Antonio - better if we say how many
+approaches for the selection of the best individual in the evolution. 
 % Antonio - Complete this with the obtained resulst and conclusions
-% We don't deal with noise explicitly, we just reevaluate all cars
-% every generation - JJ
 \end{abstract}
 \begin{IEEEkeywords}
 Videogames, Fuzzy Controller, TORCS, Steering control, Optimization, Genetic Algorithms
@@ -87,8 +81,7 @@ trains and underwater vehicles. In general, there will be a series of
 sensor inputs that include real speed, obstacles and other vehicles,
 and based on those sensors, the bot will have to take a decision on
 speed and steering that is optimal in several different
-senses \cite{Autodriv2006}. Testing different autonomous driving methodologies in real
-life is usually reserved to just a few big players, and methodologies
+senses \cite{Autodriv2006}. Testing different autonomous driving methodologies in real life is usually reserved to just a few big players, and methodologies
 as well as algorithms are usually tested in simulated environments;
 these simulated environments, at the same time, offer the incentive of
 competition among your system and others. In this paper, we will be
@@ -161,6 +154,12 @@ paper, namely, heuristic track selection, fitness function design and
 model of the racing environment. Its results will be commented in the
 corresponding section. 
 
+%considering the noisy nature of the problem, which leads to the fact
+%that the same individual could obtain very good or very bad results in
+%the same races, and against the same opponents, due to the
+%stochasticity present in the game and in the rivals' AI.
+% Antonio - Just in case we want to comment something about te uncertainty/noise of the game
+
 
 % Antonio - comment on the results
 
@@ -180,7 +179,7 @@ be presented in section \ref{sec:conclusions}.
 \section{State of the Art}
 \label{sec:soa}
 
-TORCS has become one of the main environments for research on AI since its launch in 2007 \cite{WebTORCS}. It offers different kind of problems to solve, such as the definition of the optimal parameters for the cars (before the race) and the main one which is the design of competitive autonomous drivers aiming to win races against other cars.
+TORCS has become one of the main environments for research on AI since its launch in 2007 \cite{WebTORCS}. It offers different kind of problems to solve, such as the definition of the optimal parameters for the cars (before the race) \cite{Kole-ParamCarTunning12}, and the main one, which is the design of competitive autonomous drivers aiming to win races against other cars, mainly presented in the context on the Simulated Car Racing Competition \cite{SimulatedCarRacing-2008}.
 
 Evolutionary algorithms have targeted TORCS almost since its
 publication, for instance, for determining the
