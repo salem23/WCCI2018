@@ -124,9 +124,8 @@ This proved that evolutionary algorithms were able to get the fuzzy
 controller parameters better than a hand-made design, but at the same
 time revealed several challenges. In general, evolutionary algorithms
 optimize the fitness function that is used; evolved fuzzy controllers
-(hereafter FCs)
-will be eventually as good as the fitness function allows. But in this
-particular case we cannot use as fitness function the position
+(hereafter FCs) will be eventually as good as the fitness function allows. 
+But in this particular case we cannot use as fitness function the position
 obtained by the FC in every possible race on every possible track with
 every possible opponent, so we have to settle for a {\em surrogate} of
 the fitness in a very limited environment. First we opted for
@@ -201,13 +200,17 @@ offline, or online (during the game)
 \cite{TanOnline08,Cardamone_Online_NN}.
 % FUZZY + EAs
 Our approach is focused in this line, proposing the application of an off-line genetic algorithm for the improvement of the parameters which determine the behavior of a controller for TORCS. We have focused on a Fuzzy-based model, as it is one of the best options for modeling human-like decisions and actions, as others authors have also used this kind of technique in the literature with good results \cite{torcs2012}. 
-For instance, in \cite{Guadarrama2008}, a fuzzy rule-based car controller for a Car Racing Competition was built and tuned with co-evolutionary genetic algorithms. Two fuzzy sub-controllers were designed (acceleration and turning angle). %Pablo: in previous phrase you said one controller, not two
-But this approach was applied to a simpler simulator than TORCS which is a more realistic and time-constrained simulator. 
+For instance, in \cite{Guadarrama2008}, a fuzzy rule-based car controller for a Car Racing Competition was built and tuned with co-evolutionary genetic algorithms. Two fuzzy sub-controllers were designed (acceleration and turning angle). But this approach was applied to a simpler simulator than TORCS which is a more realistic and time-constrained simulator. 
 
-PÃ©rez et al. introduced an evolutionary fuzzy approach for TORCS in \cite{PerezEvolvingFuzzy09}, where they applied EAs for improving fuzzy models to infer the acceleration and turning angle. However, the models were not so specialized as the proposed here, since their controller did not compute the target speed, which is a key factor for a competitive controller. 
+Pérez et al. introduced an evolutionary fuzzy approach for TORCS in \cite{PerezEvolvingFuzzy09}, where they applied EAs for improving fuzzy models to infer the acceleration and turning angle. However, the models were not so specialized as the proposed here, since their controller did not compute the target speed, which is a key factor for a competitive controller. 
 
-Onieva et al. \cite{LFAG} presented a parametrized modular architecture with a fuzzy system and a GA in the design of fuzzy logic controllers for steering wheel management that can reproduce human driver behavior, but it did not take the target speed into account, unlike our previous controller \cite{evo17} which computed the target speed and the steer with two fuzzy sub-controllers and whose membership functions parameters were defined by trial/error process.
-In this paper, we propose to optimize these parameters using a real coded genetic algorithm aiming to improve the performance of the original fuzzy controller. %Pablo: I think this was the Evo* objective. Update this phrase to the new objective ("generalize results..." or whatever)
+Onieva et al. \cite{LFAG} presented a parametrized modular architecture with a fuzzy system and a GA, aiming to reproduce the behavior of a human driver when controlling the steering wheel. In this line, we presented an improved approach \cite{evo17}, which evolved a fuzzy-based driver considering the target speed in addition to the steer (two fuzzy sub-controllers).
+This controller was also enhanced in a further work \cite{evo18} optimizing the parameters of the membership functions by means of a real coded genetic algorithm, obtaining a noticeable improvement in performance.
+
+In this paper we focus on the improvement of the evolved controllers by means of a redefinition of the fitness functions, using a parameter-less approach (no weights in the terms) [REF], which will be also more focused on the real objectives of a driver during a race, rather than the overall objective.
+In addition, a fairer selection process of the best individual has been implemented.
+
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%  TORCS  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -524,8 +527,7 @@ heuristics to derive two possible fitness functions:
 	f_{2}= damage + &\alpha \cdot  LapTime + \beta \cdot \frac{1}{TopSpeed}
 	\end{array}
 	\end{equation}	
-\end{description} %Pablo: I think the "Min" should not be before damage or LapTime, because we are minimizing the function f_1 in general. In fact, I would remove all the "Min" appearances.
-%Mohammed : right
+\end{description} 
 
 $\alpha$ and $\beta$ are two heuristic weights. The main difference is
 in the use of the $TopSpeed$ in the fitness to enhance the controller performances in straight lines aiming to reduce lap time and the overall race time.
