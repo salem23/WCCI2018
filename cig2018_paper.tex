@@ -11,6 +11,7 @@
 \begin{document}
 
 \title{Analyzing and Enhancing the Evaluation Process of Evolutionary Drivers for TORCS\\
+{\footnotesize \textsuperscript{*}Note: Sub-titles are not captured in Xplore and should not be used}
 \thanks{This work has been supported in part by: Ministerio espa\~{n}ol de
 Econom\'{\i}a y Competitividad under project TIN2014-56494-C4-3-P
 (UGR-EPHEMECH), TIN2017-85727-C4-2-P (UGR-DeepBio) and TEC2015-68752 (also funded by FEDER).}
@@ -206,8 +207,7 @@ Pérez et al. introduced an evolutionary fuzzy approach for TORCS in \cite{PerezE
 Onieva et al. \cite{LFAG} presented a parametrized modular architecture with a fuzzy system and a GA, aiming to reproduce the behavior of a human driver when controlling the steering wheel. In this line, we presented an improved approach \cite{evo17}, which evolved a fuzzy-based driver considering the target speed in addition to the steer (two fuzzy sub-controllers).
 This controller was also enhanced in a further work \cite{evo18} optimizing the parameters of the membership functions by means of a real coded genetic algorithm, obtaining a noticeable improvement in performance.
 
-In this paper we focus on the improvement of the evolved controllers by means of a redefinition of the fitness functions, using a parameter-less approach (no weights in the terms) [REF], which will be also more focused on the real objectives of a driver during a race, rather than the overall objective.
-In addition, a fairer selection process of the best individual has been implemented.
+In this paper we focus on the improvement of the evolved controllers by means of a redefinition of the fitness functions, looking for a parameter-less approach (no weights in the terms) \cite{Harik-ParameterLess99}, which will be also more focused on the real objectives of a driver during a race, rather than the overall objective. In addition, a `fairer' selection process of the best individual has been implemented, aiming to focus on real good drivers in races, instead of choosing the one with the highest fitness value, which could have a poorer performance due to the noise of the problem.
 
 
 
