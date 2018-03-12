@@ -217,17 +217,14 @@ In this paper we focus on the improvement of the evolved controllers by means of
 \label{sec:torcs}
 
 The Open Racing Car Simulator (TORCS) \cite{WebTORCS} is an open source, modern, multi-player, modular and portable racing simulator that allows users to race against computer-controlled opponents.
-% Its high degree of modularity and portability, together with the realistic and real-time driving simulation, make it an ideal testbed for artificial intelligence research, as it can be seen in the literature (See Section \ref{sec:soa}). %Pablo: refer to previous section?
-% The game offers different types of races from the practical single session to the championship.
-%Mohammed ok could be removed 
+Its high degree of modularity and portability, together with the realistic and real-time driving simulation, make it an ideal testbed for artificial intelligence research, as we have shown in previous section.
+
 There is a large set of sensors \cite{Torcs3} which the car can consider during a race, such as distances to track borders, to rivals, current fuel, current gear, position in the race, speed, or damage, among others.
-% These sensors values are used by any TORCS driver bot to control the car by means of a set of actuators \cite{Torcs3}: the steering wheel `Steer', the accelerator `accel', the brake pedal and the gearbox.  %Pablo: use more large paragraphs instead short phrases.
-% 	% Mohammed- ok
-% We should rewrite this section. I don't know if there's anything new or anything learned from before, but we could include it here instead of just un-commenting - JJ
-A controller is a program, running inside TORCS, that 
-drives a car automatically. It gets as input information about the current state of
-the car and its situation on the track (sensors). These collected data
-are used to decide actions to perform in the next simulation tick.  
+The sensors values are considered by any TORCS autonomous driver, or {\em controller}, to manage the car using actuators \cite{Torcs3}: the steering wheel, the accelerator, the brake pedal and the gearbox.  
+
+%Thus, a controller is a program, running inside TORCS, that drives a car automatically. It gets as input information about the current state of
+%the car and its situation on the track (sensors). These collected data
+%are used to decide actions to perform in the next simulation tick.  
 
 
 %*****************************  FUZZY CONTROLLER  ******************************
@@ -249,55 +246,56 @@ interval \textit{[minSpeed, maxSpeed]} km/h.
 
 This fuzzy controller has an output, the speed, and three input values:
 \begin{itemize}
-	\item Front = Track\_9: front distance to the track border (angle 0ยบ).  %Pablo: in PDF Track[9] seems a paper citation, change it to Track\_9 instead
-	\item M5 = max (Track\_8, Track\_10): max distance to the track border in an angle of +5ยบ and -5ยบ with respect to Front.
-	\item M10 = max (Track\_7, Track\_11): max distance to track border in an angle of +10ยบ and -10ยบ.
+	\item Front = Track\_9: front distance to the track border (angle 0บ).  
+	\item M5 = max (Track\_8, Track\_10): max distance to the track border in an angle of +5บ and -5บ with respect to Front.
+	\item M10 = max (Track\_7, Track\_11): max distance to track border in an angle of +10บ and -10บ.
 \end{itemize}
 
 It is a Mamdani-based fuzzy system \cite{iancu2012} with three
 trapezoidal Membership Functions (MF) for every input variable. The
 description of these fuzzy inputs and output are represented in Table
-\ref{tab:flouevar}. In \cite{evo17} we set the values by hand;
-previously we had made initial tests using an evolutionary
-algorithm. In this paper we will try to improve obtained results by
-fine-tuning this evolutionary algorithm. %Pablo: extend this phrase, also explaining the validation experiments. For example "Moreover, we are also validating our approach by testing the evolved controllores in different types of tracks and against other controllers, to understand the obtained behaviour." or something like that
+\ref{tab:flouevar}. In \cite{evo18} the different sets of parameters which define the membership functions were improved using a Genetic Algorithm to obtain the best results.
 
-\begin{table*}
-	\centering
-	{\scriptsize
-		\caption{Fuzzy variables description.}
-		\label{tab:flouevar}
-		\begin{tabular}{ |p{1.5cm}|p{2cm}|p{2cm}|p{2 cm}|p{1 cm}|p{1.5 cm}|p{1.5 cm}|}
-			\hline
-			{ \textbf{Variable}}&
-			{ \textbf{Range}}&
-			{ \textbf{Name}}&  
-			{ \textbf{MF}} &
-			{ \textbf{Low}} &
-			{ \textbf{Medium}}&
-			{ \textbf{High}} \\
-			\hline
-			Input & [0-100] m & Front & trapezoidal & [0-50] & [20-80] & [60-100]
-			\\
-			\hline
-			Input & [0-100] m & M5 & trapezoidal &[0-40] & [10-70] & [50-100] 
-			\\
-			\hline
-			Input & [0-100] m  & M10 & trapezoidal & [0-30] & [20-60] & [50-100]
-			\\
-			\hline 
-			Output & [0-200] m/s & TargetSpeed & singleton & / & / & /
-			\\
-			\hline 
-		\end{tabular} 
-	}
-\end{table*}
+%\begin{table*}
+%	\centering
+%	{\scriptsize
+%		\caption{Fuzzy variables description.}
+%		\label{tab:flouevar}
+%		\begin{tabular}{ |p{1.5cm}|p{2cm}|p{2cm}|p{2 cm}|p{1 cm}|p{1.5 cm}|p{1.5 cm}|}
+%			\hline
+%			{ \textbf{Variable}}&
+%			{ \textbf{Range}}&
+%			{ \textbf{Name}}&  
+%			{ \textbf{MF}} &
+%			{ \textbf{Low}} &
+%			{ \textbf{Medium}}&
+%			{ \textbf{High}} \\
+%			\hline
+%			Input & [0-100] m & Front & trapezoidal & [0-50] & [20-80] & [60-100]
+%			\\
+%			\hline
+%			Input & [0-100] m & M5 & trapezoidal &[0-40] & [10-70] & [50-100] 
+%			\\
+%			\hline
+%			Input & [0-100] m  & M10 & trapezoidal & [0-30] & [20-60] & [50-100]
+%			\\
+%			\hline 
+%			Output & [0-200] m/s & TargetSpeed & singleton & / & / & /
+%			\\
+%			\hline 
+%		\end{tabular} 
+%	}
+%\end{table*}
 
 % This is from the last paper? If so, just a reference would be
 % enough. We need to save space - JJ
 % Consider whether adding this again or not -- JJ
-% The base of rules was composed modeling the behavior of a human expert driver. Thus, this set is designed to maximize the car speed depending on the distance to the track border. The fuzzy rules are:
+% Antonio - not needed
 
+Moreover, the controller is based in a set of fuzzy rules, designed to maximize the car speed depending on the distance to the track border. These rules can be consulted in \cite{evo17}.
+% Antonio - TODO: Include the rules if there is available space?
+
+%The fuzzy rules are:
 
 % \begin{itemize}
 % {\small
@@ -324,15 +322,19 @@ fine-tuning this evolutionary algorithm. %Pablo: extend this phrase, also explai
 % \noindent
 % \textbf{Fuzzy steering control sub-controller}\\
 % %
-% The second fuzzy controller aims to control the steering, estimating and determining the target position of the car. 
 
-% The structure of this sub-controller is similar to the speed one, but, obviously, with the steering as output. Thus, the set of sensors considered is the same as in the speed case (in Table \ref{tab:flouevar}).
+The second is the {\em fuzzy steering sub-controller}, which aims to define the steer angle estimating and determining the target position of the car. 
 
-% Then, as general rules: if the car is in a straight line, it will set as target position half width of the race track (central position of the lane). Whereas, if the car is near a right curve, it will approach the path leading to the right, with a space between the car and the border of the track to avoid the loss of control. The same approach is considered if the car is near a left curve.
+The structure of this sub-controller is similar to the speed one, but it has the steering as output. Thus, the set of sensors considered is the same as in the speed case.
 
-% In order to detect the curves, the controller focuses on the sensor values (M10, M5, and Front). So, if the value on Front sensor is the longest, there is a straight road; whereas if the values of M5 and M10 with positive angles (+5 and +10) are the longest, there is right curve; and the other way round.
+Then, as general rules: if the car is in a straight line, it will set as target position half width of the race track (central position of the lane). Whereas, if the car is near a right curve, it will approach the path leading to the right, with a space between the car and the border of the track to avoid the loss of control. The same approach is considered if the car is near a left curve.
 
-% The base of rules has been defined again modeling the behavior of a human driver, so, for this controller:
+In order to detect the curves, the controller focuses on the sensor values (M10, M5, and Front). So, if the value on Front sensor is the longest, there is a straight road; whereas if the values of M5 and M10 with positive angles (+5 and +10) are the longest, there is right curve; and the other way round.
+
+It uses a base of rules which has been defined trying to model the behavior of a human driver \cite{evo17}.
+
+%, so, for this controller:
+% Antonio - TODO: Include the rules if there is available space?
 
 % {\small
 % \begin{itemize}		
