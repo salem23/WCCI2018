@@ -510,7 +510,7 @@ The objective of the car controller is to win as many races as
 possible. However, we have to optimize the most general case by
 carrying out
 solo {\em training races} in which we try to minimize the damage of
-the car ($damage$) and the average lap time $LapTime$, while
+the car ($damage$) and the lap time $LapTime$, while
 maximizing $TopSpeed$. It is a multiobjective optimization problem,
 but since we want to obtain a single controller, we will have to use
 heuristics to derive two possible fitness functions:
@@ -580,7 +580,7 @@ comparing them for racing performance. Also, we have  carried out algorithm exec
 }
 \end{table}
 
-The two genetic optimization processes are run in independently, the best four individuals for the two algorithms are  competed together in five races in the\textbf{Alpine} track already used in the optimization and five races in in \textbf{E-Track 5} track.To improve the selection, another two  controllers are picked randomly from the TORCS bots to participate in the race. The bot which gets the fastest lap or the minimum damage in each race is given five points.
+The two genetic optimization processes are run in independently, the best four individuals for the two algorithms are  competed together in five races in the\textbf{Alpine 2} track already used in the optimization and five races in in \textbf{E-Track 5} track.To improve the selection, another two  controllers are picked randomly from the TORCS bots to participate in the race. The bot which gets the fastest lap or the minimum damage in each race is given five points.
 The results of these runs are shown in Table \ref{tab:runsresults}.
 \begin{table*}[ht]
 	\centering
@@ -613,231 +613,99 @@ $damned1$&/			&/			&\textbf{25}&/			&10			&0&0&/			&/		& 			8&/		& /&0&0&/\\
 		}\label{tab:runsresults}
 	}
 \end{table*}
-According to the table, the first controller GFC1 and the second GFC2 have won the same number of races but $GFC2_1$ has achieved better results on the races he did not win.
-Of course the TORCS bots results are not counted since they only serve to diversify the selection and they do not participate in all the races.
-This selection allowed us to choose the best individual on several races and the most stable and thus avoid the selection by tournament where the winner of a single confrontation is chosen.
+According to the table, the first individual of GFC1 and the second of  GFC2 have won the same number of races but $GFC2_2$ has achieved better results on the races he did not win.
+we have to remark that the TORCS bots results are not counted since they only serve to diversify the selection and they do not participate in all the races.
+This selection allowed us to choose the best individual on several races and the most stable and thus avoid the selection by tournament where the winner of a single confrontation is chosen.\\
+It could be remarked that the genetic based fuzzy controllers have get all the points of the minimum damage even when they do not win the race, this fact  justify strongly the use of damage in the fitness functions.
+The controllers obtained using the first fitenss have also collected  the points of the best laps in  five of the ten races. one has to bear in mind that the best lap is the result of a minimum damage and a high MaxSpeed, these two parameters are optimized by the first function. In the same context, the second fitness tries to maximize the speed average  not necessary the MaxSpeed.\\
 
-
-
-
-
-The best solution obtained with each fitness function from these runs
-will be used in races against selected opponents. 
-% We will have to include the new membership functions here - JJ
-% We represented the resulted membership functions of these two optimal individuals considering the different fitness functions in Figures \ref{fig:mffront}, \ref{fig:mfmax5} and \ref{fig:MFMAX10}.
-% \begin{figure}%
-% 	\centering
-% 	\subfigure[with Fitness 1]{%
-% 		\label{fig:front1}%
-% 		\includegraphics[width=0.6\textwidth,height=3cm]{fig/MFFRONT}}%
-% 	\subfigure[with Fitness 2]{%
-% 		\label{fig:front2}%
-% 		\includegraphics[width=0.6\textwidth,height=3cm]{fig/MFFRONT2}}%
-% 	\caption{Front input MFs with GA}
-% 	\label{fig:mffront}
-% \end{figure}
-% %
-% \begin{figure}%
-% 	\centering
-% 	\subfigure[with Fitness 1]{%
-% 		\label{fig:fmax51}%
-% 		\includegraphics[width=0.6\textwidth,height=3cm]{fig/MFFMAX5}}%
-% 	\subfigure[with Fitness 2]{%
-% 		\label{fig:fmax52}%
-% 		\includegraphics[width=0.6\textwidth,height=3cm]{fig/MFFMAX52}}%
-% 	\caption{Max5 input MFs with GA}
-% 	\label{fig:mfmax5}%
-% \end{figure}
-% %
-% \begin{figure}%
-% 	\centering
-% 	\subfigure[with Fitness 1]{%
-% 		\label{fig:MFMAX101}%
-% 		\includegraphics[width=0.6\textwidth,height=3cm]{fig/MFMAX10}}%
-% 	\subfigure[with Fitness 2]{%
-% 		\label{fig:MFMAX102}%
-% 		\includegraphics[width=0.6\textwidth,height=3cm]{fig/MFMAX102}}%
-% 	\caption{Max10 input MFs with GA}
-% 		\label{fig:MFMAX10}%
-% \end{figure}
-%
-The shapes of the obtained membership functions are completely different from
-those obtained by Trial/Error in the previous work \cite{evo17}
-where the Medium linguistic variable of the new functions has bigger
-range. This makes the controller very sensitive to the middle
-distances of the inputs, like for a real driver who considers most of
-the cases the car distance from the borders in that range. 
-The other remark from the obtained  membership functions is the
-dimension of the common range between the LOW and MEDIUM, which
-provide a higher diversity in the output values. 
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%Pablo: I suggest create subsection for each new experiment for validation, and explain before its purpose.
 The two best genetic based fuzzy controllers obtained in the previous
-experiments, one per fitness function, and thus named $GFC1$ and
-$GFC2$, have been tested
-in a practice race together. They were run %Pablo: do not use future,
-                                %if you are using past tense stick
-                                %with it (past perfect can also be
-                                %used)
-% Done - JJ
-each one for 20 laps in E-Track5 circuit, which was the one used during the
-evolution; then, they will be tested also in a practice race in
-E-Road, a track not used previously. The obtained results are presented
-in Table \ref{resultat20}. 
+experiments, one per fitness function, and thus named $GFC1_1$ and
+$GFC2_2$, have been tested
+in a practice races against selected opponents. The two best controllers of \cite{evo18}, $EVO1$ and $EVO2$ are also included in the competition.
+This evaluation is a like formula1 mini championship of ten races each one for 20 laps where six bots from TORCS are used to compare our controllers. The first five races are in the \textbf{Alpine 2} track, which was the one used during the
+evolution; and the last ones took place in \textbf{E-Track 5} track\\
+The results are in Table \ref{tab:chsresults}:
 
-\begin{table}[!ht]
+\begin{table*}[ht]
 	\centering
 	{\scriptsize
-		\caption{Results of the three controllers in a 20 laps
-			practice race. Results of the $AD$ controller
-			\cite{evo17}, a hand-designed fuzzy controller, are
-			included for comparison purposes where tested.}
-		\label{resultat20}
-		\begin{tabular}{|p{3cm}|c|c|c|}
-			\hline
-			\multicolumn{4}{|c|}{\textbf{E-Track 5}}  \\
-			\hline \textbf{Results} & \textbf{AD} & \textbf{GFC1} & \textbf{GFC2}\\
-			\hline Best Lap Time         & 29:70 & 30:01 & 29:21 \\
-			\hline Top Speed          & 209 & 224 & 234\\
-			\hline Min Speed          & 168 & 151 & 186 \\
-			\hline Damage          & 936 & 0 & 0\\
-			\hline
-		\end{tabular}
-		\begin{tabular}{|p{3cm}|c|c|}
-			\hline
-			\multicolumn{3}{|c|}{\textbf{CG Track2}}  \\ 
-			\hline \textbf{Results} & \textbf{GFC1} & \textbf{GFC2}  \\
-			\hline Best Lap Time         &       01:04:96     & 01:02:32  \\
-			\hline Top Speed &220  &  238 \\
-			\hline Min Speed               & 33             & 40  \\
-			\hline Damage                    & 0              & 0  \\
-			\hline 
-		\end{tabular}
+		\caption{ Results of the mini-championship with 10 drivers and ten races in \textbf{Alpine 2} and \textbf{E-Track 5} tracks }
+		{
+			\begin{tabular}{|c||c|c|c|c|c|c|c|c|c|c||}
+				\hline
+				Drivers&{Race 1}&{Race 2}&{Race 3}&{Race 4}&{Race 5}&{Race 6}&{Race 7}&{Race 8}&{Race 9}&{Race 10}\\
+				\hline	\hline			
+				$GFC1_1$&	25&	10&	18&	12&	10&	18&	12&	15&	15&	12\\
+				$GFC2_2$&	15&	18&	25&	15&	15&	25&	18&	18&	12&18\\
+				TITA1&	4&	2&	1&	2&	2&	4&	2&	1&	4&	6\\
+				TITA2&	2&	1&	2&	1&	1&	1&	1&	2&	1&	2\\
+				INFERNO1&12&15&	12&	18&	18&	12&	15&	25&	25&	15\\
+				INFERNO2&10&12&	4&	10&	25&	10&	10&	4&	2&	8\\
+				BERWIN1&	18&	25&	15&	8&	6&	8&	8&	6&	10&	10\\
+				BERWIN2	&8&	8&	10&	25&	12&	15&	25&	10&	8&	25\\
+				EVO1&	6&	6&	8&	4&	8&	2&	6&	12&	8&	4\\
+				EVO2&	1&	4&	6&	6&	4&	6&	4&	8&	6&	2\\
+				\hline
+				\hline
+				
+			\end{tabular}
+		}\label{tab:chsresults}
 	}
-\end{table} %PABLO: why AD is not compared in CG Track2?
+\end{table*}
+
+
 
 From the table, we can see that the fuzzy controllers optimized by the
-GA yield the best results, obtaining very good overall global race
-times and eliminating damage, which is reduced to 0. For the sake of
-comparison, we include the hand-designed AD controller \cite{evo17},
-which finished the practice race where it was tested with a lot of
-damage, implying that it could, in some difficult cases, not finish
-the race. 
-Testing the controllers in CG Track2, which is quite long and
-difficult as it can be seen by the time it takes to run a single lap,
-has proved their value in the adaptation to other tracks different
-from the one used for `training', that is, the optimization of the
-fuzzy controllers. 
+GA yield best results, obtaining very good overall rankings in the races, We can also see that our two  genetic based fuzzy controllers have win  only one race for $GFC1_1$ and two for $GFC2_2$ controller compared to $berwin2 $ and $infierno1$ bots which win three races each one.
 
-The GFC2 controller has run with a higher speed (considering overall Top
-Speed and Min Speed) than GFC1 in the two tracks. This is a positive
-consequence of the inclusion of the $TopSpeed$ variable in the fitness
-computation so the GA based fuzzy controller has optimized the speed
-of the car due to early braking and detection of turns and their
-curving angles. This ability  of the GA-fuzzy controller collaborates
-to minimize the overall race time and thus the final ranking.
-According to these results, GFC2 seems to be the best controller.
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% You can't simply drop the reader into the next experiment. It has to
-% be "narrated", linked to the previous paragraphs and justified. For
-% instance - jj
-% This still applies - JJ
-Comparing average lap time gives us an overall idea of which
-controller performs the best; however, at the end of the day in a
-racing game the race has to be won. That is why we have tested every
-fuzzy separately from the others in a real race against five standard controllers from each team integrated with TORCS. Tables \ref{tab:gfc1real} and \ref{tab:gfc2real}   illustrate their performance in two 5 laps real races. 
-\begin{table*}[!ht]
-	\centering
-	{\scriptsize
-		\caption{Results of GFC1 in two real races (5 laps)}
-		% Explain the "Race time" row - JJ
-		\label{tab:gfc1real}
-		\begin{tabular}{|p{2 cm}|p{1.5 cm}|p{1.5 cm}|p{1.5 cm}|p{1.5 cm}|p{1.5 cm}|p{1.5 cm}|}
-			\hline \textbf{E-TRACK5} &   \textbf{GFC1} & \textbf{berwin 10} & \textbf{bt 3} &\textbf{damned 2} & \textbf{inferno 5} & \textbf{tita 10}  \\
-			\hline \textbf{Ranking} & 3/6&4/6&1/6&5/6&2/6&6/6\\			
-			\hline \textbf{Race Time}	& 02:29:32\newline+24:11&02:29:32\newline +1 lap &02:29:32&02:29:32\newline +1 lap &02:29:32\newline+13:67&02:29:32\newline+1 lap\\	
-			\hline \textbf{Best Lap}&33:79& 35:39&28:09&36:73&31:49&34:12\\	
-			\hline \textbf{Max Speed}& 199&206&233&198&229&219\\	
-			\hline \textbf{Damages}& 0&0&0&599&7&566 \\	
-			\hline 
-		\end{tabular}
-		
-		\begin{tabular}{|p{2 cm}|p{1.5 cm}|p{1.5 cm}|p{1.5 cm}|p{1.5 cm}|p{1.5 cm}|p{1.5 cm}|}
-			\hline \textbf{CG Track2} & \textbf{GFC1}&\textbf{berwin 10} & \textbf{bt 3} &\textbf{damned 2} & \textbf{inferno 5} & \textbf{tita 10}  \\
-			\hline \textbf{Ranking} & 3/6&4/6&1/6&6/6&5/6&2/6\\			
-			\hline \textbf{Race Time}	&  05:10:66\newline +25:43&  05:10:66\newline+55:65& 05:10:66& 05:10:66\newline+1 lap& 05:10:66\newline+38:44& 05:10:66\newline+19:82\\	
-			\hline \textbf{Best Time}& 1:03:65 &1:04:21&1:00:57&1:04:26&1:03:19&1:03:98\\	
-			\hline \textbf{Max Speed}& 233&236&288&200&238&229\\
-			\hline \textbf{Damage}& 112& 376 & 433&988&541&890\\	
-			\hline 
-		\end{tabular}
-	}
-\end{table*}
+This lack of race winning did not stop our genetic controllers from finishing in the first four rankings in the races, which helped them to win the points championship.
+This result is due to the trade-off between the damage and the average speed achieved by the fitness function. This property has given our controller an advantage in minimizing damage and looking for top speed in the straight sections of the track while it tries to find the best trajectory in turns to avoid hitting the track edges or get out of it.
+The overall number of points of the championship is presented in Figure \ref{fig:points}
 
 
-\begin{table*}[!ht]
-	\centering
-	{\scriptsize
-		\caption{Results of GFC2 in two real races (5 laps)}
-		\label{tab:gfc2real}
-		\begin{tabular}{|p{2 cm}|p{1.5 cm}|p{1.5 cm}|p{1.5 cm}|p{1.5 cm}|p{1.5 cm}|p{1.5 cm}|}
-			\hline \textbf{E-TRACK5} & \textbf{GFC2}&\textbf{berwin 10} & \textbf{bt 3} &\textbf{damned 2} & \textbf{inferno 5} & \textbf{tita 10}  \\
-			\hline \textbf{Ranking} & 2/6&4/6&1/6&6/6&3/6&5/6\\			
-			\hline \textbf{Race Time}	& 02:30:83\newline +03:99&  02:30:83\newline+1 lap&02:30:83&02:30:83\newline+1 lap&02:30:83\newline+08:35&02:30:83\newline+1 lap\\	
-			\hline \textbf{Best Time}& 29:82 &36:38&28:35&37:04&30:53&36:00\\	
-			\hline \textbf{Max Speed}& 214&202&230&188&226&204\\	
-			\hline \textbf{Damage}& 0& 0 & 343&1230&0&668\\	
-			\hline 
-		\end{tabular}
-		
-		\begin{tabular}{|p{2 cm}|p{1.5 cm}|p{1.5 cm}|p{1.5 cm}|p{1.5 cm}|p{1.5 cm}|p{1.5 cm}|}
-			\hline \textbf{E-ROAD} & \textbf{GFC2}&\textbf{berwin 10} & \textbf{bt 3} &\textbf{damned 2} & \textbf{inferno 5} & \textbf{tita 10}  \\
-			\hline \textbf{Ranking} & 3/6&4/6&1/6&6/6&2/6&5/6\\			
-			\hline \textbf{Race Time}	& 05:38:23\newline +17:72&  05:38:23\newline+1 lap&05:38:23&05:38:23\newline+1 lap&05:38:23\newline+10:73&05:38:23\newline+1 lap\\	
-			\hline \textbf{Best Time}& 1:17:34 &1:16:29&1:14:97&1:20:80&1:13:98&1:15:29\\	
-			\hline \textbf{Max Speed}& 221&206&228&178&228&206\\
-			\hline \textbf{Damage}& 120& 356 & 753&2750&130&894\\	
-			\hline 
-		\end{tabular}
-	}
-\end{table*}
+\begin{figure}[!ht]	
+	\begin{center}
+		\includegraphics[width=8cm]{fig/POINTS.png}
+		\caption{Championship points results}
+		\label{fig:points}	
+	\end{center}	
+\end{figure}
 
-$GFC1$ and $GFC2$ controllers are quite competitive in these races; 
-GFC2 has got an excellent second position in the track used during optimization (E-Track), and it has also got a remarkable third rank in the unknown track (E-Road). 
-Both controllers have dealt very well for not being damaged, which even the winner, {\tt bt 3}, could not avoid. 
 
-These results are a confirmation of the proper optimization done by the GA and mainly when the Top Speed was considered in the fitness. 
-The obtained results in real races with opponents from tough teams of TORCS are encouraging even if the optimization process was in practice races.
-This good adaptation of the proposed controller in races with rivals is due to the fact the modular fuzzy controller takes into consideration the presence of opponents in the track \cite{evo17}. 
-The enhancement of that driver by the optimal values of the membership function values, allows it to detect and overtake the other cars with no damage or stuck.
+\begin{figure}[!ht]	
+	\begin{center}
+		\includegraphics[width=8cm]{fig/HISTSD.png}
+		\caption{Championship damage and MaxSpeeds results}
+		\label{fig:damspeed}	
+	\end{center}	
+\end{figure}
 
-In the last experiment, we tried to get the best of our controller by testing its limits in a disadvantageous track, so A-Speedway was selected. 
-The results are shown in Table \ref{tab:gfc2real2} where one
-could clearly notice the degradation of the performances of the
-optimized fuzzy controller. It was ranked in the fourth position just before {\tt tita10} and {\tt bt3} controllers. Its top speed is acceptable considering that the used car is not as fast as others but the fast lap time was higher and the GFC2 controller was not as competitive with its rivals in this race. 
 
-These results could be justified by the nature of the track. A-Speedway is an oval circuit with only four turns, this kind of tracks deprives our controller of its strongest point which is the late braking and the selection of an optimal trajectory in turns. 
-The fact that the car has a worse average speed compared to the others and that our controller can not compensate for this loss of time in the turns will not work in favor of getting better best lap times.  
+%$GFC1$ and $GFC2$ controllers are quite competitive in these races; 
+%GFC2 has got an excellent second position in the track used during optimization (E-Track), and it has also got a remarkable third rank in the unknown track (E-Road). 
+%Both controllers have dealt very well for not being damaged, which even the winner, {\tt bt 3}, could not avoid. 
+%
+%These results are a confirmation of the proper optimization done by the GA and mainly when the Top Speed was considered in the fitness. 
+%The obtained results in real races with opponents from tough teams of TORCS are encouraging even if the optimization process was in practice races.
+%This good adaptation of the proposed controller in races with rivals is due to the fact the modular fuzzy controller takes into consideration the presence of opponents in the track \cite{evo17}. 
+%The enhancement of that driver by the optimal values of the membership function values, allows it to detect and overtake the other cars with no damage or stuck.
+%
+%In the last experiment, we tried to get the best of our controller by testing its limits in a disadvantageous track, so A-Speedway was selected. 
+%The results are shown in Table \ref{tab:gfc2real2} where one
+%could clearly notice the degradation of the performances of the
+%optimized fuzzy controller. It was ranked in the fourth position just before {\tt tita10} and {\tt bt3} controllers. Its top speed is acceptable considering that the used car is not as fast as others but the fast lap time was higher and the GFC2 controller was not as competitive with its rivals in this race. 
+%
+%These results could be justified by the nature of the track. A-Speedway is an oval circuit with only four turns, this kind of tracks deprives our controller of its strongest point which is the late braking and the selection of an optimal trajectory in turns. 
+%The fact that the car has a worse average speed compared to the others and that our controller can not compensate for this loss of time in the turns will not work in favor of getting better best lap times.  
 
-\begin{table*}[!ht]
-	\centering
-	{\scriptsize
-		\caption{Results of GFC2 in a real race (5 laps)}
-		\label{tab:gfc2real2}
-		\begin{tabular}{|p{2 cm}|p{1.5 cm}|p{1.5 cm}|p{1.5 cm}|p{1.5 cm}|p{1.5 cm}|p{1.5 cm}|}
-			\hline \textbf{A-Speedway} & \textbf{GFC2}&\textbf{berwin 10} & \textbf{bt 3} &\textbf{damned 2} & \textbf{inferno 5} & \textbf{tita 10}  \\
-			\hline \textbf{Ranking} & 4/6&2/6&1/6&6/6&3/6&5/6\\			
-			\hline \textbf{Race Time}	& 02:37:74\newline +29:12&  02:37:74\newline +19:03&02:37:74&02:37:74\newline+1 lap&02:37:74\newline+28:89&02:37:74\newline+1 lap\\	
-			\hline \textbf{Best Time}& 35:78 &32:83&29:40&39:49&34:86&40:92\\	
-			\hline \textbf{Max Speed}& 239&251&266&223&259&238\\	
-			\hline \textbf{Damage}& 119& 615&1290 &363&739&899\\	
-			\hline 
-		\end{tabular}
-	}
-\end{table*} 
+
+
+
+
+
+
+
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%  CONCLUSIONS  %%%%%%%%%%%%%%%%%%%%%%%%%%%%
