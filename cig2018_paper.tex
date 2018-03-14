@@ -519,25 +519,24 @@ heuristics to derive two possible fitness functions:
 	\item[GFC1:]  
 	\begin{equation} \label{fit1}
 	\begin{array}{ll}
-	f_{1} =   damage + &\alpha \cdot LapTime 
+	f_{1} =   \frac{(MinSpeed*Maxpeed) }{damage+1}
 	\end{array}
 	\end{equation}
 	\item[GFC2:] 
 	\begin{equation} \label{fit2}
 	\begin{array}{lll}
-	f_{2}= damage + &\alpha \cdot  LapTime + \beta \cdot \frac{1}{TopSpeed}
+	f_{2}= \frac{AVG(Speed)}{damage+1}
 	\end{array}
 	\end{equation}	
 \end{description} 
 
-$\alpha$ and $\beta$ are two heuristic weights. The main difference is
-in the use of the $TopSpeed$ in the fitness to enhance the controller performances in straight lines aiming to reduce lap time and the overall race time.
+The main difference is that we  try to maximize the Min and Max speeds while minimizing the damage in the first fitness. In the second one, we try to maximize the average speed to increase the performances.
 % There should be some explanation here why is that the particular
 % parameter you have decided to change in the two tested fitnesses - JJ
 % Moahmmed : Added
 To evaluate the candidate controllers during the evolutionary process, we will make each of them compete in a 20 laps practice race in a medium difficulty circuit without rivals. We have omitted the presence of opponents in order to avoid including additional uncertainty sources to the optimization process.
 
-Then, the obtained output values $damage$, $LapTime$ and $TopSpeed$ are collected to compute the corresponding fitness value. As a clarification, $LapTime$ is the average of the 20 laps time.
+Then, the obtained output values $damage$, $Minspeed$ and $MaxSpeed$ are collected to compute the corresponding fitness value. As a clarification.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%  RESULTS  %%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -550,14 +549,14 @@ Then, the obtained output values $damage$, $LapTime$ and $TopSpeed$ are collecte
 
 % This paragraph should maybe go to the previous section, because it's more "experimental setup" than results. - JJ	
 We will first need to choose whose tracks and cars are going to be used in the
-experiment among the ones TORCS provides; in our case, we have selected the E-Track5 circuit as it is a
+experiment among the ones TORCS provides; in our case, we have selected the \textbf{Alpine2} circuit as it is a
 quite complex one, with multiple turns. \textit{car1-tbr1} has been
 selected as the driving car \cite{evo17}. According to previous
 experiments, this is a fair choice due to its moderate
 performance. This will lead our controller to be prepared to drive in the most usual conditions. 
 
-We have evaluated the FGC with the two proposed fitness functions, %Pablo: I rewrote this paragraph completely
-comparing them for racing performance. Also, we have  carried out two algorithm executions with two different population sizes: 20 and 50, respectively. The rest of the parameters are: Generations=50, Crossover rate=0.7, Mutation rate=0.3, number of runs per configuration = 20.
+We have evaluated the GFC with the two proposed fitness functions, %Pablo: I rewrote this paragraph completely
+comparing them for racing performance. Also, we have  carried out algorithm execution with population size of 50 individuals. The rest of the parameters are: Generations=50, Crossover rate=0.85, Mutation rate=0.1, number of runs per configuration = 10.
 
 %shown in Table \ref{tab:GA_config}: 
 %	
@@ -572,97 +571,56 @@ comparing them for racing performance. Also, we have  carried out two algorithm 
 		\caption{GA parameters}
 		\label{tab:GA_config}
 		\begin{tabular}{|p{3.6cm}|p{3cm}|}
-			\hline \textbf{Population size} & 20 \\
+			\hline \textbf{Population size} & 50 \\
 			\hline \textbf{Generations} & 50   \\
-			\hline \textbf{Crossover rate$\textit{P}_{\textit{c}}$} &  0.7 \\
-			\hline \textbf{Mutation rate $\textit{P}_{\textit{m}}$} &  0.3   \\ 		
+			\hline \textbf{Crossover rate$\textit{P}_{\textit{c}}$} &  0.85 \\
+			\hline \textbf{Mutation rate $\textit{P}_{\textit{m}}$} &  0.1   \\ 		
 			\hline          
 		\end{tabular}	
 }
 \end{table}
 
-The coefficients $\alpha$ and $\beta$ are chosen to be $1$  and
-$10*MaxSpeed$ respectively, where $MaxSpeed $ is the maximum value of
-speed that \textit{car1-tbr1}  could take ($MaxSpeed=300$)
-\cite{evo17}, this choice is motivated by the fact to normalize
-the Top speed values and make them in the same level as other fitness
-terms. 
+The two genetic optimization processes are run in independently, the best four individuals for the two algorithms are  competed together in five races in the\textbf{Alpine} track already used in the optimization and five races in in \textbf{E-Track 5} track.To improve the selection, another two  controllers are picked randomly from the TORCS bots to participate in the race. The bot which gets the fastest lap or the minimum damage in each race is given five points.
 The results of these runs are shown in Table \ref{tab:runsresults}.
 \begin{table*}[ht]
 	\centering
 	{\scriptsize
-		\caption{ Results of 10 runs of GA with the two fitness
-			functions. Please bear in mind that fitness follow different
-			formula, and thus cannot be compared; LapTime and Damage
-			should be the quantities used for comparison. }
+		\caption{ Results of races based selection for the two fitness functions. }
 		{
-			\begin{tabular}{|c||c|c|c|c||c|c|c|c|}
+			\begin{tabular}{|c||c|c|c|c|c|c|c||c|c|c|c|c|c|c||c|}
 				\hline
-				&\multicolumn{8}{c||}{ with population size 20}\\ %Pablo: Remove EVO and put a reference to it, instead
-				%Mohammed could we cite evo before  the final version?, I just put EVO  to explain that theese data is our previous work
-				
-				\hline
-				&\multicolumn{4}{c||}{GFC1}&\multicolumn{4}{c|}{GFC2}\\
-				\cline{2-9}
-				& Min GFC1 & $LapTime$ & $Damage$ & $TopSpeed$& Min fit. 2& $LapTime$ & $Damage$ & $TopSpeed$\\
-				\hline
-				% 1 &46.42& 33.42& 13& 43.8005 & 30.98& 0& 234\\
-				
-				% 2 &31.09& 31.09& 0& 51.6614& 29.87& 11& 278\\
-				
-				Best &\textbf{29.44}& 29.44& 0&231&\textbf{39.74} & 29.25& 0& 286\\
-				
-				% 4 &31.12& 31.12& 0& 60.5155& 31.64& 16& 233\\
-				
-				% 5 &39.63& 31.63&8&  41.7232 & 30.05& 0& 257\\
-				
-				% 6 &30.21& 30.21& 0&  41.8588 & 30.14& 0& 256\\
-				
-				% 7 &29.73& 29.73& 0& 40.3140 &29.12& 0& 268\\
-				
-				% 8 &37.29& 31.29&6& 40.8510 & 30.75& 0& 297\\
-				
-				% 9 &34.07& 30.07& 4 & 40.8596 &29.99& 0& 276\\
-				
-				% 10&29.88& 29.88& 0& 40.0467&29.63& 0& 288\\
-				\hline
-				Mean &33.88 &30.79 &3.10&227.43&   44.14&  30.14 &   2.70&267.30\\ 
-				St. Dev.&5.61&1.18&4.58&32.55&6.73&0.78 &5.81  & 22.03\\
+				&\multicolumn{7}{c||}{5 races in Alpine track}&\multicolumn{7}{c|}{5 races in Etrack5}&\\
+				\cline{2-16}
+Bots	& 		  R1 & 		  R2 & 		 R3 & 		  R4& 		   R5&Best laps&Min damage& R1&R2&R3&R4&R5&Best laps&Min damage&Total\\
+				\hline		
+$GFC1_1$ &\textbf{25}& 18		 &8			&15			&12        &15 &10&		12&\textbf{25}& 		18&\textbf{25}&		18&10&10&221\\
+$GFC1_2$ &12		 &\textbf{25}& 15 		&12			&15			&0&5&8			&15		  &			15&	4	&10&0&0&136\\
+$GFC1_3$ &6			 &6			&10			&10			&8			&0&0&15			&10		  &			10&	18	&6&0&5&104\\
+$GFC1_4$ &2			 &	8		&4			&4			&      6    &0&0& 10		& 1		  &		 2&1		&2&0&0&40\\
+$GFC2_1$ &1			 &4			&6			&2			&	4		&0&0&4		    &2		  &			12&	10	& 4&0&0&49\\					
+$GFC2_2$ &15		&10			& 18		&\textbf{25}&18			&5&10&\textbf{25}& 18	  &	\textbf{25} &15&15&5&10&206\\
+$GFC2_3$ &10		&2			&1			&6			&	2		&0&0&2			&6		  &			4&	6	&1&0&0&41\\
+$GFC2_4$ &4			&1			&2			&1			&	1		&0&0&1			&4	      &		8&	2	&8&0&0&32\\	
+$bt1$ 	 &/			&/			&/			&8			&/			&0&0&/			&8		  &			 6&8		&/&0&0&/\\
+$inferno1$&18		&/			&12			&/			&/			&0&0&18			&12		  &			/&/		& /& 0&0&/\\			
+$berwin2$&8			&15			&/			&18			&/			&0&0&/			&/		&			/&12	&12&5&0&/\\
+$berwin3$&/			&12			&/			&/			&\textbf{25}&5&0&4			&/		&			/&/		&\textbf{25}&5&0&/\\
+$damned1$&/			&/			&\textbf{25}&/			&10			&0&0&/			&/		& 			8&/		& /&0&0&/\\			
 				\hline
 				\hline
-				&\multicolumn{8}{c||}{ with population size 50}\\
-				\hline
-				&\multicolumn{4}{c||}{GFC1}&\multicolumn{4}{c|}{GFC2}\\
-				\cline{2-9}
-				& Min GFC2 & $LapTime$ & $Damage$ & $TopSpeed$& Min fit. 2& $LapTime$ & $Damage$ & $TopSpeed$\\
-				\hline
-				Best &\textbf{28.78}& 28.78& 0&233&\textbf{28.11} & 38.52& 0& 288\\
-				\hline
-				Mean &33.14 &29.89 &4.14&230.19&   42.93&  29.57 &   3.46&271.74\\ 
-				St. Dev.&4.98&1.32&4.22&31.14&5.63&0.93 &5.19  & 23.90\\
-				\hline
-				
+			
 			\end{tabular}
 		}\label{tab:runsresults}
 	}
 \end{table*}
-Wilcoxon rank sum non-parametric test is used to reject or accept the
-null hypothesis of equality of medians of the values of the two
-fitness functions for the 20 runs with 50 chromosomes. The obtained
-p-value was $p =  0.0011$, this result lead to the rejection of null
-hypothesis with a threshold $\alpha=0.01$ which allows us to conclude
-that the two samples sets are different. 
+According to the table, the first controller GFC1 and the second GFC2 have won the same number of races but $GFC2_1$ has achieved better results on the races he did not win.
+Of course the TORCS bots results are not counted since they only serve to diversify the selection and they do not participate in all the races.
+This selection allowed us to choose the best individual on several races and the most stable and thus avoid the selection by tournament where the winner of a single confrontation is chosen.
 
-Since the \textbf{GFC2} controller also optimizes the TopSpeed, we can
-notice that it is clearly superior to that of \textbf{GFC1} which
-surely influences the overall Lap time. This improvement in TopSpeed
-greatly increases the performance of the the \textbf{GFC2}.
 
-Increasing the population size to 50  has led to better values of the
-two controllers, yielding better values for lap time, speed and
-damage. This increase in the population size has allowed a better
-coverage of the research space, thus getting closer to the optimal
-solution.  
+
+
+
 The best solution obtained with each fitness function from these runs
 will be used in races against selected opponents. 
 % We will have to include the new membership functions here - JJ
