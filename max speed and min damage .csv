@@ -1,6 +1,6 @@
-Bots;MaxSpeed;Damage
-$GFC-MMS_1$;1;3
-$GFC-AVS_2$;0;5
+Drivers;MaxSpeed;Damage
+GFC-MMS_1;1;3
+GFC-AVS_2;0;5
 TITA1;0;0
 TITA2;0;0
 INFERNO1;2;1
