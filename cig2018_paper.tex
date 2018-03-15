@@ -642,14 +642,16 @@ $GFC-AVS_2$, have been tested in a practice races against selected opponents. Th
 
 This evaluation is a like Formula 1 mini championship of 10 races each one for 20 laps where also six bots from TORCS are used to test our controllers. The first 5 races are conducted in \textbf{Alpine 2} track (trained one); and the other 5 races took place in \textbf{E-Track 5} track.
 
-The results are shown in Table \ref{tab:chsresults}:
-
+The results are shown in Table \ref{tab:chsresults}. 
+%
 \begin{table*}[ht]
   \centering
   {\scriptsize
-    \caption{ Results of the mini-championship with 10 drivers and ten races in \textbf{Alpine 2} and \textbf{E-Track 5} tracks }
+    \caption{ Results of the mini-championship with 10 drivers and ten races in \textbf{Alpine 2} and \textbf{E-Track 5} tracks. }
     % Total points should be added, maybe per track. Also highlight,
     % as above, who won. - JJ
+    % References for Tita and Inferno should be added. I haven't seen
+    % them - JJ
     {
 			\begin{tabular}{|c||c|c|c|c|c|c|c|c|c|c||}
 				\hline
@@ -675,13 +677,17 @@ The results are shown in Table \ref{tab:chsresults}:
 		}\label{tab:chsresults}
 	}
 \end{table*}
+%
+This table shows how the fuzzy controllers that are evolved using the
+new track and evaluation functions yield  the best results, obtaining
+very good overall rankings in the races, We can also see that our two
+genetic based fuzzy controllers have win  only one race for
+$GFC-MMS_1$ and two for $GFC-AVS_2$ controller compared to $berwin2 $
+and $inferno1$ bots which win three races each one. 
 
-
-
-From the table, we can see that the fuzzy controllers optimized by the
-GA yield best results, obtaining very good overall rankings in the races, We can also see that our two  genetic based fuzzy controllers have win  only one race for 	$GFC-MMS_1$ and two for $GFC-AVS_2$ controller compared to $berwin2 $ and $inferno1$ bots which win three races each one.
-
-This lack of race winning did not stop our genetic controllers from finishing in the first four rankings in the races, which helped them to win the points championship.
+This lack of race winning did not stop our genetic controllers from
+finishing in the first four rankings in the races, which helped them
+to win the  championship by score.
 This result is due to the trade-off between the damage and the average speed achieved by the fitness function. This property has given our controller an advantage in minimizing damage and looking for top speed in the straight sections of the track while it tries to find the best trajectory in turns to avoid hitting the track edges or get out of it.
 The overall number of points of the championship is presented in Figure \ref{fig:points} while Figure \ref{fig:damspeed} represent the numbers of races where each controller has obtained the minimum of damage and the higher MaxSpeed.
 
