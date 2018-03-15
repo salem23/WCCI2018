@@ -687,8 +687,11 @@ The overall number of points of the championship is presented in Figure \ref{fig
 
 \begin{figure}[!ht]	
 	\begin{center}
-		\includegraphics[width=8cm]{fig/HISTSD.png}
-		\caption{Championship damage and MaxSpeeds results}
+          \includegraphics[width=8cm]{fig/HISTSD.png}
+          % Plotted with plot-speed-damage.R
+		\caption{Chart with number of races where controlled
+                  cars are  damaged and where they obtain the MaxSpeed
+                in a lap.}
 		\label{fig:damspeed}	
 	\end{center}	
 \end{figure}
@@ -699,29 +702,29 @@ those of  \cite{evo18}: $EVO1$  and $EVO2$. The average values of $damage$, $Max
 
 
 \begin{table}[!ht]
-	\centering
-	{\scriptsize
-		\caption{Average damage and Speed Results of GFC in a 5 races in \textbf{Alpine 2} and  \textbf{E-Track 5} tracks}
-		\label{tab:damagespeed}
-		\begin{tabular}{|c|c|c|c|c|}
-			\hline 
-			\multicolumn{5}{|c|}{\textbf{Alpine 2}}  \\	
-			\hline  
-			& \textbf{$GFC-MMS_1$}&\textbf{$GFC-AVS_2$} & \textbf{$EVO1$} &\textbf{$EVO2$}\\					
-			\hline \textbf{Average Speed km/h}& 188.66&194.39&154.02&150.98\\
-			\hline \textbf{Max Speed km/h}& 229.77&218.91&213.42&215.00\\	
-			\hline \textbf{Damage}& 122.43& 134.85&124.02 &131.41\\	
-			\hline 
-		\end{tabular}
-		\begin{tabular}{|c|c|c|c|c|}
-			\multicolumn{5}{|c|}{\textbf{E-Track 5}}  \\
-			\hline 
-			 & \textbf{$GFC-MMS_1$}&\textbf{$GFC-AVS_2$} & \textbf{$EVO1$} &\textbf{$EVO2$} \\				
-			\hline \textbf{Average Speed km/h}& 166.89&169.33&147.92&145.78\\
-				\hline \textbf{Max Speed km/h}&252.72&241.29&236.33&231.90\\	
-			\hline \textbf{Damage}& 22.89& 18.44&23.34 &15.26\\	
-			\hline 
-		\end{tabular}
+  \centering
+  {\scriptsize
+    \caption{Average damage and Speed Results of GFC in a 5 races in \textbf{Alpine 2} and  \textbf{E-Track 5} tracks}
+    \label{tab:damagespeed}
+    \begin{tabular}{|p{1.65cm}|c|c|c|c|}
+      \hline 
+      \multicolumn{5}{|c|}{\textbf{Alpine 2}}  \\	
+      \hline  
+   & \textbf{$GFC-MMS_1$}&\textbf{$GFC-AVS_2$} & \textbf{$EVO1$} &\textbf{$EVO2$}\\					
+      \hline \textbf{Average Speed km/h}& 188.66&194.39&154.02&150.98\\
+      \hline \textbf{Max Speed km/h}& 229.77&218.91&213.42&215.00\\	
+      \hline \textbf{Damage}& 122.43& 134.85&124.02 &131.41\\	
+      \hline 
+    \end{tabular}
+    \begin{tabular}{|p{1.65cm}|c|c|c|c|}
+      \multicolumn{5}{|c|}{\textbf{E-Track 5}}  \\
+      \hline 
+   & \textbf{$GFC-MMS_1$}&\textbf{$GFC-AVS_2$} & \textbf{$EVO1$} &\textbf{$EVO2$} \\				
+      \hline \textbf{Average Speed (km/h)}& 166.89&169.33&147.92&145.78\\
+      \hline \textbf{Max Speed  (km/h)}&252.72&241.29&236.33&231.90\\	
+      \hline \textbf{Damage}& 22.89& 18.44&23.34 &15.26\\	
+      \hline 
+    \end{tabular}
 	}
 \end{table} 
 
