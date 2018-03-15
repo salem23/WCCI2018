@@ -774,13 +774,43 @@ by the other tested controller as well as Inferno1.
 \section{Conclusions and Future Work} 
 \label{sec:conclusions}
 
-In this work, we have presented an improved Genetic Algorithm implementation that optimizes and improves an autonomous driver using fuzzy systems for TORCS simulator \cite{evo17}. It combines two sub-controllers, one to calculate the target speed and the other for the direction, that is, for driving the steering wheel.
+In this work, we have presented an new ways of evaluating controllers
+for the TORCS game; these new methods work within an evolutionary
+algorithm that optimizes a set of fuzzy controllers for TORCS cars \cite{evo17}. It combines two
+sub-controllers, one to calculate the target speed and the other for
+the direction, that is, for driving the steering wheel. 
 
-After initial tests, that showed the promise of using evolutionary algorithms with two different fitness functions, one considering the average lap time and the car damage and another adding the top speed reached, we have fine-tuned some algorithm parameters to obtain better results. %PABLO: "Also, in order to validate the obtained controllers, different experiments have also been carried out on tracks not used for training ."
+After initial tests, that showed the promise of using evolutionary
+algorithms with two different fitness functions, one considering the
+average lap time and the car damage and another adding the top speed
+reached, we discovered the importance of the speed, using different
+combinations. {\em A priori}, we could think that races are won by
+being very fast when you can be, and trying not to get too slow in
+tortuous segments. This heuristic was what drove us to design the
+first evaluation function, \textbf{$GFC-MMS_1$}. However, it could be
+thought that sustaining a high average speed will be the most
+important factor; this was the heuristic used for
+\textbf{$GFC-AVS_2$}. The choice of the single track used for training
+reflected these facts: tracks usually combine ``fast'' and ``slow''
+segments, and the car should be able to perform on both.
 
-The yielded results are very promising since the optimized controllers (one per fitness function) were ranked among the first ones in three different evaluation races with rivals, with the minimum of damage.
+Besides, the uncertainty of the evaluation are taken into account when
+selecting the {\em best} controller. Since there is a random element
+in evaluation, instead of picking the individual with the best fitness
+in the last generation, we make them race against each other and pick
+the one with the best results in a real race. Introducing this element
+of reality also makes the choice of controller for comparison a more
+robust choice than previously. 
 
-In the comparison with the original (before the optimization) fuzzy controller, the improvement can be clearly seen in the results. The new controllers are able to drive much faster than it, and moreover they manage to not receiving any damage, while the original controller even crashed the car in some races.
+The yielded results are very promising since the optimized controllers
+(one per fitness function) were ranked among the first ones in 
+different evaluation races with rivals, with the minimum of damage. 
+
+In the comparison with the original (before the optimization) fuzzy
+controller, the improvement can be clearly seen in the results. The
+new controllers are able to drive much faster than it, and moreover
+they manage to sustain a low damage, while the original controller
+even crashed the car in some races. % We should have to revise this.  
 
 The results show that including the top speed in the calculus improves
 results, since the obtained drivers have proved to be able to run a 10
@@ -789,6 +819,7 @@ considered to `compensate' somehow the influence of the top speed,
 otherwise the controller would be extremely aggressive and would not
 finish many of the races.
 
+% All this has to be revised
 Thus, we can conclude from the results that the presented evolutionary
 algorithm with the
 proposed fitness functions are well suited for finding the best
