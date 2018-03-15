@@ -582,8 +582,12 @@ We have evaluated the Genetic Fuzzy Controller (GFC) with the two proposed fitne
 
 The two genetic optimization processes have been run in independently. However, as a difference to previous works in which we just selected as the best the individual with the highest fitness value in the last generation, in this study we have aimed to implement a better process, which we expect will yield a more competitive controller.
 
-To this end, for every approach, once the evolutionary process is finished, the best four individuals have competed together in 5 races in the\textbf{Alpine 2} track (used in the optimization) and 5 races in \textbf{E-Track 5} track (a new one for them). 
+To this end, for every approach, once the evolutionary process is
+finished, the best four individuals have competed together in 5 races
+in the \textbf{Alpine 2} track (used in the optimization) and 5 races in \textbf{E-Track 5} track (a new one for them). 
 % Antonio - Mohammed, During how many laps are the races performed?
+% It would be interesting to add another column with the fitness of
+% those chosen - JJ
 In order to enhance the selection of the best, another two controllers are picked randomly from the default TORCS bots
 % Antonio - Mohammed, are the bots taken from the default ones? Can you select them randomly in the run or have you selected them in advance?
 to participate in the race. Moreover, to do it fairer, we have defined a \textit{score}, so the controller which gets the fastest lap or the minimum damage in each race is given 5 points.
