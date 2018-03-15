@@ -39,9 +39,9 @@ University of C{\'a}diz, Spain. \\Email: pablo.garciasanchez@uca.es}
 \begin{abstract}
 Simulated car races have been used for a long time as an environment
 where car controlling algorithms can be tested; they are an
-interesting testbed for all kind of algorithms, including
+interesting testbed for all kinds of algorithms, including
 metaheuristics such as evolutionary algorithms; however, the challenge
-in these evolutionary algorithms is to design a reliable and effective
+in the evolutionary algorithms is to design a reliable and effective
 evaluation process for the individuals that eventually translates into
 good solutions to the car racing problem: finding a controller that is
 able to win in a wide range of tracks and with a good quantity of
@@ -60,6 +60,7 @@ to do so. It builds on preliminary results obtained in previous papers as a base
 % Antonio - Complete this with the obtained results and conclusions
 % I don't know if different approaches are eventually used. Erase if not.
 % Antonio - just one approach: the score-based
+%Mohammd right
 \end{abstract}
 \begin{IEEEkeywords}
 Videogames, fuzzy controllers, TORCS, Steering control, Optimization,
@@ -80,7 +81,7 @@ senses \cite{Autodriv2006}. Testing different autonomous driving methodologies i
 as well as algorithms are usually tested in simulated environments;
 these simulated environments, at the same time, offer the incentive of
 competition among your system and others. In this paper, we will be
-using the Open Racing Car Simulator (TORCS) \cite{WebTORCS} is a very
+using the Open Racing Car Simulator (TORCS) \cite{WebTORCS}, a very
 realistic racing simulator which offers a great testbed for the
 implementation and evaluation of autonomous drivers.  
 It has been used several times for the celebration of Artificial
@@ -103,7 +104,7 @@ for defining this kind of autonomous agents, since they are in part
 inspired by the human reasoning when driving. A fuzzy controller works
 with linguistic variables, and will for instance turn {\em slightly}
 to the right when the next curve is {\em close}, but these controllers
-have to be designed to map properly input to desired outputs in
+have to be designed to map properly inputs to desired outputs in
 particular situations. Previously, the authors presented an approach
 combining two specialized fuzzy controllers, designed by hand, that
 were able to decide the car's proper steering angle and desired speed
@@ -185,7 +186,7 @@ inside TORCS has been the optimization of autonomous controllers for
 car driving, i.e. conducting a meta-optimization process. 
 Thus, EAs have been applied to `refine' the parameters which define
 the driver's behavior \cite{ButzCMAES09,SAES2012}, or to improve the
-structure/architecture of the models \cite{evol,neurone}, working
+structure/architecture of the models \cite{SAES2012,neurone}, working
 offline, or online (during the game)
 \cite{TanOnline08,Cardamone_Online_NN}.
 % FUZZY + EAs
@@ -554,11 +555,13 @@ After analyzing most of the available tracks, we have selected for these experim
 
 \begin{figure}[!ht]	
   \begin{center}
-    \includegraphics[width=7cm]{fig/alpine2.jpg}
+    \includegraphics[width=3cm]{fig/alpine2.jpg}
     \caption{Alpine 2 Track: Slow mountain road. Length: 3773.57m, Width: 10m}
     \label{fig:alpine2_track}	
   \end{center}	
 \end{figure}
+
+
 
 We have used the driving car for our controllers \textit{car1-tbr1}, since according to previous experiments \cite{evo17}, this is a fair choice due to its moderate performance. This will lead our controller to be prepared to drive in the most usual conditions. 
 
