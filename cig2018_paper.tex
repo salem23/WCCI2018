@@ -206,11 +206,18 @@ In this paper we focus on the improvement of the evolved controllers by means of
 \section{Experimental Setup}
 \label{sec:experimental_setup}
 
-The Open Racing Car Simulator (TORCS) \cite{WebTORCS} is an open source, modern, multi-player, modular and portable racing simulator that allows users to race against computer-controlled opponents.
-Its high degree of modularity and portability, together with the realistic and real-time driving simulation, make it an ideal testbed for artificial intelligence research, as we have shown in previous section.
+The Open Racing Car Simulator (TORCS) \cite{WebTORCS} is an open
+source, modern, multi-player, modular and portable racing simulator
+that allows users to compete against other computer-controlled opponents.
+Its high degree of modularity and portability, together with the
+realistic and real-time driving simulation, make it an ideal testbed
+for artificial intelligence research, as we have shown in the previous section.
 
-There is a large set of sensors \cite{Torcs3} which the car can consider during a race, such as distances to track borders, to rivals, current fuel, current gear, position in the race, speed, or damage, among others.
-The sensors values are considered by any TORCS autonomous driver, or {\em controller}, to manage the car using actuators \cite{Torcs3}: the steering wheel, the accelerator, the brake pedal and the gearbox.  
+Every car in TORCS includes  a large set of sensors \cite{Torcs3},
+whose values the car can use during a race, such as distances to track borders, to rivals, current fuel, current gear, position in the race, speed, or damage, among others.
+The sensor values are considered by any TORCS autonomous driver, or
+{\em controller}, to manage the car using actuators \cite{Torcs3}: the
+steering wheel, the accelerator, the brake pedal and the gearbox.   
 
 %Thus, a controller is a program, running inside TORCS, that drives a car automatically. It gets as input information about the current state of
 %the car and its situation on the track (sensors). These collected data
@@ -732,11 +739,29 @@ those of  \cite{evo18}: $EVO1$  and $EVO2$. The average values of $damage$, $Max
 
 The average values obtained for the maximum speed and the damage show a clear improvement for the two new functions proposed for the fitness compared to those of EVO.
 Although the damage values of $GFC-MMS_1$ and $GFC-AVS_2$ did not vary very much, they remained close to the previous fitness functions.
-The remark that emerges clearly from the table is the increase of the maximum speed of more than $10 km/h$ for $GFC-MMS_1$ and more than $5 km/h$ for $GFC-AVS_2$.
-this improvement in speed especially for the fitness $GFC-MMS_1$ is due to the maximization of the Maxspeed in the fitness function so only the individuals that get the higher MaxSpeed are kept after the selection process of the genetic optimization.
+The conclusion that can be drawn from these results is the increase of
+the maximum speed of more than $10 km/h$ for $GFC-MMS_1$ and more than
+$5 km/h$ for $GFC-AVS_2$. This improvement in speed especially for the
+fitness $GFC-MMS_1$ is due to the maximization of the MaxSpeed in the
+fitness function so only the individuals that get the higher MaxSpeed
+are kept after the selection process of the genetic optimization. 
 
-on the other hand, we can notice the considerable increase in the average speed of controller $GFC-AVS_2$ in both tracks and especially for Alpine2 used for optimization.
-This increase translates into a decrease in race time in each segment of the track and therefore better performances.
+On the other hand, we can notice the considerable increase in the
+average speed of controller $GFC-AVS_2$ in both tracks and especially
+in Alpine2, which was the one used during the evolution process. This
+increase translates into a decrease in race time in each segment of
+the track and therefore better performance. The results in Table
+\ref{tab:damagespeed} are consistent with the evaluation functions:
+$GFC-AVS_2$ has better average and lower MaxSpeed than
+$GFC-MMS_1$. Damage, however, is quite similar, although, as we can
+see in Figure \ref{fig:damspeed} $GFC-MMS_1$ is better at doing fast
+laps, at the same time it sustains less damage. Peak speed is not
+enough to eventually win a race: Figure \ref{fig:points} shows how
+$GFC-AVS_2$ achieves the best score in the {\em championship}. It
+should be noted that this victory is mainly achieved thanks to
+victories in {\tt E-Track5}. Although it is always in a good position
+in this track, $GFC-MMS_1$ fails to win a single race, being overcome
+by the other tested controller as well as Inferno1.
 
 
 
