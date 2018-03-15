@@ -640,18 +640,21 @@ The results are shown in Table \ref{tab:chsresults}:
 		{
 			\begin{tabular}{|c||c|c|c|c|c|c|c|c|c|c||}
 				\hline
+			&\multicolumn{5}{|c|}{\textbf{Alpine 2}} &	\multicolumn{5}{|c|}{\textbf{E-Track 5}}\\
+				\hline
+				\hline	
 				Drivers&{Race 1}&{Race 2}&{Race 3}&{Race 4}&{Race 5}&{Race 6}&{Race 7}&{Race 8}&{Race 9}&{Race 10}\\
 				\hline	\hline			
 				$GFC-MMS_1$&	25&	10&	18&	12&	10&	18&	12&	15&	15&	12\\
 				$GFC-AVS_2$&	15&	18&	25&	15&	15&	25&	18&	18&	12&18\\
-				TITA1&	4&	2&	1&	2&	2&	4&	2&	1&	4&	6\\
-				TITA2&	2&	1&	2&	1&	1&	1&	1&	2&	1&	2\\
-				INFERNO1&12&15&	12&	18&	18&	12&	15&	25&	25&	15\\
-				INFERNO2&10&12&	4&	10&	25&	10&	10&	4&	2&	8\\
-				BERWIN1&	18&	25&	15&	8&	6&	8&	8&	6&	10&	10\\
-				BERWIN2	&8&	8&	10&	25&	12&	15&	25&	10&	8&	25\\
-				EVO1&	6&	6&	8&	4&	8&	2&	6&	12&	8&	4\\
-				EVO2&	1&	4&	6&	6&	4&	6&	4&	8&	6&	2\\
+				$Tita1$&	4&	2&	1&	2&	2&	4&	2&	1&	4&	6\\
+				$Tita2$&	2&	1&	2&	1&	1&	1&	1&	2&	1&	2\\
+				$Inferno1$&12&15&	12&	18&	18&	12&	15&	25&	25&	15\\
+				$Inferno2$&10&12&	4&	10&	25&	10&	10&	4&	2&	8\\
+				$Berwin1$&	18&	25&	15&	8&	6&	8&	8&	6&	10&	10\\
+				$Berwin2$	&8&	8&	10&	25&	12&	15&	25&	10&	8&	25\\
+				$EVO1$&	6&	6&	8&	4&	8&	2&	6&	12&	8&	4\\
+				$EVO2$&	1&	4&	6&	6&	4&	6&	4&	8&	6&	2\\
 				\hline
 				\hline
 				
@@ -663,7 +666,7 @@ The results are shown in Table \ref{tab:chsresults}:
 
 
 From the table, we can see that the fuzzy controllers optimized by the
-GA yield best results, obtaining very good overall rankings in the races, We can also see that our two  genetic based fuzzy controllers have win  only one race for 	$GFC-MMS_1$ and two for $GFC-AVS_2$ controller compared to $berwin2 $ and $infierno1$ bots which win three races each one.
+GA yield best results, obtaining very good overall rankings in the races, We can also see that our two  genetic based fuzzy controllers have win  only one race for 	$GFC-MMS_1$ and two for $GFC-AVS_2$ controller compared to $berwin2 $ and $inferno1$ bots which win three races each one.
 
 This lack of race winning did not stop our genetic controllers from finishing in the first four rankings in the races, which helped them to win the points championship.
 This result is due to the trade-off between the damage and the average speed achieved by the fitness function. This property has given our controller an advantage in minimizing damage and looking for top speed in the straight sections of the track while it tries to find the best trajectory in turns to avoid hitting the track edges or get out of it.
