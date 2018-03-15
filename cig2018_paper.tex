@@ -645,29 +645,29 @@ The results are shown in Table \ref{tab:chsresults}:
     % Total points should be added, maybe per track. Also highlight,
     % as above, who won. - JJ
     {
-			\begin{tabular}{|c||c|c|c|c|c|c|c|c|c|c||}
-				\hline
-			&\multicolumn{5}{|c|}{\textbf{Alpine 2}} &	\multicolumn{5}{|c|}{\textbf{E-Track 5}}\\
-				\hline
-				\hline	
-				Drivers&{Race 1}&{Race 2}&{Race 3}&{Race 4}&{Race 5}&{Race 6}&{Race 7}&{Race 8}&{Race 9}&{Race 10}\\
-				\hline	\hline			
-				$GFC-MMS_1$&	25&	10&	18&	12&	10&	18&	12&	15&	15&	12\\
-				$GFC-AVS_2$&	15&	18&	25&	15&	15&	25&	18&	18&	12&18\\
-				$Tita1$&	4&	2&	1&	2&	2&	4&	2&	1&	4&	6\\
-				$Tita2$&	2&	1&	2&	1&	1&	1&	1&	2&	1&	2\\
-				$Inferno1$&12&15&	12&	18&	18&	12&	15&	25&	25&	15\\
-				$Inferno2$&10&12&	4&	10&	25&	10&	10&	4&	2&	8\\
-				$Berwin1$&	18&	25&	15&	8&	6&	8&	8&	6&	10&	10\\
-				$Berwin2$	&8&	8&	10&	25&	12&	15&	25&	10&	8&	25\\
-				$EVO1$&	6&	6&	8&	4&	8&	2&	6&	12&	8&	4\\
-				$EVO2$&	1&	4&	6&	6&	4&	6&	4&	8&	6&	2\\
-				\hline
-				\hline
-				
-			\end{tabular}
-		}\label{tab:chsresults}
-	}
+      \begin{tabular}{|c||c|c|c|c|c|c|c|c|c|c||}
+        \hline
+        &\multicolumn{5}{|c|}{\textbf{Alpine 2}} &	\multicolumn{5}{|c|}{\textbf{E-Track 5}}\\
+        \hline
+        \hline	
+        Drivers&{Race 1}&{Race 2}&{Race 3}&{Race 4}&{Race 5}&{Race 6}&{Race 7}&{Race 8}&{Race 9}&{Race 10}\\
+        \hline	\hline			
+        $GFC-MMS_1$&	25&	10&	18&	12&	10&	18&	12&	15&	15&	12\\
+        $GFC-AVS_2$&	15&	18&	25&	15&	15&	25&	18&	18&	12&18\\
+        $Tita1$&	4&	2&	1&	2&	2&	4&	2&	1&	4&	6\\
+        $Tita2$&	2&	1&	2&	1&	1&	1&	1&	2&	1&	2\\
+        $Inferno1$&12&15&	12&	18&	18&	12&	15&	25&	25&	15\\
+        $Inferno2$&10&12&	4&	10&	25&	10&	10&	4&	2&	8\\
+        $Berwin1$&	18&	25&	15&	8&	6&	8&	8&	6&	10&	10\\
+        $Berwin2$	&8&	8&	10&	25&	12&	15&	25&	10&	8&	25\\
+        $EVO1$&	6&	6&	8&	4&	8&	2&	6&	12&	8&	4\\
+        $EVO2$&	1&	4&	6&	6&	4&	6&	4&	8&	6&	2\\
+        \hline
+        \hline
+        
+      \end{tabular}
+    }\label{tab:chsresults}
+  }
 \end{table*}
 
 
@@ -681,13 +681,16 @@ The overall number of points of the championship is presented in Figure \ref{fig
 
 
 
-\begin{figure}[!ht]	
-	\begin{center}
-		\includegraphics[width=8cm]{fig/POINTS.png}
-		\caption{Championship points results}
-		\label{fig:points}	
-	\end{center}	
-\end{figure}
+\begin{figure*}[h!tb]	
+  \begin{center}
+    \includegraphics[width=0.95\textwidth]{fig/POINTS.png}
+    % Generated with plot-points.R 
+    \caption{Total and partial score for all controllers in the {\em
+        championship}. {\tt GFC} are the two controllers introduced in
+    this paper}
+    \label{fig:points}	
+  \end{center}	
+\end{figure*}
 
 
 \begin{figure}[!ht]	
