@@ -691,8 +691,6 @@ to win the  championship by score.
 This result is due to the trade-off between the damage and the average speed achieved by the fitness function. This property has given our controller an advantage in minimizing damage and looking for top speed in the straight sections of the track while it tries to find the best trajectory in turns to avoid hitting the track edges or get out of it.
 The overall number of points of the championship is presented in Figure \ref{fig:points} while Figure \ref{fig:damspeed} represent the numbers of races where each controller has obtained the minimum of damage and the higher MaxSpeed.
 
-
-
 \begin{figure*}[h!tb]	
   \begin{center}
     \includegraphics[width=0.95\textwidth]{fig/POINTS.png}
@@ -709,16 +707,16 @@ The overall number of points of the championship is presented in Figure \ref{fig
           \includegraphics[width=8cm]{fig/HISTSD.png}
           % Plotted with plot-speed-damage.R
 		\caption{Bar chart with the number of races where controlled
-                  cars are damaged and where they obtain the MaxSpeed
+                  cars obtain the minimum damage and where they obtain the highest MaxSpeed
                 in a lap.}
 		\label{fig:damspeed}	
 	\end{center}	
 \end{figure}
 
 Table \ref{tab:damagespeed} presents a comparison between the genetic based fuzzy controllers presented in this paper, \textbf{$GFC-MMS_1$} and \textbf{$GFC-AVS_2$} with  
-those of  \cite{evo18}: $EVO1$  and $EVO2$. The average values of $damage$, $MaxSpeed$ and $Speed$ of the ten races in the \textbf{Alpine 2} and  \textbf{E-Track 5} tracks.
-
-
+those of  \cite{evo18}: $EVO1$  and $EVO2$. The average values of
+$damage$, $MaxSpeed$ and $Speed$ of the ten races in the
+\textbf{Alpine 2} and  \textbf{E-Track 5} tracks. 
 
 \begin{table}[!ht]
   \centering
