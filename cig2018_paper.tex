@@ -169,7 +169,7 @@ simulator, the fuzzy controllers and the Genetic Algorithm implemented in Sectio
 \section{State of the Art}
 \label{sec:soa}
 
-TORCS has become one of the main environments for research on AI since its launch in 2007 \cite{WebTORCS}. It offers different kind of problems to solve, such as the definition of the optimal parameters for the cars (before the race) \cite{Kole-ParamCarTunning12}, and the main one, which is the design of competitive autonomous drivers aiming to win races against other cars, mainly presented in the context on the Simulated Car Racing Competition \cite{SimulatedCarRacing-2008}.
+TORCS has become one of the main environments for research on AI since its launch in 2007 \cite{WebTORCS}. It offers different kinds of problems to solve, such as the definition of the optimal parameters for the cars (before the race) \cite{Kole-ParamCarTunning12}, and the main one, which is the design of competitive autonomous drivers aiming to win races against other cars, mainly presented in the context on the Simulated Car Racing Competition \cite{SimulatedCarRacing-2008}.
 
 Evolutionary algorithms have targeted TORCS almost since its
 publication, for instance, for determining the
@@ -426,6 +426,7 @@ $x_{3}$ and $x_{4}$ taking their values in the interval \textit{[a,
 		\caption {Trapezoidal MFs}
 		\label{fig:trapeze}
 	\end{center}
+% Mohammed: Could we remove this figure?
 \end{figure}
 And a fuzzy partition with \textit{n} trapezoidal membership functions
 is defined by \textit{2n} variables (\textit{a =} $ x_{1}$,$x_{2}
@@ -518,7 +519,7 @@ maximizing $TopSpeed$. However in this study, we have turned our focus and have 
 \begin{itemize}
 \item $MinSpeed$: aiming to increase the good driving in the difficult zones of the tracks (e.g. curves).
 \item $MaxSpeed$: centered on the enhancement of the controller in easy or straight parts.
-\item $AVG(Speed)$: which shows the combination of the overall behaviour in the whole track.
+\item $AVG(Speed)$: which shows the combination of the overall behavior in the whole track.
 \item $Damage$: aiming to create `safe' controllers, as it is mandatory being able to finish the race.
 \end{itemize} 
 %
@@ -563,7 +564,7 @@ After analyzing most of the available tracks, we have selected for these experim
 
 
 
-We have used the driving car for our controllers \textit{car1-tbr1}, since according to previous experiments \cite{evo17}, this is a fair choice due to its moderate performance. This will lead our controller to be prepared to drive in the most usual conditions. 
+We have used the driving car  \textit{car1-tbr1} for our controllers, since according to previous experiments \cite{evo17}, this is a fair choice due to its moderate performance. This will lead our controller to be prepared to drive in the most usual conditions. 
 
 We have evaluated the Genetic Fuzzy Controller (GFC) with the two proposed fitness functions: GFC-MMS (Equation \ref{fit1}) and GFC-AVS (Equation \ref{fit2}), comparing them for racing performance. We have run the  algorithm with population size of 50 individuals. The rest of parameters are: Generations=50, Crossover rate=0.85, Mutation rate=0.1, and 10 different runs per configuration.
 
@@ -589,17 +590,20 @@ To this end, for every approach, once the evolutionary process is
 finished, the best four individuals have competed together in 5 races
 in the \textbf{Alpine 2} track (used in the optimization) and 5 races in \textbf{E-Track 5} track (a new one for them). 
 % Antonio - Mohammed, During how many laps are the races performed?
+%Mohammed  5 laps
 % It would be interesting to add another column with the fitness of
 % those chosen - JJ
 In order to enhance the selection of the best, another two controllers are picked randomly from the default TORCS bots
 % Antonio - Mohammed, are the bots taken from the default ones? Can you select them randomly in the run or have you selected them in advance?
+% before starting the race, I picked two numbers randomly that represent two TORCS drivers and i load them in the same race with our genetic bots
 to participate in the race. Moreover, to do it fairer, we have defined a \textit{score}, so the controller which gets the fastest lap or the minimum damage in each race is given 5 points.
 
-The results of these runs are shown in Table \ref{tab:runsresults}.
+The results of these runs are shown in Table \ref{tab:runsresults}. Best laps and damage are the scores collected by each bot in each track's races when getting the best lap time or/and the minimum damage. 
 \begin{table*}[ht]
   \centering
   {\scriptsize % Please explain all columns. What's "best laps"? And
                % "min damage"? - JJ
+               %mohammed done
     \caption{ Obtained Scores on the race-based selection for the two approaches in two different tracks. }
 		{
 			\begin{tabular}{|c||c|c|c|c|c|c|c||c|c|c|c|c|c|c||c|}
@@ -608,7 +612,7 @@ The results of these runs are shown in Table \ref{tab:runsresults}.
 				\cline{2-16}
 Bots	& 		  R1 & 		  R2 & 		 R3 & 		  R4& 		   R5&Best laps&Min damage& R1&R2&R3&R4&R5&Best laps&Min damage&Total\\
 				\hline		
-$GFC-MMS_1$ &\textbf{25}& 18		 &8			&15			&12        &15 &10&		12&\textbf{25}& 		18&\textbf{25}&		18&10&10&221\\
+$GFC-MMS_1$ &\textbf{25}& 18		 &8			&15			&12        &15 &10&		12&\textbf{25}& 		18&\textbf{25}&		18&10&10&\textbf{221}\\
 $GFC-MMS_2$ &12		 &\textbf{25}& 15 		&12			&15			&0&5&8			&15		  &			15&	4	&10&0&0&136\\
 $GFC-MMS_3$ &6			 &6			&10			&10			&8			&0&0&15			&10		  &			10&	18	&6&0&5&104\\
 $GFC-MMS_4$ &2			 &	8		&4			&4			&      6    &0&0& 10		& 1		  &		 2&1		&2&0&0&40\\
@@ -631,6 +635,7 @@ $damned1$&/			&/			&\textbf{25}&/			&10			&0&0&/			&/		& 			8&/		& /&0&0&/\\
 
 % Antonio - Mohammed, what do the results with "/" mean?
 % Couldn't finish, maybe. But you should add the total anyway - JJ
+%Mohammed / mean that the bot is not selected for that race ( only two default bots are chosen in every race)
 
 According to the table, the first individual of GFC-MMS and the second of GFC-AVS have won the same number of races but $GFC-AVS_2$ has achieved better results on the races it did not win.
 We have to remark that the TORCS bots results are not counted since they only serve to diversify the selection and they do not participate in all the races.
@@ -653,26 +658,27 @@ The results are shown in Table \ref{tab:chsresults}.
     \caption{ Results of the mini-championship with 10 drivers and ten races in \textbf{Alpine 2} and \textbf{E-Track 5} tracks. }
     % Total points should be added, maybe per track. Also highlight,
     % as above, who won. - JJ
+    %Mohammed : done
     % References for Tita and Inferno should be added. I haven't seen
     % them - JJ
     {
-			\begin{tabular}{|c||c|c|c|c|c|c|c|c|c|c||}
+			\begin{tabular}{|c||c|c|c|c|c|c||c|c|c|c|c|c||}
 				\hline
-			&\multicolumn{5}{|c|}{\textbf{Alpine 2}} &	\multicolumn{5}{|c|}{\textbf{E-Track 5}}\\
+			&\multicolumn{6}{|c|}{\textbf{Alpine 2}} &	\multicolumn{6}{|c|}{\textbf{E-Track 5}}\\
 				\hline
 				\hline	
-				Drivers&{Race 1}&{Race 2}&{Race 3}&{Race 4}&{Race 5}&{Race 6}&{Race 7}&{Race 8}&{Race 9}&{Race 10}\\
+				Drivers&{Race 1}&{Race 2}&{Race 3}&{Race 4}&{Race 5}&Track Score&{Race 6}&{Race 7}&{Race 8}&{Race 9}&{Race 10}&Track Score\\
 				\hline	\hline			
-				$GFC-MMS_1$&	25&	10&	18&	12&	10&	18&	12&	15&	15&	12\\
-				$GFC-AVS_2$&	15&	18&	25&	15&	15&	25&	18&	18&	12&18\\
-				$Tita1$&	4&	2&	1&	2&	2&	4&	2&	1&	4&	6\\
-				$Tita2$&	2&	1&	2&	1&	1&	1&	1&	2&	1&	2\\
-				$Inferno1$&12&15&	12&	18&	18&	12&	15&	25&	25&	15\\
-				$Inferno2$&10&12&	4&	10&	25&	10&	10&	4&	2&	8\\
-				$Berwin1$&	18&	25&	15&	8&	6&	8&	8&	6&	10&	10\\
-				$Berwin2$	&8&	8&	10&	25&	12&	15&	25&	10&	8&	25\\
-				$EVO1$&	6&	6&	8&	4&	8&	2&	6&	12&	8&	4\\
-				$EVO2$&	1&	4&	6&	6&	4&	6&	4&	8&	6&	2\\
+				$GFC-MMS_1$&	25&	10&	18&	12&	10&75&	18&	12&	15&	15&	12&72\\
+				$GFC-AVS_2$&	15&	18&	25&	15&	15&\textbf{88}&	25&	18&	18&	12&18&91\\
+				$Tita1$&	4&	2&	1&	2&	2&11&	4&	2&	1&	4&	6&17\\
+				$Tita2$&	2&	1&	2&	1&	1&7&	1&	1&	2&	1&	2&9\\
+				$Inferno1$&12&15&	12&	18&	18&75&	12&	15&	25&	25&	15&\textbf{92}\\
+				$Inferno2$&10&12&	4&	10&	25&61&	10&	10&	4&	2&	8&34\\
+				$Berwin1$&	18&	25&	15&	8&	6&72&	8&	8&	6&	10&	10&42\\
+				$Berwin2$	&8&	8&	10&	25&	12&63&	15&	25&	10&	8&	25&83\\
+				$EVO1$&	6&	6&	8&	4&	8&32&	2&	6&	12&	8&	4&32\\
+				$EVO2$&	1&	4&	6&	6&	4&21&	6&	4&	8&	6&	2&26\\
 				\hline
 				\hline
 				
