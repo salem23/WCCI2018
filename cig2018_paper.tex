@@ -28,57 +28,38 @@ Pablo Garc{\'i}a-S{\'a}nchez\IEEEauthorrefmark{4}}
 University of C{\'a}diz, Spain. \\Email: pablo.garciasanchez@uca.es}
 }
 
-
-%\author{\IEEEauthorblockN{1\textsuperscript{st} Mohammed Salem}
-%\IEEEauthorblockA{\textit{Department of Computer Sciences} \\
-%\textit{University of Mascara}\\
-%Mascara, Algeria \\
-%salem@univ-mascara.dz}
-%\and
-%\IEEEauthorblockN{2\textsuperscript{nd} Antonio Miguel Mora}
-%\IEEEauthorblockA{\textit{Department of Computer Sciences and Technology, ESIT} \\
-%\textit{International University of La Rioja (UNIR)}\\
-%Granada, Spain\\
-%antoniomiguel.mora@unir.net}
-%\and
-%\IEEEauthorblockN{3\textsuperscript{rd} Juan Julian Merelo}
-%\IEEEauthorblockA{\textit{Department of Architecture and Computer Technology} \\
-%\textit{University of Granada}\\
-%Granada, Spain \\
-%jmerelo@ugr.es}
-%\and
-%\IEEEauthorblockN{4\textsuperscript{th} Pablo Garc\'ia-S\'anchez}
-%\IEEEauthorblockA{\textit{Department of Computer Science, ESI} \\
-%\textit{University of C\'adiz}\\
-%C\'adiz, Spain \\
-%pablo.garciasanchez@uca.es}
-%}
-
 \maketitle
 
 \begin{abstract}
-	
-In Evolutionary Algorithms, designing a reliable and effective
-evaluation process for the individuals is a key aspect to care
-about. This process involves not only the design of a proper fitness
-function, but also the selection of the best solution for the
-optimization problem being solved; since this decision might not be
-easy when uncertainty or `noise' is present in the problem
-environment. Automatically improving the behavioural engine of an
+Simulated car races have been used for a long time as an environment
+where car controlling algorithms can be tested; they are an
+interesting testbed for all kind of algorithms, including
+metaheuristics such as evolutionary algorithms; however, the challenge
+in these evolutionary algorithms is to design a reliable and effective
+evaluation process for the individuals that eventually translates into
+good solutions to the car racing problem: finding a controller that is
+able to win in a wide range of tracks and with a good quantity of
+opponents. Evaluating individual car controllers involves not only the design of a proper
+fitness function representing how good the solution to the problem is, but also the selection of the best solution for the
+optimization problem being solved; this decision might not be
+easy when uncertainty is present in the problem
+environment; in this case, weather and track conditions as well as unpredictable
+behavior of other racers. Automatically designing the controller of an
 autonomous driver for a car racing simulator such as TORCS is an
-optimization problem which offers these challenges. Thus, in this
+optimization problem which offers all these challenges. Thus, in this
 paper we describe an analysis and some proposals to improve the
-evaluation of optimized fuzzy drivers for TORCS. It starts from
-preliminary results obtained in previous papers and aims to obtain a
+evaluation of optimized fuzzy drivers for TORCS. It uses preliminary
+results obtained in previous papers as a baseline and aims to obtain a
 more competitive autonomous driver via redesign of the fitness
 evaluation procedure; to this end, two different fitness functions are
-studied in ***YYY*** experiments, along with ***XXX***
-% Antonio - TODO: set the final values here
+studied in several experiments, along with different 
 approaches for the selection of the best individual in the evolution. 
 % Antonio - Complete this with the obtained results and conclusions
+% I don't know if different approaches are eventually used. Erase if not.
 \end{abstract}
 \begin{IEEEkeywords}
-Videogames, Fuzzy Controller, TORCS, Steering control, Optimization, Genetic Algorithms
+Videogames, fuzzy controllers, TORCS, Steering control, Optimization,
+Genetic Algorithms, car racing games
 \end{IEEEkeywords}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%   INTRODUCTION   %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
