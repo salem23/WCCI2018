@@ -10,9 +10,14 @@
     T\kern-.1667em\lower.7ex\hbox{E}\kern-.125emX}}
 \begin{document}
 
-\title{Evolved to win: improving the process of evaluating car
-  controllers in racing simulators}
-% Antonio - TODO: @JJ put a better title if we do more than just enhancing this selection process. 
+\title{The evolutionary race: improving the process of evaluating car
+ controllers in racing simulators}
+%\title{Evolved to win: improving the process of evaluating car
+%  controllers in racing simulators}
+%\title{The evolutionary race: generating enhanced fuzzy controllers for TORCS}
+% Antonio - Check this new title, I have had an inspiration moment. ;D
+
+
 %\thanks{This work has been supported in part by: Ministerio espa\~{n}ol de
 %Econom\'{\i}a y Competitividad under project TIN2014-56494-C4-3-P
 %(UGR-EPHEMECH), TIN2017-85727-C4-2-P (UGR-DeepBio) and TEC2015-68752 (also funded by FEDER).}
@@ -40,26 +45,21 @@ in these evolutionary algorithms is to design a reliable and effective
 evaluation process for the individuals that eventually translates into
 good solutions to the car racing problem: finding a controller that is
 able to win in a wide range of tracks and with a good quantity of
-opponents. Evaluating individual car controllers involves not only the design of a proper
-fitness function representing how good the car controller would be in
+opponents. Evaluating individual car controllers involves not only the design of a proper fitness function representing how good the car controller would be in
 a competitive race, but also the selection of the best solution for the
 optimization problem being solved; this decision might not be
 easy when uncertainty is present in the problem
 environment; in this case, weather and track conditions as well as unpredictable
-behavior of other racers. Creating a methodology for the automatic
-design of  the controller of an
+behavior of other drivers. 
+Creating a methodology for the automatic design of  the controller of an
 autonomous driver for a car racing simulator such as TORCS is an
 optimization problem which offers all these challenges. Thus, in this
 paper we describe an analysis and some proposals to improve the
 evaluation of optimized fuzzy drivers for TORCS over previous attempts
-to do so. It builds on preliminary
-results obtained in previous papers as a baseline and aims to obtain a
-more competitive autonomous driver via redesign of the fitness
-evaluation procedure; to this end, two different fitness functions are
-studied in several experiments, along with different 
-approaches for the selection of the best individual in the evolution. 
+to do so. It builds on preliminary results obtained in previous papers as a baseline and aims to obtain a more competitive autonomous driver via redesign of the fitness evaluation procedure; to this end, two different fitness functions are studied in several experiments, along with a novel competition-based approach for the selection of the best individual in the evolution. 
 % Antonio - Complete this with the obtained results and conclusions
 % I don't know if different approaches are eventually used. Erase if not.
+% Antonio - just one approach: the score-based
 \end{abstract}
 \begin{IEEEkeywords}
 Videogames, fuzzy controllers, TORCS, Steering control, Optimization,
@@ -134,10 +134,8 @@ Results were encouraging, but it is still a surrogate model. As such a
 model, we need to decide on the best track to perform {\em training}
 and also the solo race measures with the biggest impact in the
 eventual racing performance. This is why in this paper we have
-designed different speed-and-damage related measures, and also taken
-into account damages, as we will present later on. Besides, the
-fitness evaluation process has a certain amount of uncertainty because
-damages and some track conditions can randomly vary in different
+combined into the fitness function only those terms related with speed during race (to maximize) and damage (to minimize) - the most important factors - in two different approaches.
+Besides, the fitness evaluation process has a certain amount of uncertainty because damages and some track conditions can randomly vary in different
 evaluations. This is why instead of selecting directly the driver as
 we did before, we will be using an actual race among the best drivers
 to select the best one.
@@ -163,10 +161,7 @@ corresponding section.
 % Antonio - describe the final paper structure
 The rest of the paper is organized as follows. Next we present the
 state of the art, to be followed by a description of the TORCS
-simulator in Section \ref{sec:torcs} and the
-method for optimizing fuzzy controllers will be presented in Section
-Results will be presented next in Section \ref{sec:results}. Finally, conclusions and future lines of work will
-be presented in section \ref{sec:conclusions}.
+simulator, the fuzzy controllers and the Genetic Algorithm implemented in Section \ref{sec:experimental_setup}. After it, the experiments conducted and the obtained results are described in Section \ref{sec:results}. Finally, conclusions and future lines of work will be presented in section \ref{sec:conclusions}.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%  STATE OF THE ART  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -209,7 +204,7 @@ In this paper we focus on the improvement of the evolved controllers by means of
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%  TORCS  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \section{Experimental Setup}
-\label{sec:torcs}
+\label{sec:experimental_setup}
 
 The Open Racing Car Simulator (TORCS) \cite{WebTORCS} is an open source, modern, multi-player, modular and portable racing simulator that allows users to race against computer-controlled opponents.
 Its high degree of modularity and portability, together with the realistic and real-time driving simulation, make it an ideal testbed for artificial intelligence research, as we have shown in previous section.
@@ -244,9 +239,9 @@ interval \textit{[minSpeed, maxSpeed]} km/h.
 
 This fuzzy controller has an output, the speed, and three input values:
 \begin{itemize}
-	\item Front = Track\_9: front distance to the track border (angle 0บ).  
-	\item M5 = max (Track\_8, Track\_10): max distance to the track border in an angle of +5บ and -5บ with respect to Front.
-	\item M10 = max (Track\_7, Track\_11): max distance to track border in an angle of +10บ and -10บ.
+	\item Front = Track\_9: front distance to the track border (angle 0ยบ).  
+	\item M5 = max (Track\_8, Track\_10): max distance to the track border in an angle of +5ยบ and -5ยบ with respect to Front.
+	\item M10 = max (Track\_7, Track\_11): max distance to track border in an angle of +10ยบ and -10ยบ.
 \end{itemize}
 
 It is a Mamdani-based fuzzy system \cite{iancu2012} with three
@@ -645,29 +640,29 @@ The results are shown in Table \ref{tab:chsresults}:
     % Total points should be added, maybe per track. Also highlight,
     % as above, who won. - JJ
     {
-      \begin{tabular}{|c||c|c|c|c|c|c|c|c|c|c||}
-        \hline
-        &\multicolumn{5}{|c|}{\textbf{Alpine 2}} &	\multicolumn{5}{|c|}{\textbf{E-Track 5}}\\
-        \hline
-        \hline	
-        Drivers&{Race 1}&{Race 2}&{Race 3}&{Race 4}&{Race 5}&{Race 6}&{Race 7}&{Race 8}&{Race 9}&{Race 10}\\
-        \hline	\hline			
-        $GFC-MMS_1$&	25&	10&	18&	12&	10&	18&	12&	15&	15&	12\\
-        $GFC-AVS_2$&	15&	18&	25&	15&	15&	25&	18&	18&	12&18\\
-        $Tita1$&	4&	2&	1&	2&	2&	4&	2&	1&	4&	6\\
-        $Tita2$&	2&	1&	2&	1&	1&	1&	1&	2&	1&	2\\
-        $Inferno1$&12&15&	12&	18&	18&	12&	15&	25&	25&	15\\
-        $Inferno2$&10&12&	4&	10&	25&	10&	10&	4&	2&	8\\
-        $Berwin1$&	18&	25&	15&	8&	6&	8&	8&	6&	10&	10\\
-        $Berwin2$	&8&	8&	10&	25&	12&	15&	25&	10&	8&	25\\
-        $EVO1$&	6&	6&	8&	4&	8&	2&	6&	12&	8&	4\\
-        $EVO2$&	1&	4&	6&	6&	4&	6&	4&	8&	6&	2\\
-        \hline
-        \hline
-        
-      \end{tabular}
-    }\label{tab:chsresults}
-  }
+			\begin{tabular}{|c||c|c|c|c|c|c|c|c|c|c||}
+				\hline
+			&\multicolumn{5}{|c|}{\textbf{Alpine 2}} &	\multicolumn{5}{|c|}{\textbf{E-Track 5}}\\
+				\hline
+				\hline	
+				Drivers&{Race 1}&{Race 2}&{Race 3}&{Race 4}&{Race 5}&{Race 6}&{Race 7}&{Race 8}&{Race 9}&{Race 10}\\
+				\hline	\hline			
+				$GFC-MMS_1$&	25&	10&	18&	12&	10&	18&	12&	15&	15&	12\\
+				$GFC-AVS_2$&	15&	18&	25&	15&	15&	25&	18&	18&	12&18\\
+				$Tita1$&	4&	2&	1&	2&	2&	4&	2&	1&	4&	6\\
+				$Tita2$&	2&	1&	2&	1&	1&	1&	1&	2&	1&	2\\
+				$Inferno1$&12&15&	12&	18&	18&	12&	15&	25&	25&	15\\
+				$Inferno2$&10&12&	4&	10&	25&	10&	10&	4&	2&	8\\
+				$Berwin1$&	18&	25&	15&	8&	6&	8&	8&	6&	10&	10\\
+				$Berwin2$	&8&	8&	10&	25&	12&	15&	25&	10&	8&	25\\
+				$EVO1$&	6&	6&	8&	4&	8&	2&	6&	12&	8&	4\\
+				$EVO2$&	1&	4&	6&	6&	4&	6&	4&	8&	6&	2\\
+				\hline
+				\hline
+				
+			\end{tabular}
+		}\label{tab:chsresults}
+	}
 \end{table*}
 
 
@@ -691,8 +686,7 @@ The overall number of points of the championship is presented in Figure \ref{fig
     \label{fig:points}	
   \end{center}	
 \end{figure*}
-
-
+%
 \begin{figure}[!ht]	
 	\begin{center}
           \includegraphics[width=8cm]{fig/HISTSD.png}
