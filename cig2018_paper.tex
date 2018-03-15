@@ -10,7 +10,8 @@
     T\kern-.1667em\lower.7ex\hbox{E}\kern-.125emX}}
 \begin{document}
 
-\title{Analyzing and Enhancing the Evaluation Process of Evolutionary Drivers for TORCS}
+\title{Evolved to win: improving the process of evaluating car
+  controllers in racing simulators}
 % Antonio - TODO: @JJ put a better title if we do more than just enhancing this selection process. 
 %\thanks{This work has been supported in part by: Ministerio espa\~{n}ol de
 %Econom\'{\i}a y Competitividad under project TIN2014-56494-C4-3-P
@@ -40,15 +41,18 @@ evaluation process for the individuals that eventually translates into
 good solutions to the car racing problem: finding a controller that is
 able to win in a wide range of tracks and with a good quantity of
 opponents. Evaluating individual car controllers involves not only the design of a proper
-fitness function representing how good the solution to the problem is, but also the selection of the best solution for the
+fitness function representing how good the car controller would be in
+a competitive race, but also the selection of the best solution for the
 optimization problem being solved; this decision might not be
 easy when uncertainty is present in the problem
 environment; in this case, weather and track conditions as well as unpredictable
-behavior of other racers. Automatically designing the controller of an
+behavior of other racers. Creating a methodology for the automatic
+design of  the controller of an
 autonomous driver for a car racing simulator such as TORCS is an
 optimization problem which offers all these challenges. Thus, in this
 paper we describe an analysis and some proposals to improve the
-evaluation of optimized fuzzy drivers for TORCS. It uses preliminary
+evaluation of optimized fuzzy drivers for TORCS over previous attempts
+to do so. It builds on preliminary
 results obtained in previous papers as a baseline and aims to obtain a
 more competitive autonomous driver via redesign of the fitness
 evaluation procedure; to this end, two different fitness functions are
