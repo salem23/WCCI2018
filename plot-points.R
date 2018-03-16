@@ -1,6 +1,6 @@
 library(ggplot2)
 library(reshape)
-library(ggthemes2)
+library(ggthemes)
 
 data <- read.csv("championship points.csv",sep=';')
 
