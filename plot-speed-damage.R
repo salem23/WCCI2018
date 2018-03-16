@@ -1,6 +1,6 @@
 library(ggplot2)
 library(reshape)
-library(ggthemes2)
+library(ggthemes)
 
 data <- read.csv("max speed and min damage .csv",sep=';')
 data.factored <- melt(data,id=c('Drivers'))
