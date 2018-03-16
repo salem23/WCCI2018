@@ -803,15 +803,25 @@ them have an impact, but, taking into account the big difference among
 results in the post-optimization selection of controllers in the last
 generation, probably this step, which deals with uncertainty in the
 evaluation of the controller, might have had the biggest
-impact. However, 
+impact. This way of dealing with uncertainty, which is usually a
+problem in game bot optimization \cite{merelo2016statistical}, might
+be extended in different ways, for instance as a selection method
+for all generations.
 
-As future lines of work, we could aim to improve the controllers
+This is one of the future lines of work, combined with a study of the
+influence of all factors in bot performance. This will have to include
+tracks, fitness functions and post-optimization selection. This will
+have to be combined with the improvement of the controllers
 considering a `deeper' and `wider' evaluation (more laps and more
-tracks). There is also a close research line to address, which is the
+tracks). There is also a similar research line to address, which is the
 optimization of the outputs in the fuzzy system, which has been set
 manually in all our approaches. 
 
-With regard to the applied GA, it could be improved in different ways, for instance, reducing its computation time by means of the parallelization of the evaluation phase. Also, a multi-objective approach could be implemented, in which the main objectives to address by the controller could be optimized at once.
+With regard to the applied GA, it could be improved in different ways,
+for instance, reducing its computation time by means of the
+parallelization of the evaluation phase. Also, a multi-objective
+approach could be implemented, in which the main objectives to address
+by the controller could be optimized at once. 
 Moreover, we could also try to generate, optimize and tune
 automatically the rule base of the fuzzy controller by means of a
 Genetic Programming algorithm.  
@@ -821,7 +831,6 @@ Genetic Programming algorithm.
 This work has been supported in part by: Ministerio espa\~{n}ol de
 Econom\'{\i}a y Competitividad under project TIN2014-56494-C4-3-P
 (UGR-EPHEMECH), TIN2017-85727-C4-2-P (UGR-DeepBio) and TEC2015-68752 (also funded by FEDER).
-
 
 \bibliographystyle{IEEEtranS}
 \bibliography{fuzzy_torcs}
