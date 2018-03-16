@@ -772,25 +772,44 @@ thought that sustaining a high average speed will be the most
 important factor; this was the heuristic used for \textbf{$GFC-AVS$}. 
 The choice of the single track used for training reflected these facts: tracks usually combine ``fast'' and ``slow'' segments, and the car should be able to perform well on both.
 
-Besides, the uncertainty of the evaluation are taken into account when
+Besides, the uncertainty of the evaluation is taken into account when
 selecting the {\em best} controller. Since there is a random element
 in evaluation, instead of just picking the individual with the best fitness
-in the last generation, we make a subset of the best ones race against each other and select the one with the best results in a set of real races (against other rivals and in other tracks). Introducing this element of reality also makes the choice of controller for comparison a more robust choice than previously.
+in the last generation, we select the best ones, make them complete 
+against each other and other rivals in a set of real races in several
+tracks; then select the one
+with the best results overall score. Introducing this element of reality also makes the
+choice of controller for comparison a more robust choice than
+previously. 
 
 The yielded results are very promising since the optimized controllers
 (one per fitness function) were ranked among the first ones in 
 different evaluation races with rivals, with the minimum of damage and a very good average and maximum speed. 
 
 In the comparison with the previous evolved fuzzy controllers (from \cite{evo18}), the improvement can be clearly seen in the results. The
-new controllers are able to drive much faster than them, even in a track where the latter were trained, and moreover they manage to sustain a low damage.  
+new controllers are able to drive much faster than them, even in a
+track where the latter were trained, and moreover they manage to
+sustain a low damage. They do so even if, compared with
+\cite{evo17,evo18}, they are not using damage as a criterium for
+optimization. High damage might make a car abandon a race, but
+apparently a certain amount of damage should be expected if you want
+to win the race. 
 
+At this point, it would be difficult to say which of the three factors
+introduced in this paper, namely, new evaluation functions, race track
+for evaluation and post-optimization selection of winner, is the one
+that contributes the most to the good results. Clearly all three of
+them have an impact, but, taking into account the big difference among
+results in the post-optimization selection of controllers in the last
+generation, probably this step, which deals with uncertainty in the
+evaluation of the controller, might have had the biggest
+impact. However, 
 
-% All this has to be revised
-Thus, we can conclude from the results that the presented evolutionary
-algorithm with the proposed fitness functions are well suited for finding the best trade-off between the two objectives of any racing controller: damage
-and speed. 
-
-As future lines of work, we could aim to improve the controllers considering a `deeper' and `wider' evaluation (more laps and more tracks). There is also a close research line to address, which is the optimization of the outputs in the fuzzy system, which has been set manually in all our approaches.
+As future lines of work, we could aim to improve the controllers
+considering a `deeper' and `wider' evaluation (more laps and more
+tracks). There is also a close research line to address, which is the
+optimization of the outputs in the fuzzy system, which has been set
+manually in all our approaches. 
 
 With regard to the applied GA, it could be improved in different ways, for instance, reducing its computation time by means of the parallelization of the evaluation phase. Also, a multi-objective approach could be implemented, in which the main objectives to address by the controller could be optimized at once.
 Moreover, we could also try to generate, optimize and tune
