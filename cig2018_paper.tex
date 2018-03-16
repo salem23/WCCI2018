@@ -31,7 +31,7 @@ Juan J. Merelo\IEEEauthorrefmark{3}}
 % Antonio - Pablo requested me to remove him
 \IEEEauthorblockA{\IEEEauthorrefmark{1}Department of Computer Sciences, University of Mascara, Algeria. \\Email: salem@univ-mascara.dz}
 \IEEEauthorblockA{\IEEEauthorrefmark{2}Department of Computer Sciences and Technology, ESIT, International University of La Rioja (UNIR), Spain. \\Email: antoniomiguel.mora@unir.net}
-\IEEEauthorblockA{\IEEEauthorrefmark{3}Dept. of Computer Architecture and Computer Technology. University of Granada, Spain. \\Email: jjmerelo@geneura.ugr.es}
+\IEEEauthorblockA{\IEEEauthorrefmark{3}Dept. of Computer Architecture and Computer Technology. University of Granada, Spain. \\Email: jmerelo@geneura.ugr.es}
 %\IEEEauthorblockA{\IEEEauthorrefmark{4}Department of Computer Science, ESI,
 %University of C{\'a}diz, Spain. \\Email: pablo.garciasanchez@uca.es}
 }
@@ -83,7 +83,7 @@ realistic racing simulator which offers a great testbed for the
 implementation and evaluation of autonomous drivers.  
 It has been used several times for the celebration of Artificial
 Intelligence (AI) competitions, where the aim is to create the best
-autonomous driver for racings
+autonomous driver for racing
 \cite{SimulatedCarRacing-2008,oponnents2010,Torcs3,manualTORCS}. Besides being
 able to test your car against other cars that have been published, it
 can be used as a standalone environment to optimize driving in a
@@ -527,7 +527,7 @@ We have combined these terms into two possible fitness functions:
 	\item[GFC-MMS:]  
 	\begin{equation} \label{fit1}
 	\begin{array}{ll}
-	f_{1} =   \frac{(MinSpeed*Maxpeed) }{Damage+1}
+	f_{1} =   \frac{(MinSpeed*MaxSpeed) }{Damage+1}
 	\end{array}
 	\end{equation}
 	\item[GFC-AVS:] 
@@ -542,7 +542,7 @@ As it can be seen, the aim is to maximize the minimum and maximum velocities whi
 
 To evaluate every candidate controller during the evolutionary process, we will make each of them compete in a 20 laps practice race in a medium difficulty circuit without rivals. As stated, we have omitted the presence of opponents in order to avoid including additional uncertainty sources to the optimization process. In order to obtain general-behaviour controllers, the selected track for this process will be one with a combination of curves and straight parts.
 
-After this practice, the obtained output values $Damage$, $Minspeed$, $MaxSpeed$ and $AVG(Speed)$ are collected to compute the corresponding fitness value.
+After this practice, the obtained output values $Damage$, $MinSpeed$, $MaxSpeed$ and $AVG(Speed)$ are collected to compute the corresponding fitness value.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%  RESULTS  %%%%%%%%%%%%%%%%%%%%%%%%%%%%
