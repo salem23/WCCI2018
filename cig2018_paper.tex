@@ -24,14 +24,16 @@
 %}
 
 \author{\IEEEauthorblockN{Mohammed Salem\IEEEauthorrefmark{1},
-Antonio M. Mora\IEEEauthorrefmark{2},
-Juan J. Merelo\IEEEauthorrefmark{3} and
-Pablo Garc{\'i}a-S{\'a}nchez\IEEEauthorrefmark{4}}
+Antonio M. Mora\IEEEauthorrefmark{2} and
+Juan J. Merelo\IEEEauthorrefmark{3}}
+%and
+%Pablo Garc{\'i}a-S{\'a}nchez\IEEEauthorrefmark{4}}
+% Antonio - Pablo requested me to remove him
 \IEEEauthorblockA{\IEEEauthorrefmark{1}Department of Computer Sciences, University of Mascara, Algeria. \\Email: salem@univ-mascara.dz}
 \IEEEauthorblockA{\IEEEauthorrefmark{2}Department of Computer Sciences and Technology, ESIT, International University of La Rioja (UNIR), Spain. \\Email: antoniomiguel.mora@unir.net}
 \IEEEauthorblockA{\IEEEauthorrefmark{3}Dept. of Computer Architecture and Computer Technology. University of Granada, Spain. \\Email: jjmerelo@geneura.ugr.es}
-\IEEEauthorblockA{\IEEEauthorrefmark{4}Department of Computer Science, ESI,
-University of C{\'a}diz, Spain. \\Email: pablo.garciasanchez@uca.es}
+%\IEEEauthorblockA{\IEEEauthorrefmark{4}Department of Computer Science, ESI,
+%University of C{\'a}diz, Spain. \\Email: pablo.garciasanchez@uca.es}
 }
 
 \maketitle
@@ -56,15 +58,10 @@ autonomous driver for a car racing simulator such as TORCS is an
 optimization problem which offers all these challenges. Thus, in this
 paper we describe an analysis and some proposals to improve the
 evaluation of optimized fuzzy drivers for TORCS over previous attempts
-to do so. It builds on preliminary results obtained in previous papers as a baseline and aims to obtain a more competitive autonomous driver via redesign of the fitness evaluation procedure; to this end, two different fitness functions are studied in several experiments, along with a novel competition-based approach for the selection of the best individual in the evolution. 
-% Antonio - Complete this with the obtained results and conclusions
-% I don't know if different approaches are eventually used. Erase if not.
-% Antonio - just one approach: the score-based
-%Mohammd right
+to do so. It builds on preliminary results obtained in previous papers as a baseline and aims to obtain a more competitive autonomous driver via redesign of the fitness evaluation procedure; to this end, two different fitness functions are studied in several experiments, along with a novel race-based approach for the selection of the best individual in the evolution. 
 \end{abstract}
 \begin{IEEEkeywords}
-Videogames, fuzzy controllers, TORCS, Steering control, Optimization,
-Genetic Algorithms, car racing games
+Videogames, Simulated Car Racing, TORCS, Fuzzy Controllers, Autonomous Drivers, Genetic Algorithms, Optimization, Evaluation
 \end{IEEEkeywords}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%   INTRODUCTION   %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
@@ -87,7 +84,7 @@ implementation and evaluation of autonomous drivers.
 It has been used several times for the celebration of Artificial
 Intelligence (AI) competitions, where the aim is to create the best
 autonomous driver for racings
-\cite{torcs5,manualTORCS,Torcs3,torcs7,oponnents2010}. Besides being
+\cite{SimulatedCarRacing-2008,oponnents2010,Torcs3,manualTORCS}. Besides being
 able to test your car against other cars that have been published, it
 can be used as a standalone environment to optimize driving in a
 solo race. 
@@ -96,7 +93,7 @@ Evolutionary Algorithms (EAs) \cite{EAs_Back96} have been frequently
 applied as a general-purpose optimization method in this area,
 generally combined with behavioural engines that rule different parts
 of the car
-\cite{Floreano2004,CarRacing_Pelta09,SAES2012,QuadfliegMO,torcs2012}. These
+\cite{Floreano2004,CarRacing_Pelta09,SAES2012,torcs2012}. These
 driving engines have included lately fuzzy controllers
 \cite{Guadarrama2008, LFAG, PerezEvolvingFuzzy09}. These controllers
 use fuzzy Logic \cite{Fuzzy2011}, a  technique that is quite suitable
@@ -159,7 +156,6 @@ corresponding section.
 %Once optimized, the best genetic-fuzzy based controllers (one per fitness) have been evaluated in a practice race (without rivals) first, and then in a real race against different drivers in TORCS. 
 %According to the obtained results the enhanced controllers perform both much better than the original fuzzy controller, improving the lap time and reducing the received damage. Moreover they are much more competitive against tough rivals, reaching high ranks in the most difficult races.
 
-% Antonio - describe the final paper structure
 The rest of the paper is organized as follows. Next we present the
 state of the art, to be followed by a description of the TORCS
 simulator, the fuzzy controllers and the Genetic Algorithm implemented in Section \ref{sec:experimental_setup}. After it, the experiments conducted and the obtained results are described in Section \ref{sec:results}. Finally, conclusions and future lines of work will be presented in section \ref{sec:conclusions}.
@@ -169,7 +165,7 @@ simulator, the fuzzy controllers and the Genetic Algorithm implemented in Sectio
 \section{State of the Art}
 \label{sec:soa}
 
-TORCS has become one of the main environments for research on AI since its launch in 2007 \cite{WebTORCS}. It offers different kinds of problems to solve, such as the definition of the optimal parameters for the cars (before the race) \cite{Kole-ParamCarTunning12}, and the main one, which is the design of competitive autonomous drivers aiming to win races against other cars, mainly presented in the context on the Simulated Car Racing Competition \cite{SimulatedCarRacing-2008}.
+TORCS has become one of the main environments for research on AI since its launch in 2007 \cite{WebTORCS}. It offers different kinds of problems to solve, such as the definition of the optimal parameters for the cars (before the race) \cite{Kole-ParamCarTunning12}, and the main one, which is the design of competitive autonomous drivers aiming to win races against other cars, mainly presented in the context on the Simulated Car Racing Competition \cite{SimulatedCarRacing-2008,oponnents2010}.
 
 Evolutionary algorithms have targeted TORCS almost since its
 publication, for instance, for determining the
@@ -198,7 +194,7 @@ P{\'e}rez et al. introduced an evolutionary fuzzy approach for TORCS in \cite{Pe
 Onieva et al. \cite{LFAG} presented a parametrized modular architecture with a fuzzy system and a GA, aiming to reproduce the behavior of a human driver when controlling the steering wheel. In this line, we presented an improved approach \cite{evo17}, which evolved a fuzzy-based driver considering the target speed in addition to the steer (two fuzzy sub-controllers).
 This controller was also enhanced in a further work \cite{evo18} optimizing the parameters of the membership functions by means of a real coded genetic algorithm, obtaining a noticeable improvement in performance.
 
-In this paper we focus on the improvement of the evolved controllers by means of a redefinition of the fitness functions, looking for a parameter-less approach (no weights in the terms) \cite{Harik-ParameterLess99}, which will be also more focused on the real objectives of a driver during a race, rather than the overall objective. In addition, a `fairer' selection process of the best individual has been implemented, aiming to focus on real good drivers in races, instead of choosing the one with the highest fitness value, which could have a poorer performance due to the noise of the problem.
+In this paper we focus on the improvement of the evolved controllers by means of a redefinition of the fitness functions, looking for a parameter-less approach (no weights in the terms) \cite{Harik-ParameterLess99}, which will be also more focused on the real objectives for a driver during a race, rather than the overall target. In addition, a `fairer' selection process of the best individual has been implemented, aiming to focus on real good drivers in races, instead of choosing the one with the highest fitness value, which could have a poorer performance due to the uncertainty/noise present on the problem.
 
 
 
@@ -247,9 +243,9 @@ interval \textit{[minSpeed, maxSpeed]} km/h.
 
 This fuzzy controller has an output, the speed, and three input values:
 \begin{itemize}
-	\item Front = Track\_9: front distance to the track border (angle 0ยบ).  
-	\item M5 = max (Track\_8, Track\_10): max distance to the track border in an angle of +5ยบ and -5ยบ with respect to Front.
-	\item M10 = max (Track\_7, Track\_11): max distance to track border in an angle of +10ยบ and -10ยบ.
+	\item Front = Track\_9: front distance to the track border (angle 0บ).  
+	\item M5 = max (Track\_8, Track\_10): max distance to the track border in an angle of +5บ and -5บ with respect to Front.
+	\item M10 = max (Track\_7, Track\_11): max distance to track border in an angle of +10บ and -10บ.
 \end{itemize}
 
 It is a Mamdani-based fuzzy system \cite{iancu2012} with three
@@ -367,21 +363,22 @@ It uses a base of rules which has been defined trying to model the behavior of a
 
 The proposed optimization approach aims to find the optimal parameters of the membership functions of the two sub-controllers previously introduced. 
 The followed process is depicted in Figure \ref{fig:ga}, in which, as it can be seen, the GA uses TORCS for the evaluation of every individual during the evolutionary process.
+
 \begin{figure}[!ht]
   \label{fig:ga}
   \begin{center}
     \includegraphics[width=10cm]{fig/flowchart}
   \end{center}
   \caption{Optimization of a fuzzy controller flowchart. The evaluation of an individual is performed by: putting the parameter values on the two sub-controllers, launching a race in TORCS with this configuration, obtaining the resulting values of Damage, Top Speed and mean Lap Time and using these values for the computation of the fitness of the individual.}
-\end{figure}	
+\end{figure}
+	
 The GA starts by creating the initial population with random values
 for the parameters in the defined range $[0,100]$. The fitness of each
 candidate solution is computed by injecting its gene values to the
 parameters of the membership functions of the two fuzzy
 sub-controllers. The defined autonomous controller is used to drive a
 car in a 20 laps race in a circuit without opponents, and the
-results (Top speed, Damage and Mean Lap time) are used to compute the
-fitness value. 
+results (Maximum, Minimum and Average speed, Damage) are used to compute the fitness value. 
 
 %***********************************************
 
@@ -427,6 +424,7 @@ $x_{3}$ and $x_{4}$ taking their values in the interval \textit{[a,
 		\label{fig:trapeze}
 	\end{center}
 % Mohammed: Could we remove this figure?
+% Antonio - if we need space, yes, otherwise, it does not matter I think
 \end{figure}
 And a fuzzy partition with \textit{n} trapezoidal membership functions
 is defined by \textit{2n} variables (\textit{a =} $ x_{1}$,$x_{2}
@@ -515,7 +513,7 @@ carrying out solo {\em training races}, which will be less sensitive to the pres
 
 In previous approaches we focused on minimizing the damage of
 the car ($damage$) and the lap time $LapTime$, while
-maximizing $TopSpeed$. However in this study, we have turned our focus and have considered:
+maximizing $TopSpeed$. However in this study, we have turned our focus to a more `human-like approach', i.e. trying to drive as fast as possible in every single part of the track while avoiding damage. Thus, we have considered:
 \begin{itemize}
 \item $MinSpeed$: aiming to increase the good driving in the difficult zones of the tracks (e.g. curves).
 \item $MaxSpeed$: centered on the enhancement of the controller in easy or straight parts.
@@ -540,7 +538,7 @@ We have combined these terms into two possible fitness functions:
 	\end{equation}	
 \end{description} 
 
-As it can be seen, the aim is to maximize the minimum and maximum velocities while minimizing the damage in the first fitness. In the second one, we try to maximize the average speed on the circuit.
+As it can be seen, the aim is to maximize the minimum and maximum velocities while minimizing the damage in the first fitness. In the second one, we try to maximize the average speed on the complete circuit.
 
 To evaluate every candidate controller during the evolutionary process, we will make each of them compete in a 20 laps practice race in a medium difficulty circuit without rivals. As stated, we have omitted the presence of opponents in order to avoid including additional uncertainty sources to the optimization process. In order to obtain general-behaviour controllers, the selected track for this process will be one with a combination of curves and straight parts.
 
@@ -549,14 +547,14 @@ After this practice, the obtained output values $Damage$, $Minspeed$, $MaxSpeed$
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%  RESULTS  %%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\section{Experimental results}  
+\section{Experiments and results}  
 \label{sec:results}
 
 After analyzing most of the available tracks, we have selected for these experiments the \textbf{Alpine 2} circuit. It is a quite complex one, with multiple turns, but also straight parts (See Figure \ref{fig:alpine2_track}).
 
 \begin{figure}[!ht]	
   \begin{center}
-    \includegraphics[width=3cm]{fig/alpine2.jpg}
+    \includegraphics[width=4cm]{fig/alpine2.jpg}
     \caption{Alpine 2 Track: Slow mountain road. Length: 3773.57m, Width: 10m}
     \label{fig:alpine2_track}	
   \end{center}	
@@ -566,7 +564,7 @@ After analyzing most of the available tracks, we have selected for these experim
 
 We have used the driving car  \textit{car1-tbr1} for our controllers, since according to previous experiments \cite{evo17}, this is a fair choice due to its moderate performance. This will lead our controller to be prepared to drive in the most usual conditions. 
 
-We have evaluated the Genetic Fuzzy Controller (GFC) with the two proposed fitness functions: GFC-MMS (Equation \ref{fit1}) and GFC-AVS (Equation \ref{fit2}), comparing them for racing performance. We have run the  algorithm with population size of 50 individuals. The rest of parameters are: Generations=50, Crossover rate=0.85, Mutation rate=0.1, and 10 different runs per configuration.
+We have evaluated the Genetic Fuzzy Controller (GFC) with the two proposed fitness functions: GFC-MMS (Equation \ref{fit1}) and GFC-AVS (Equation \ref{fit2}), comparing them for racing performance. We have run the algorithm with a population size of 50 individuals. The rest of parameters are: Generations=50, Crossover rate=0.85, Mutation rate=0.1, and 10 different runs per configuration.
 
 
 %\begin{table}[!ht]	
@@ -586,31 +584,24 @@ We have evaluated the Genetic Fuzzy Controller (GFC) with the two proposed fitne
 
 The two genetic optimization processes have been run in independently. However, as a difference to previous works in which we just selected as the best the individual with the highest fitness value in the last generation, in this study we have aimed to implement a better process, which we expect will yield a more competitive controller.
 
-To this end, for every approach, once the evolutionary process is
-finished, the best four individuals have competed together in 5 races
-in the \textbf{Alpine 2} track (used in the optimization) and 5 races in \textbf{E-Track 5} track (a new one for them). 
-% Antonio - Mohammed, During how many laps are the races performed?
-%Mohammed  5 laps
+To this end, once the evolutionary process is finished and for every approach, the best four individuals have competed together in 5 races (of 5 laps) in the \textbf{Alpine 2} track (used in the optimization) and 5 races (of 5 laps) in \textbf{E-Track 5} track (a new one for them). 
 % It would be interesting to add another column with the fitness of
 % those chosen - JJ
-In order to enhance the selection of the best, another two controllers are picked randomly from the default TORCS bots
-% Antonio - Mohammed, are the bots taken from the default ones? Can you select them randomly in the run or have you selected them in advance?
-% before starting the race, I picked two numbers randomly that represent two TORCS drivers and i load them in the same race with our genetic bots
-to participate in the race. Moreover, to do it fairer, we have defined a \textit{score}, so the controller which gets the fastest lap or the minimum damage in each race is given 5 points.
+In order to enhance the selection of the best, another two controllers are picked randomly from the default TORCS bots to participate in the race. Moreover, in order to do it fairer, we have defined a \textit{score}, so the controller which gets the fastest lap or the minimum damage in each race is given 5 points.
+% Antonio - Mohammed, what about the rest of scores? Do the other bots obtain 4, 3, 2 and 1 points?
 
-The results of these runs are shown in Table \ref{tab:runsresults}. Best laps and damage are the scores collected by each bot in each track's races when getting the best lap time or/and the minimum damage. 
+The results of these runs are shown in Table \ref{tab:runsresults}. "Best laps" and "Min damage" are the scores obtained by every controller in every race when getting the best lap time or/and the minimum damage of all the contenders. The symbol `-' means the TORCS bot do not participate in the race.
+
 \begin{table*}[ht]
   \centering
-  {\scriptsize % Please explain all columns. What's "best laps"? And
-               % "min damage"? - JJ
-               %mohammed done
+  {\scriptsize 
     \caption{ Obtained Scores on the race-based selection for the two approaches in two different tracks. }
 		{
 			\begin{tabular}{|c||c|c|c|c|c|c|c||c|c|c|c|c|c|c||c|}
 				\hline
-				&\multicolumn{7}{c||}{5 races in Alpine 2 track}&\multicolumn{7}{c|}{5 races in E-Track 5}&\\
+				&\multicolumn{7}{c||}{5 races in Alpine 2 track (5 laps each)}&\multicolumn{7}{c|}{5 races in E-Track 5 (5 laps each)}&\\
 				\cline{2-16}
-Bots	& 		  R1 & 		  R2 & 		 R3 & 		  R4& 		   R5&Best laps&Min damage& R1&R2&R3&R4&R5&Best laps&Min damage&Total\\
+Driver	& 		  R1 & 		  R2 & 		 R3 & 		  R4& 		   R5&Best laps&Min damage& R1&R2&R3&R4&R5&Best laps&Min damage&Total\\
 				\hline		
 $GFC-MMS_1$ &\textbf{25}& 18		 &8			&15			&12        &15 &10&		12&\textbf{25}& 		18&\textbf{25}&		18&10&10&\textbf{221}\\
 $GFC-MMS_2$ &12		 &\textbf{25}& 15 		&12			&15			&0&5&8			&15		  &			15&	4	&10&0&0&136\\
@@ -620,12 +611,11 @@ $GFC-AVS_1$ &1			 &4			&6			&2			&	4		&0&0&4		    &2		  &			12&	10	& 4&0&0&49\\
 $GFC-AVS_2$ &15		&10			& 18		&\textbf{25}&18			&5&10&\textbf{25}& 18	  &	\textbf{25} &15&15&5&10&206\\
 $GFC-AVS_3$ &10		&2			&1			&6			&	2		&0&0&2			&6		  &			4&	6	&1&0&0&41\\
 $GFC-AVS_4$ &4			&1			&2			&1			&	1		&0&0&1			&4	      &		8&	2	&8&0&0&32\\	
-$bt1$ 	 &/			&/			&/			&8			&/			&0&0&/			&8		  &			 6&8		&/&0&0&/\\
-$inferno1$&18		&/			&12			&/			&/			&0&0&18			&12		  &			/&/		& /& 0&0&/\\			
-$berwin2$&8			&15			&/			&18			&/			&0&0&/			&/		&			/&12	&12&5&0&/\\
-$berwin3$&/			&12			&/			&/			&\textbf{25}&5&0&4			&/		&			/&/		&\textbf{25}&5&0&/\\
-$damned1$&/			&/			&\textbf{25}&/			&10			&0&0&/			&/		& 			8&/		& /&0&0&/\\			
-				\hline
+$bt1$ 	 &-			&-			&-			&8			&-			&0&0&-			&8		  &			 6&8		&-&0&0&-\\
+$inferno1$&18		&-			&12			&-			&-			&0&0&18			&12		  &			-&-		& -& 0&0&-\\			
+$berwin2$&8			&15			&-			&18			&-			&0&0&-			&-		&			-&12	&12&5&0&-\\
+$berwin3$&-			&12			&-			&-			&\textbf{25}&5&0&4			&-		&			-&-		&\textbf{25}&5&0&-\\
+$damned1$&-			&-			&\textbf{25}&-			&10			&0&0&-			&-		& 			8&-		& -&0&0&-\\			
 				\hline
 			
 			\end{tabular}
@@ -633,72 +623,60 @@ $damned1$&/			&/			&\textbf{25}&/			&10			&0&0&/			&/		& 			8&/		& /&0&0&/\\
 	}
 \end{table*}
 
-% Antonio - Mohammed, what do the results with "/" mean?
-% Couldn't finish, maybe. But you should add the total anyway - JJ
-%Mohammed / mean that the bot is not selected for that race ( only two default bots are chosen in every race)
-
-According to the table, the first individual of GFC-MMS and the second of GFC-AVS have won the same number of races but $GFC-AVS_2$ has achieved better results on the races it did not win.
+According to the table, the first individual of GFC-MMS and the second of GFC-AVS have won the same number of races but $GFC-AVS_2$ has achieved better scores on the races it did not win.
 We have to remark that the TORCS bots results are not counted since they only serve to diversify the selection and they do not participate in all the races.
-This selection allowed us to choose the best individual on several races and the most stable and thus avoid the selection by tournament where the winner of a single confrontation is chosen.
+This selection allowed us to choose the best individual on several races and the most stable, and thus, avoid the classical selection by tournament where the winner of a single confrontation is chosen.
 
-It could be remarked that the genetic based fuzzy controllers have get all the points of the minimum damage even when they do not win the race, this fact  justify strongly the use of damage in the fitness functions.
-The controllers obtained using the first fitness have also collected  the points of the best laps in  five of the ten races. one has to bear in mind that the best lap is the result of a minimum damage and a high MaxSpeed, these two parameters are optimized by the first function. In the same context, the second fitness tries to maximize the speed average  not necessary the MaxSpeed.
+It could be also pointed out that the genetic-based fuzzy controllers have get all the points of the minimum damage even when they do not win the race, this fact strongly justifies the use of damage in the fitness functions, which is a key factor to consider in real races.
 
-The two best genetic based fuzzy controllers obtained in the previous
-experiments, one per fitness function, and thus named $GFC-MMS_1$ and
-$GFC-AVS_2$, have been tested in a practice races against selected opponents. The two best controllers of our previous paper \cite{evo18}, $EVO1$ and $EVO2$ are also included in the competition.
+The controllers obtained using the first fitness have also collected the points of the best laps in five out of the ten races. We have to bear in mind that the best lap is the result of a minimum damage and a high MaxSpeed, which are both optimized by the first function. In the same line, the second fitness tries to maximize the average speed, not necessarily the MaxSpeed.
 
-This evaluation is a like Formula 1 mini championship of 10 races each one for 20 laps where also six bots from TORCS are used to test our controllers. The first 5 races are conducted in \textbf{Alpine 2} track (trained one); and the other 5 races took place in \textbf{E-Track 5} track.
+For the following experiment, we have chosen the two - one per fitness function - best genetic-based fuzzy controllers obtained in the previous tests, which are named $GFC-MMS_1$ and $GFC-AVS_2$. They have been evaluated in a set of practice races against some selected opponents. In addition, the two best evolutionary controllers of our previous paper \cite{evo18}, $EVO1$ and $EVO2$, have been also included in the competition.
+
+This evaluation is a kind of Formula 1 mini championship, consisting of 10 races, each one for 20 laps, and with a total of 10 participants per race: the best two $GFC-MMS_1$ and $GFC-AVG_2$, $EVO1$ and $EVO2$, and also 6 bots from TORCS are used to test our controllers. The first 5 races are conducted in \textbf{Alpine 2} track (trained one); and the other 5 races took place in \textbf{E-Track 5} track (not trained for the new controllers, but used in the evolution of our previous ones).
+% Antonio - Mohammed, explain the scores in these races
 
 The results are shown in Table \ref{tab:chsresults}. 
 %
 \begin{table*}[ht]
   \centering
   {\scriptsize
-    \caption{ Results of the mini-championship with 10 drivers and ten races in \textbf{Alpine 2} and \textbf{E-Track 5} tracks. }
-    % Total points should be added, maybe per track. Also highlight,
-    % as above, who won. - JJ
-    %Mohammed : done
+    \caption{ Results of the mini-championship with 10 drivers and 10 races in two different tracks. }
     % References for Tita and Inferno should be added. I haven't seen
     % them - JJ
     {
-			\begin{tabular}{|c||c|c|c|c|c|c||c|c|c|c|c|c||}
+			\begin{tabular}{|c||c|c|c|c|c|c||c|c|c|c|c|c|}
 				\hline
-			&\multicolumn{6}{|c|}{\textbf{Alpine 2}} &	\multicolumn{6}{|c|}{\textbf{E-Track 5}}\\
+			&\multicolumn{6}{|c|}{Races in \textbf{Alpine 2} track (20 laps each)} &	\multicolumn{6}{|c|}{Races in \textbf{E-Track 5} track (20 laps each)}\\
+					\cline{2-13}
+				Driver&{R1}&{R2}&{R3}&{R4}&{R5}&Track Score&{R6}&{R7}&{R8}& {R9}&{R10}&Track Score\\
 				\hline
-				\hline	
-				Drivers&{Race 1}&{Race 2}&{Race 3}&{Race 4}&{Race 5}&Track Score&{Race 6}&{Race 7}&{Race 8}&{Race 9}&{Race 10}&Track Score\\
-				\hline	\hline			
 				$GFC-MMS_1$&	25&	10&	18&	12&	10&75&	18&	12&	15&	15&	12&72\\
 				$GFC-AVS_2$&	15&	18&	25&	15&	15&\textbf{88}&	25&	18&	18&	12&18&91\\
-				$Tita1$&	4&	2&	1&	2&	2&11&	4&	2&	1&	4&	6&17\\
-				$Tita2$&	2&	1&	2&	1&	1&7&	1&	1&	2&	1&	2&9\\
-				$Inferno1$&12&15&	12&	18&	18&75&	12&	15&	25&	25&	15&\textbf{92}\\
-				$Inferno2$&10&12&	4&	10&	25&61&	10&	10&	4&	2&	8&34\\
-				$Berwin1$&	18&	25&	15&	8&	6&72&	8&	8&	6&	10&	10&42\\
-				$Berwin2$	&8&	8&	10&	25&	12&63&	15&	25&	10&	8&	25&83\\
+				$tita1$&	4&	2&	1&	2&	2&11&	4&	2&	1&	4&	6&17\\
+				$tita2$&	2&	1&	2&	1&	1&7&	1&	1&	2&	1&	2&9\\
+				$inferno1$&12&15&	12&	18&	18&75&	12&	15&	25&	25&	15&\textbf{92}\\
+				$inferno2$&10&12&	4&	10&	25&61&	10&	10&	4&	2&	8&34\\
+				$berwin1$&	18&	25&	15&	8&	6&72&	8&	8&	6&	10&	10&42\\
+				$berwin2$	&8&	8&	10&	25&	12&63&	15&	25&	10&	8&	25&83\\
 				$EVO1$&	6&	6&	8&	4&	8&32&	2&	6&	12&	8&	4&32\\
 				$EVO2$&	1&	4&	6&	6&	4&21&	6&	4&	8&	6&	2&26\\
-				\hline
 				\hline
 				
 			\end{tabular}
 		}\label{tab:chsresults}
 	}
 \end{table*}
-%
-This table shows how the fuzzy controllers that are evolved using the
-new track and evaluation functions yield  the best results, obtaining
-very good overall rankings in the races, We can also see that our two
-genetic based fuzzy controllers have win  only one race for
-$GFC-MMS_1$ and two for $GFC-AVS_2$ controller compared to $berwin2 $
-and $inferno1$ bots which win three races each one. 
 
-This lack of race winning did not stop our genetic controllers from
-finishing in the first four rankings in the races, which helped them
-to win the  championship by score.
-This result is due to the trade-off between the damage and the average speed achieved by the fitness function. This property has given our controller an advantage in minimizing damage and looking for top speed in the straight sections of the track while it tries to find the best trajectory in turns to avoid hitting the track edges or get out of it.
-The overall number of points of the championship is presented in Figure \ref{fig:points} while Figure \ref{fig:damspeed} represent the numbers of races where each controller has obtained the minimum of damage and the higher MaxSpeed.
+This table shows how the fuzzy controllers that are evolved using the
+new selection and evaluation functions yield the best results, obtaining
+very good overall rankings in the races.
+% Antonio - Mohammed, Inferno1 obtained better scores than GFC-MMS_1...
+
+We can also see that our two genetic based fuzzy controllers have only won: one race $GFC-MMS_1$ and two races $GFC-AVS_2$, while $berwin2$ and $inferno1$ bots have won three races each one. 
+% Antonio - Mohammed, it is not clear to me how to know when they have won or the possition in the race...
+
+To complement the visualization of results, we have plotted the overall number of points of the championship in Figure \ref{fig:points}. Figure \ref{fig:damspeed} represents the number of races where each controller has obtained the minimum Damage and the highest Maximum Speed.
 
 \begin{figure*}[h!tb]	
   \begin{center}
@@ -706,7 +684,7 @@ The overall number of points of the championship is presented in Figure \ref{fig
     % Generated with plot-points.R 
     \caption{Total and partial score for all controllers in the {\em
         championship}. The two controllers introduced in
-    this paper use the {\tt GFC} preffix.}
+    this paper use the {\tt GFC} prefix.}
     \label{fig:points}	
   \end{center}	
 \end{figure*}
@@ -716,29 +694,38 @@ The overall number of points of the championship is presented in Figure \ref{fig
           \includegraphics[width=8cm]{fig/HISTSD.png}
           % Plotted with plot-speed-damage.R
 		\caption{Bar chart with the number of races where controlled
-                  cars obtain the minimum damage and where they obtain the highest MaxSpeed
-                in a lap.}
+                  cars obtain the minimum damage and where they obtain the highest MaxSpeed in a lap.}
 		\label{fig:damspeed}	
 	\end{center}	
 \end{figure}
 
-Table \ref{tab:damagespeed} presents a comparison between the genetic based fuzzy controllers presented in this paper, \textbf{$GFC-MMS_1$} and \textbf{$GFC-AVS_2$} with  
-those of  \cite{evo18}: $EVO1$  and $EVO2$. The average values of
-$damage$, $MaxSpeed$ and $Speed$ of the ten races in the
-\textbf{Alpine 2} and  \textbf{E-Track 5} tracks. 
+As it can be seen in the table and figures, even if they are not able to win, our new genetic controllers have finished in the first four positions in the races, which helped them to win the  championship by score.
+% Antonio - Mohammed, I think we should add the total score in the championship to Table II
+
+This result is due to the trade-off between the damage and the average speed achieved by the fitness function (mainly the second one). This property has given our controllers an advantage in minimizing damage and looking for top speed in the straight sections of the track while it tries to find the best trajectory in turns to avoid hitting the track edges or get out of it.
+
+Also, as we can see in Figure \ref{fig:damspeed} $GFC-MMS_1$ is better at doing fast laps, and at the same time it sustains less damage. Peak speed is not
+enough to eventually win a race. Figure \ref{fig:points} shows how
+$GFC-AVS_2$ achieves the best score in the {\em championship}. It
+should be noted that this victory is mainly achieved thanks to the 
+victories in {\tt E-Track 5}. Although it is always in a good position
+in this track, $GFC-MMS_1$ fails to win a single race, being overcome
+by the other tested controller as well as $inferno1$.
+
+Finally, Table \ref{tab:damagespeed} presents a comparison between the genetic based fuzzy controllers presented in this paper, \textbf{$GFC-MMS_1$} and \textbf{$GFC-AVS_2$} with those obtained in \cite{evo18}, $EVO1$  and $EVO2$. The results are the average values of $damage$, $MaxSpeed$ and $Speed$ of 10 races in the \textbf{Alpine 2} and \textbf{E-Track 5} tracks. 
 
 \begin{table}[!ht]
   \centering
   {\scriptsize
-    \caption{Average damage and Speed Results of GFC in a 5 races in \textbf{Alpine 2} and  \textbf{E-Track 5} tracks}
+    \caption{Average damage and Speed Results of GFC in 5 races in \textbf{Alpine 2} and 5 races in \textbf{E-Track 5} tracks}
     \label{tab:damagespeed}
     \begin{tabular}{|p{1.65cm}|c|c|c|c|}
       \hline 
       \multicolumn{5}{|c|}{\textbf{Alpine 2}}  \\	
       \hline  
    & \textbf{$GFC-MMS_1$}&\textbf{$GFC-AVS_2$} & \textbf{$EVO1$} &\textbf{$EVO2$}\\					
-      \hline \textbf{Average Speed km/h}& 188.66&194.39&154.02&150.98\\
-      \hline \textbf{Max Speed km/h}& 229.77&218.91&213.42&215.00\\	
+      \hline \textbf{Average Speed (km/h)}& 188.66&194.39&154.02&150.98\\
+      \hline \textbf{Max Speed (km/h)}& 229.77&218.91&213.42&215.00\\	
       \hline \textbf{Damage}& 122.43& 134.85&124.02 &131.41\\	
       \hline 
     \end{tabular}
@@ -754,31 +741,14 @@ $damage$, $MaxSpeed$ and $Speed$ of the ten races in the
 	}
 \end{table} 
 
-The average values obtained for the maximum speed and the damage show a clear improvement for the two new functions proposed for the fitness compared to those of EVO.
-Although the damage values of $GFC-MMS_1$ and $GFC-AVS_2$ did not vary very much, they remained close to the previous fitness functions.
-The conclusion that can be drawn from these results is the increase of
-the maximum speed of more than $10 km/h$ for $GFC-MMS_1$ and more than
-$5 km/h$ for $GFC-AVS_2$. This improvement in speed especially for the
-fitness $GFC-MMS_1$ is due to the maximization of the MaxSpeed in the
-fitness function so only the individuals that get the higher MaxSpeed
-are kept after the selection process of the genetic optimization. 
-
+The average values obtained for the maximum speed and the damage show a clear improvement for the two new controllers, with regard to previous ones, given by the novel fitness functions proposed here.
+Although the damage values of $GFC-MMS_1$ and $GFC-AVS_2$ remains similar to the ones obtained by `EVOs', the improvement in the average and maximum speed reached during the races is clear. This fact is even more remarkable in the case of $GFC-MMS_1$, which was designed with a fitness function in which the speed had a higher relevance.
 On the other hand, we can notice the considerable increase in the
 average speed of controller $GFC-AVS_2$ in both tracks and especially
-in Alpine2, which was the one used during the evolution process. This
+in Alpine 2, which was the one used during the evolution process. This
 increase translates into a decrease in race time in each segment of
-the track and therefore better performance. The results in Table
-\ref{tab:damagespeed} are consistent with the evaluation functions:
-$GFC-AVS_2$ has better average and lower MaxSpeed than
-$GFC-MMS_1$. Damage, however, is quite similar, although, as we can
-see in Figure \ref{fig:damspeed} $GFC-MMS_1$ is better at doing fast
-laps, at the same time it sustains less damage. Peak speed is not
-enough to eventually win a race: Figure \ref{fig:points} shows how
-$GFC-AVS_2$ achieves the best score in the {\em championship}. It
-should be noted that this victory is mainly achieved thanks to
-victories in {\tt E-Track5}. Although it is always in a good position
-in this track, $GFC-MMS_1$ fails to win a single race, being overcome
-by the other tested controller as well as Inferno1.
+the track and therefore an overall better performance. 
+According to the results in the table we could argue that the evaluation functions are working properly. And moreover, that the new approaches are working much better than previous ones, even in the circuit in which the `EVOs'  were trained.
 
 
 
@@ -786,70 +756,43 @@ by the other tested controller as well as Inferno1.
 \section{Conclusions and Future Work} 
 \label{sec:conclusions}
 
-In this work, we have presented an new ways of evaluating controllers
+In this work, we have presented new ways of evaluating controllers
 for the TORCS game; these new methods work within an evolutionary
-algorithm that optimizes a set of fuzzy controllers for TORCS cars \cite{evo17}. It combines two
-sub-controllers, one to calculate the target speed and the other for
-the direction, that is, for driving the steering wheel. 
+algorithm that optimizes a set of fuzzy controllers for TORCS cars \cite{evo18}. It combines two sub-controllers, one to calculate the target speed and the other for the direction, that is, for driving the steering wheel. 
 
-After initial tests, that showed the promise of using evolutionary
-algorithms with two different fitness functions, one considering the
-average lap time and the car damage and another adding the top speed
-reached, we discovered the importance of the speed, using different
+After initial tests in previous works \cite{evo17,evo18}, that showed the promise of using evolutionary algorithms with two different fitness functions, one considering the average lap time and the car damage and another adding the top speed reached, we discovered the importance of the speed, using different
 combinations. {\em A priori}, we could think that races are won by
 being very fast when you can be, and trying not to get too slow in
 tortuous segments. This heuristic was what drove us to design the
-first evaluation function, \textbf{$GFC-MMS_1$}. However, it could be
+first evaluation function, \textbf{$GFC-MMS$}. However, it could be
 thought that sustaining a high average speed will be the most
-important factor; this was the heuristic used for
-\textbf{$GFC-AVS_2$}. The choice of the single track used for training
-reflected these facts: tracks usually combine ``fast'' and ``slow''
-segments, and the car should be able to perform on both.
+important factor; this was the heuristic used for \textbf{$GFC-AVS$}. 
+The choice of the single track used for training reflected these facts: tracks usually combine ``fast'' and ``slow'' segments, and the car should be able to perform well on both.
 
 Besides, the uncertainty of the evaluation are taken into account when
 selecting the {\em best} controller. Since there is a random element
-in evaluation, instead of picking the individual with the best fitness
-in the last generation, we make them race against each other and pick
-the one with the best results in a real race. Introducing this element
-of reality also makes the choice of controller for comparison a more
-robust choice than previously. 
+in evaluation, instead of just picking the individual with the best fitness
+in the last generation, we make a subset of the best ones race against each other and select the one with the best results in a set of real races (against other rivals and in other tracks). Introducing this element of reality also makes the choice of controller for comparison a more robust choice than previously.
 
 The yielded results are very promising since the optimized controllers
 (one per fitness function) were ranked among the first ones in 
-different evaluation races with rivals, with the minimum of damage. 
+different evaluation races with rivals, with the minimum of damage and a very good average and maximum speed. 
 
-In the comparison with the original (before the optimization) fuzzy
-controller, the improvement can be clearly seen in the results. The
-new controllers are able to drive much faster than it, and moreover
-they manage to sustain a low damage, while the original controller
-even crashed the car in some races. % We should have to revise this.  
+In the comparison with the previous evolved fuzzy controllers (from \cite{evo18}), the improvement can be clearly seen in the results. The
+new controllers are able to drive much faster than them, even in a track where the latter were trained, and moreover they manage to sustain a low damage.  
 
-The results show that including the top speed in the calculus improves
-results, since the obtained drivers have proved to be able to run a 10
-to 15\% faster in the races. However the damage term must be also
-considered to `compensate' somehow the influence of the top speed,
-otherwise the controller would be extremely aggressive and would not
-finish many of the races.
 
 % All this has to be revised
 Thus, we can conclude from the results that the presented evolutionary
-algorithm with the
-proposed fitness functions are well suited for finding the best
-trade-off between the two objectives of any racing controller: damage
+algorithm with the proposed fitness functions are well suited for finding the best trade-off between the two objectives of any racing controller: damage
 and speed. 
 
-% We have to revise this. 
-% Antonio - revised and rewritten
-Nevertheless, these results can be improved by extending the
-evaluation of population controllers in the Genetic algorithm to other
-tracks and not just one, to allow the elected controller to adapt to many different situations during the races.
-The applied GA could be improved in different ways, for instance, reducing its computation time by means of the parallelization of the evaluation phase.
-Also, a multi-objective approach could be implemented, in which the main objectives to address by the controller could be optimized at once.
+As future lines of work, we could aim to improve the controllers considering a `deeper' and `wider' evaluation (more laps and more tracks). There is also a close research line to address, which is the optimization of the outputs in the fuzzy system, which has been set manually in all our approaches.
+
+With regard to the applied GA, it could be improved in different ways, for instance, reducing its computation time by means of the parallelization of the evaluation phase. Also, a multi-objective approach could be implemented, in which the main objectives to address by the controller could be optimized at once.
 Moreover, we could also try to generate, optimize and tune
 automatically the rule base of the fuzzy controller by means of a
 Genetic Programming algorithm.  
-
-Finally, the fuzzy controller could be evolved and adapted to be an efficient autonomous driver for a real car. This could be addressed by considering real-life traffic situations instead of races and, of course, redefining the fitness functions to accomplish other objectives, mainly related with security and comfort.
 
 \section*{Acknowledgments}
 
