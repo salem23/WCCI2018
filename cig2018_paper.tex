@@ -16,7 +16,7 @@
 %  controllers in racing simulators}
 %\title{The evolutionary race: generating enhanced fuzzy controllers for TORCS}
 % Antonio - Check this new title, I have had an inspiration moment. ;D
-
+% mohammed -  keep that inspiration
 
 %\thanks{This work has been supported in part by: Ministerio espa\~{n}ol de
 %Econom\'{\i}a y Competitividad under project TIN2014-56494-C4-3-P
@@ -589,7 +589,7 @@ To this end, once the evolutionary process is finished and for every approach, t
 % those chosen - JJ
 In order to enhance the selection of the best, another two controllers are picked randomly from the default TORCS bots to participate in the race. Moreover, in order to do it fairer, we have defined a \textit{score}, so the controller which gets the fastest lap or the minimum damage in each race is given 5 points.
 % Antonio - Mohammed, what about the rest of scores? Do the other bots obtain 4, 3, 2 and 1 points?
-
+% mohammed- there no bot  with 3 points,  the bots with 1 point in  the race means it finished last
 The results of these runs are shown in Table \ref{tab:runsresults}. "Best laps" and "Min damage" are the scores obtained by every controller in every race when getting the best lap time or/and the minimum damage of all the contenders. The symbol `-' means the TORCS bot do not participate in the race.
 
 \begin{table*}[ht]
@@ -673,6 +673,7 @@ This table shows how the fuzzy controllers that are evolved using the
 new selection and evaluation functions yield the best results, obtaining
 very good overall rankings in the races.
 % Antonio - Mohammed, Inferno1 obtained better scores than GFC-MMS_1...
+%Mohammed it has a faster car and its maxspeed is higher than ours , also he get more maxspeeds in the races ( 3)  
 
 We can also see that our two genetic based fuzzy controllers have only won: one race $GFC-MMS_1$ and two races $GFC-AVS_2$, while $berwin2$ and $inferno1$ bots have won three races each one. 
 % Antonio - Mohammed, it is not clear to me how to know when they have won or the possition in the race...
