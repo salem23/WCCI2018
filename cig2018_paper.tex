@@ -623,6 +623,7 @@ $damned1$&-			&-			&\textbf{25}&-			&10			&0&0&-			&-		& 			8&-		& -&0&0&-\\
 	}
 \end{table*}
 
+
 According to the table, the first individual of GFC-MMS and the second of GFC-AVS have won the same number of races but $GFC-AVS_2$ has achieved better scores on the races it did not win.
 We have to remark that the TORCS bots results are not counted since they only serve to diversify the selection and they do not participate in all the races.
 This selection allowed us to choose the best individual on several races and the most stable, and thus, avoid the classical selection by tournament where the winner of a single confrontation is chosen.
@@ -645,22 +646,22 @@ The results are shown in Table \ref{tab:chsresults}.
     % References for Tita and Inferno should be added. I haven't seen
     % them - JJ
     {
-			\begin{tabular}{|c||c|c|c|c|c|c||c|c|c|c|c|c|}
+			\begin{tabular}{|c||c|c|c|c|c|c||c|c|c|c|c|c||c|}
 				\hline
-			&\multicolumn{6}{|c|}{Races in \textbf{Alpine 2} track (20 laps each)} &	\multicolumn{6}{|c|}{Races in \textbf{E-Track 5} track (20 laps each)}\\
+			&\multicolumn{6}{|c|}{Races in \textbf{Alpine 2} track (20 laps each)} &	\multicolumn{6}{|c|}{Races in \textbf{E-Track 5} track (20 laps each)}&\\
 					\cline{2-13}
-				Driver&{R1}&{R2}&{R3}&{R4}&{R5}&Track Score&{R6}&{R7}&{R8}& {R9}&{R10}&Track Score\\
+				Driver&{R1}&{R2}&{R3}&{R4}&{R5}&Track Score&{R6}&{R7}&{R8}& {R9}&{R10}&Track Score& Total Score\\
 				\hline
-				$GFC-MMS_1$&	25&	10&	18&	12&	10&75&	18&	12&	15&	15&	12&72\\
-				$GFC-AVS_2$&	15&	18&	25&	15&	15&\textbf{88}&	25&	18&	18&	12&18&91\\
-				$tita1$&	4&	2&	1&	2&	2&11&	4&	2&	1&	4&	6&17\\
-				$tita2$&	2&	1&	2&	1&	1&7&	1&	1&	2&	1&	2&9\\
-				$inferno1$&12&15&	12&	18&	18&75&	12&	15&	25&	25&	15&\textbf{92}\\
-				$inferno2$&10&12&	4&	10&	25&61&	10&	10&	4&	2&	8&34\\
-				$berwin1$&	18&	25&	15&	8&	6&72&	8&	8&	6&	10&	10&42\\
-				$berwin2$	&8&	8&	10&	25&	12&63&	15&	25&	10&	8&	25&83\\
-				$EVO1$&	6&	6&	8&	4&	8&32&	2&	6&	12&	8&	4&32\\
-				$EVO2$&	1&	4&	6&	6&	4&21&	6&	4&	8&	6&	2&26\\
+				$GFC-MMS_1$&	25&	10&	18&	12&	10&75&	18&	12&	15&	15&	12&72&147\\
+				$GFC-AVS_2$&	15&	18&	25&	15&	15&\textbf{88}&	25&	18&	18&	12&18&91&\textbf{179}\\
+				$tita1$&	4&	2&	1&	2&	2&11&	4&	2&	1&	4&	6&17&28\\
+				$tita2$&	2&	1&	2&	1&	1&7&	1&	1&	2&	1&	2&9&16\\
+				$inferno1$&12&15&	12&	18&	18&75&	12&	15&	25&	25&	15&\textbf{92}&167\\
+				$inferno2$&10&12&	4&	10&	25&61&	10&	10&	4&	2&	8&34&95\\
+				$berwin1$&	18&	25&	15&	8&	6&72&	8&	8&	6&	10&	10&42&114\\
+				$berwin2$	&8&	8&	10&	25&	12&63&	15&	25&	10&	8&	25&83&146\\
+				$EVO1$&	6&	6&	8&	4&	8&32&	2&	6&	12&	8&	4&32&64\\
+				$EVO2$&	1&	4&	6&	6&	4&21&	6&	4&	8&	6&	2&26&47\\
 				\hline
 				
 			\end{tabular}
@@ -675,7 +676,8 @@ very good overall rankings in the races.
 
 We can also see that our two genetic based fuzzy controllers have only won: one race $GFC-MMS_1$ and two races $GFC-AVS_2$, while $berwin2$ and $inferno1$ bots have won three races each one. 
 % Antonio - Mohammed, it is not clear to me how to know when they have won or the possition in the race...
-
+% Mohammed the formula1 ponctuation system is as follows:
+%The first  car :25 points, 2:18, 3:15, 4: 12, 5: 10, 6 :8, 7: 6, 8: 4, 9: 2, 10: 1,  should I add the website of formula 1 as ref
 To complement the visualization of results, we have plotted the overall number of points of the championship in Figure \ref{fig:points}. Figure \ref{fig:damspeed} represents the number of races where each controller has obtained the minimum Damage and the highest Maximum Speed.
 
 \begin{figure*}[h!tb]	
@@ -701,7 +703,7 @@ To complement the visualization of results, we have plotted the overall number o
 
 As it can be seen in the table and figures, even if they are not able to win, our new genetic controllers have finished in the first four positions in the races, which helped them to win the  championship by score.
 % Antonio - Mohammed, I think we should add the total score in the championship to Table II
-
+%Mohammed-- done
 This result is due to the trade-off between the damage and the average speed achieved by the fitness function (mainly the second one). This property has given our controllers an advantage in minimizing damage and looking for top speed in the straight sections of the track while it tries to find the best trajectory in turns to avoid hitting the track edges or get out of it.
 
 Also, as we can see in Figure \ref{fig:damspeed} $GFC-MMS_1$ is better at doing fast laps, and at the same time it sustains less damage. Peak speed is not
