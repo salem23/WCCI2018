@@ -78,7 +78,7 @@ senses \cite{Autodriv2006}. Testing different autonomous driving methodologies i
 as well as algorithms are usually tested in simulated environments;
 these simulated environments, at the same time, offer the incentive of
 competition among your system and others. In this paper, we will be
-using the Open Racing Car Simulator (TORCS) \cite{WebTORCS}, a very
+using the Open Racing Car Simulator (TORCS) \cite{torcs4}, a very
 realistic racing simulator which offers a great testbed for the
 implementation and evaluation of autonomous drivers.  
 It has been used several times for the celebration of Artificial
@@ -165,7 +165,7 @@ simulator, the fuzzy controllers and the Genetic Algorithm implemented in Sectio
 \section{State of the Art}
 \label{sec:soa}
 
-TORCS has become one of the main environments for research on AI since its launch in 2007 \cite{WebTORCS}. It offers different kinds of problems to solve, such as the definition of the optimal parameters for the cars (before the race) \cite{Kole-ParamCarTunning12}, and the main one, which is the design of competitive autonomous drivers aiming to win races against other cars, mainly presented in the context on the Simulated Car Racing Competition \cite{SimulatedCarRacing-2008,oponnents2010}.
+TORCS has become one of the main environments for research on AI since its launch in 2007 \cite{torcs4}. It offers different kinds of problems to solve, such as the definition of the optimal parameters for the cars (before the race) \cite{Kole-ParamCarTunning12}, and the main one, which is the design of competitive autonomous drivers aiming to win races against other cars, mainly presented in the context on the Simulated Car Racing Competition \cite{SimulatedCarRacing-2008,oponnents2010}.
 
 Evolutionary algorithms have targeted TORCS almost since its
 publication, for instance, for determining the
@@ -203,7 +203,7 @@ In this paper we focus on the improvement of the evolved controllers by means of
 \section{Experimental Setup}
 \label{sec:experimental_setup}
 
-The Open Racing Car Simulator (TORCS) \cite{WebTORCS} is an open
+The Open Racing Car Simulator (TORCS) \cite{torcs4} is an open
 source, modern, multi-player, modular and portable racing simulator
 that allows users to compete against other computer-controlled opponents.
 Its high degree of modularity and portability, together with the
@@ -292,9 +292,9 @@ In \cite{evo18} the different sets of parameters which define the membership fun
 
 Moreover, the controller is based in a set of fuzzy rules, designed to maximize the car speed depending on the distance to the track border. These rules can be consulted in \cite{evo17}.
 % Antonio - TODO: Include the rules if there is available space?
-
+%
 %The fuzzy rules are:
-
+%
 % \begin{itemize}
 % {\small
 % 	\item \texttt{IF Front is High THEN TargetSpeed is TS1}
@@ -305,24 +305,24 @@ Moreover, the controller is based in a set of fuzzy rules, designed to maximize 
 % 	\item \texttt{IF Front is Low and M5 is Low and M10 is Medium THEN TargetSpeed is TS6}
 % 	\item \texttt{IF Front is Low and M5 is Low and M10 is Low THEN TargetSpeed is TS7}\\
 % }
-
+%
 % In addition, a crisp rule is added to obtain a maximum value of the target speed when the three input variables are as big as possible:\\
 % {\small	
 % \item \texttt{IF Front = MAXDISTSPEED or M5 = MAXDISTSPEED or M10 = MAXDISTSPEED THEN TargetSpeed = MAXSPEED}
 % }
 % \end{itemize}
-
+%
 % MAXDISTSPEED is the longest possible value for the track sensors, and MAXSPEED is the maximal speed for the specific car. 
 % The output value is encoded by seven singletons TS1 to TS7, being respectively: 280, 240, 220, 180, 120, 60 and 30.\\
-
-
+%
+%
 % %***********************************************
 % \noindent
 % \textbf{Fuzzy steering control sub-controller}\\
 % %
-
+%
 The second is the {\em fuzzy steering sub-controller}, which aims to define the steer angle estimating and determining the target position of the car. 
-
+%
 The structure of this sub-controller is similar to the speed one, but it has the steering as output. Thus, the set of sensors considered is the same as in the speed case.
 
 Then, as general rules: if the car is in a straight line, it will set as target position half width of the race track (central position of the lane). Whereas, if the car is near a right curve, it will approach the path leading to the right, with a space between the car and the border of the track to avoid the loss of control. The same approach is considered if the car is near a left curve.
@@ -367,7 +367,7 @@ The followed process is depicted in Figure \ref{fig:ga}, in which, as it can be 
 \begin{figure}[!ht]
   \label{fig:ga}
   \begin{center}
-    \includegraphics[width=10cm]{fig/flowchart}
+    \includegraphics[width=9cm]{fig/flowchart}
   \end{center}
   \caption{Optimization of a fuzzy controller flowchart. The evaluation of an individual is performed by: putting the parameter values on the two sub-controllers, launching a race in TORCS with this configuration, obtaining the resulting values of Damage, Top Speed and mean Lap Time and using these values for the computation of the fitness of the individual.}
 \end{figure}
@@ -419,7 +419,7 @@ $x_{3}$ and $x_{4}$ taking their values in the interval \textit{[a,
 
 \begin{figure}[!ht] 
 	\begin{center}
-		\includegraphics[scale=0.7]{fig/trapese}
+		\includegraphics[scale=0.5]{fig/trapese}
 		\caption {Trapezoidal MFs}
 		\label{fig:trapeze}
 	\end{center}
@@ -433,7 +433,7 @@ the representation is given by the
 figure \ref{fig:at} 
 \begin{figure}[!ht] 
 	\begin{center}
-		\includegraphics[scale=0.55]{fig/trapezoidal.png}
+		\includegraphics[scale=0.4]{fig/trapezoidal.png}
 		\caption {Trapezoidal-shaped MFs coding}
 		\label{fig:at}
 	\end{center}
@@ -554,7 +554,7 @@ After analyzing most of the available tracks, we have selected for these experim
 
 \begin{figure}[!ht]	
   \begin{center}
-    \includegraphics[width=4cm]{fig/alpine2.jpg}
+    \includegraphics[width=3cm]{fig/alpine2.jpg}
     \caption{Alpine 2 Track: Slow mountain road. Length: 3773.57m, Width: 10m}
     \label{fig:alpine2_track}	
   \end{center}	
@@ -642,9 +642,10 @@ The results are shown in Table \ref{tab:chsresults}.
 \begin{table*}[ht]
   \centering
   {\scriptsize
-    \caption{ Results of the mini-championship with 10 drivers and 10 races in two different tracks. }
-    % References for Tita and Inferno should be added. I haven't seen
-    % them - JJ
+    \caption{ Results of the mini-championship with 10 drivers and 10
+      races in two different tracks. {\tt tita}, {\tt berniw} and {\tt
+      inferno} are example controllers included with the TORCS
+    simulator \cite{torcs4}}
     {
 			\begin{tabular}{|c||c|c|c|c|c|c||c|c|c|c|c|c||c|}
 				\hline
@@ -668,19 +669,19 @@ The results are shown in Table \ref{tab:chsresults}.
 		}\label{tab:chsresults}
 	}
 \end{table*}
-
-This table shows how the fuzzy controllers that are evolved using the
-new selection and evaluation functions yield the best results, obtaining
+%
+This table shows how one of the fuzzy controllers that are evolved using the
+new selection and evaluation functions {\sf GFC-MMS$_2$} yields the best results, obtaining
 very good overall rankings in the races.
 % Antonio - Mohammed, Inferno1 obtained better scores than GFC-MMS_1...
 %Mohammed it has a faster car and its maxspeed is higher than ours , also he get more maxspeeds in the races ( 3)  
-
+%
 We can also see that our two genetic based fuzzy controllers have only won: one race $GFC-MMS_1$ and two races $GFC-AVS_2$, while $berniw2$ and $inferno1$ bots have won three races each one. 
 To complement the visualization of results, we have plotted the overall number of points of the championship in Figure \ref{fig:points}. Figure \ref{fig:damspeed} represents the number of races where each controller has obtained the minimum Damage and the highest Maximum Speed.
 
 \begin{figure*}[h!tb]	
   \begin{center}
-    \includegraphics[width=0.95\textwidth]{fig/POINTS.png}
+    \includegraphics[width=0.70\textwidth]{fig/POINTS.png}
     % Generated with plot-points.R 
     \caption{Total and partial score for all controllers in the {\em
         championship}. The two controllers introduced in
