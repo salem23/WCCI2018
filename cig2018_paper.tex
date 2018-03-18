@@ -243,9 +243,9 @@ interval \textit{[minSpeed, maxSpeed]} km/h.
 
 This fuzzy controller has an output, the speed, and three input values:
 \begin{itemize}
-	\item Front = Track\_9: front distance to the track border (angle 0º).  
-	\item M5 = max (Track\_8, Track\_10): max distance to the track border in an angle of +5º and -5º with respect to Front.
-	\item M10 = max (Track\_7, Track\_11): max distance to track border in an angle of +10º and -10º.
+	\item Front = Track\_9: front distance to the track border (angle 0\textdegree).  
+	\item M5 = max (Track\_8, Track\_10): max distance to the track border in an angle of +5\textdegree and -5\textdegree with respect to Front.
+	\item M10 = max (Track\_7, Track\_11): max distance to track border in an angle of +10\textdegree and -10\textdegree.
 \end{itemize}
 
 It is a Mamdani-based fuzzy system \cite{iancu2012} with three
@@ -587,9 +587,10 @@ The two genetic optimization processes have been run in independently. However, 
 To this end, once the evolutionary process is finished and for every approach, the best four individuals have competed together in 5 races (of 5 laps) in the \textbf{Alpine 2} track (used in the optimization) and 5 races (of 5 laps) in \textbf{E-Track 5} track (a new one for them). 
 % It would be interesting to add another column with the fitness of
 % those chosen - JJ
-In order to enhance the selection of the best, another two controllers are picked randomly from the default TORCS bots to participate in the race. Moreover, in order to do it fairer, we have defined a \textit{score}, so the controller which gets the fastest lap or the minimum damage in each race is given 5 points.
-% Antonio - Mohammed, what about the rest of scores? Do the other bots obtain 4, 3, 2 and 1 points?
-% mohammed- there no bot  with 3 points,  the bots with 1 point in  the race means it finished last
+In order to enhance the selection of the best, another two controllers are picked randomly from the default TORCS bots to participate in the race. 
+We have implemented a \textit{score-based competition}, which is based in Formula 1 schema, so the obtained scores depend on the car position: 1 - 25 points, 2 - 18, 3 - 15, 4 - 12, 5 - 10, 6 - 8, 7 - 6, 8 - 4, 9 - 2, 10 - 1.
+Moreover, in order to consider the fitness terms, we have defined an \textit{extra score}, so the controller which gets the fastest time or the minimum damage in each lap is given 5 extra points.
+
 The results of these runs are shown in Table \ref{tab:runsresults}. "Best laps" and "Min damage" are the scores obtained by every controller in every race when getting the best lap time or/and the minimum damage of all the contenders. The symbol `-' means the TORCS bot do not participate in the race.
 
 \begin{table*}[ht]
@@ -623,7 +624,6 @@ $damned1$&-			&-			&\textbf{25}&-			&10			&0&0&-			&-		& 			8&-		& -&0&0&-\\
 	}
 \end{table*}
 
-
 According to the table, the first individual of GFC-MMS and the second of GFC-AVS have won the same number of races but $GFC-AVS_2$ has achieved better scores on the races it did not win.
 We have to remark that the TORCS bots results are not counted since they only serve to diversify the selection and they do not participate in all the races.
 This selection allowed us to choose the best individual on several races and the most stable, and thus, avoid the classical selection by tournament where the winner of a single confrontation is chosen.
@@ -634,8 +634,8 @@ The controllers obtained using the first fitness have also collected the points 
 
 For the following experiment, we have chosen the two - one per fitness function - best genetic-based fuzzy controllers obtained in the previous tests, which are named $GFC-MMS_1$ and $GFC-AVS_2$. They have been evaluated in a set of practice races against some selected opponents. In addition, the two best evolutionary controllers of our previous paper \cite{evo18}, $EVO1$ and $EVO2$, have been also included in the competition.
 
-This evaluation is a kind of Formula 1 mini championship, consisting of 10 races, each one for 20 laps, and with a total of 10 participants per race: the best two $GFC-MMS_1$ and $GFC-AVG_2$, $EVO1$ and $EVO2$, and also 6 bots from TORCS are used to test our controllers. The first 5 races are conducted in \textbf{Alpine 2} track (trained one); and the other 5 races took place in \textbf{E-Track 5} track (not trained for the new controllers, but used in the evolution of our previous ones).
-% Antonio - Mohammed, explain the scores in these races
+This evaluation is a type of mini-championship, which also considers Formula 1 scores. It consists of 10 races, each one for 20 laps, and with a total of 10 participants per race: the best two $GFC-MMS_1$ and $GFC-AVG_2$, $EVO1$ and $EVO2$, and also 6 bots from TORCS are used to test our controllers. The first 5 races are conducted in \textbf{Alpine 2} track (trained one); and the other 5 races took place in \textbf{E-Track 5} track (not trained for the new controllers, but used in the evolution of our previous ones).
+It is important to note that in these races there are not extra points.
 
 The results are shown in Table \ref{tab:chsresults}. 
 %
@@ -671,8 +671,7 @@ The results are shown in Table \ref{tab:chsresults}.
 \end{table*}
 %
 This table shows how one of the fuzzy controllers that are evolved using the
-new selection and evaluation functions {\sf GFC-MMS$_2$} yields the best results, obtaining
-very good overall rankings in the races.
+new selection and evaluation functions {\sf GFC-MMS$_2$} yields the best results, obtaining very good overall rankings in the races. Inferno1 controller also obtained very good results, but it got 3 times the best lap score, surely due to it uses the fastest car.
 % Antonio - Mohammed, Inferno1 obtained better scores than GFC-MMS_1...
 %Mohammed it has a faster car and its maxspeed is higher than ours , also he get more maxspeeds in the races ( 3)  
 %
