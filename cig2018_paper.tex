@@ -78,22 +78,19 @@ senses \cite{Autodriv2006}. Testing different autonomous driving methodologies i
 as well as algorithms are usually tested in simulated environments;
 these simulated environments, at the same time, offer the incentive of
 competition among your system and others. In this paper, we will be
-using the Open Racing Car Simulator (TORCS) \cite{torcs4}, a very
+using the Open Racing Car Simulator (TORCS) \cite{WebTORCS}, a very
 realistic racing simulator which offers a great testbed for the
 implementation and evaluation of autonomous drivers.  
 It has been used several times for the celebration of Artificial
 Intelligence (AI) competitions, where the aim is to create the best
 autonomous driver for racing
-\cite{SimulatedCarRacing-2008,oponnents2010,Torcs3,manualTORCS}. Besides being
-able to test your car against other cars that have been published, it
-can be used as a standalone environment to optimize driving in a
-solo race. 
+\cite{SimulatedCarRacing-2008,oponnents2010,CarRacingCompetition_SoftwareManual13}. Besides being able to test your car against other cars that have been published, it can be used as a standalone environment to optimize driving in a solo race. 
 
 Evolutionary Algorithms (EAs) \cite{EAs_Back96} have been frequently
 applied as a general-purpose optimization method in this area,
 generally combined with behavioural engines that rule different parts
 of the car
-\cite{Floreano2004,CarRacing_Pelta09,SAES2012,torcs2012}. These
+\cite{Floreano2004,CarRacing_Pelta09,SAES2012,AutopiaDriver2012}. These
 driving engines have included lately fuzzy controllers
 \cite{Guadarrama2008, LFAG, PerezEvolvingFuzzy09}. These controllers
 use fuzzy Logic \cite{Fuzzy2011}, a  technique that is quite suitable
@@ -165,7 +162,7 @@ simulator, the fuzzy controllers and the Genetic Algorithm implemented in Sectio
 \section{State of the Art}
 \label{sec:soa}
 
-TORCS has become one of the main environments for research on AI since its launch in 2007 \cite{torcs4}. It offers different kinds of problems to solve, such as the definition of the optimal parameters for the cars (before the race) \cite{Kole-ParamCarTunning12}, and the main one, which is the design of competitive autonomous drivers aiming to win races against other cars, mainly presented in the context on the Simulated Car Racing Competition \cite{SimulatedCarRacing-2008,oponnents2010}.
+TORCS has become one of the main environments for research on AI since its launch in 2007 \cite{WebTORCS}. It offers different kinds of problems to solve, such as the definition of the optimal parameters for the cars (before the race) \cite{Kole-ParamCarTunning12}, and the main one, which is the design of competitive autonomous drivers aiming to win races against other cars, mainly presented in the context on the Simulated Car Racing Competition \cite{SimulatedCarRacing-2008,oponnents2010}.
 
 Evolutionary algorithms have targeted TORCS almost since its
 publication, for instance, for determining the
@@ -186,7 +183,7 @@ structure/architecture of the models \cite{SAES2012,neurone}, working
 offline, or online (during the game)
 \cite{TanOnline08,Cardamone_Online_NN}.
 % FUZZY + EAs
-Our approach is focused in this line, proposing the application of an off-line genetic algorithm for the improvement of the parameters which determine the behavior of a controller for TORCS. We have focused on a Fuzzy-based model, as it is one of the best options for modeling human-like decisions and actions, as others authors have also used this kind of technique in the literature with good results \cite{torcs2012}. 
+Our approach is focused in this line, proposing the application of an off-line genetic algorithm for the improvement of the parameters which determine the behavior of a controller for TORCS. We have focused on a Fuzzy-based model, as it is one of the best options for modeling human-like decisions and actions, as others authors have also used this kind of technique in the literature with good results \cite{AutopiaDriver2012}. 
 For instance, in \cite{Guadarrama2008}, a fuzzy rule-based car controller for a Car Racing Competition was built and tuned with co-evolutionary genetic algorithms. Two fuzzy sub-controllers were designed (acceleration and turning angle). But this approach was applied to a simpler simulator than TORCS which is a more realistic and time-constrained simulator. 
 
 P{\'e}rez et al. introduced an evolutionary fuzzy approach for TORCS in \cite{PerezEvolvingFuzzy09}, where they applied EAs for improving fuzzy models to infer the acceleration and turning angle. However, the models were not so specialized as the proposed here, since their controller did not compute the target speed, which is a key factor for a competitive controller. 
@@ -203,18 +200,15 @@ In this paper we focus on the improvement of the evolved controllers by means of
 \section{Experimental Setup}
 \label{sec:experimental_setup}
 
-The Open Racing Car Simulator (TORCS) \cite{torcs4} is an open
+The Open Racing Car Simulator (TORCS) \cite{WebTORCS} is an open
 source, modern, multi-player, modular and portable racing simulator
 that allows users to compete against other computer-controlled opponents.
 Its high degree of modularity and portability, together with the
 realistic and real-time driving simulation, make it an ideal testbed
 for artificial intelligence research, as we have shown in the previous section.
 
-Every car in TORCS includes  a large set of sensors \cite{Torcs3},
-whose values the car can use during a race, such as distances to track borders, to rivals, current fuel, current gear, position in the race, speed, or damage, among others.
-The sensor values are considered by any TORCS autonomous driver, or
-{\em controller}, to manage the car using actuators \cite{Torcs3}: the
-steering wheel, the accelerator, the brake pedal and the gearbox.   
+Every car in TORCS includes a large set of sensors, whose values the car can use during a race, such as distances to track borders, to rivals, current fuel, current gear, position in the race, speed, or damage, among others. The sensor values can be considered by any TORCS autonomous driver, or {\em controller}, to manage the car using actuators: the steering wheel, the accelerator, the brake pedal and the gearbox.  
+The designed controller is based on the model of sensors and actuators of the simulated car racing competition \cite{CarRacingCompetition_SoftwareManual13}.
 
 %Thus, a controller is a program, running inside TORCS, that drives a car automatically. It gets as input information about the current state of
 %the car and its situation on the track (sensors). These collected data
@@ -367,7 +361,7 @@ The followed process is depicted in Figure \ref{fig:ga}, in which, as it can be 
 \begin{figure}[!ht]
   \label{fig:ga}
   \begin{center}
-    \includegraphics[width=9cm]{fig/flowchart}
+    \includegraphics[width=9cm]{fig/flowchart.png}
   \end{center}
   \caption{Optimization of a fuzzy controller flowchart. The evaluation of an individual is performed by: putting the parameter values on the two sub-controllers, launching a race in TORCS with this configuration, obtaining the resulting values of Damage, Top Speed and mean Lap Time and using these values for the computation of the fitness of the individual.}
 \end{figure}
@@ -582,7 +576,7 @@ We have evaluated the Genetic Fuzzy Controller (GFC) with the two proposed fitne
 %}
 %\end{table}
 
-The two genetic optimization processes have been run in independently. However, as a difference to previous works in which we just selected as the best the individual with the highest fitness value in the last generation, in this study we have aimed to implement a better process, which we expect will yield a more competitive controller.
+The two genetic optimization processes have been run independently. However, as a difference to previous works in which we just selected as the best the individual with the highest fitness value in the last generation, in this study we have aimed to implement a better process, which we expect will yield a more competitive controller.
 
 To this end, once the evolutionary process is finished and for every approach, the best four individuals have competed together in 5 races (of 5 laps) in the \textbf{Alpine 2} track (used in the optimization) and 5 races (of 5 laps) in \textbf{E-Track 5} track (a new one for them). 
 % It would be interesting to add another column with the fitness of
@@ -645,7 +639,7 @@ The results are shown in Table \ref{tab:chsresults}.
     \caption{ Results of the mini-championship with 10 drivers and 10
       races in two different tracks. {\tt tita}, {\tt berniw} and {\tt
       inferno} are example controllers included with the TORCS
-    simulator \cite{torcs4}}
+    simulator \cite{WebTORCS}}
     {
 			\begin{tabular}{|c||c|c|c|c|c|c||c|c|c|c|c|c||c|}
 				\hline
@@ -680,7 +674,7 @@ To complement the visualization of results, we have plotted the overall number o
 
 \begin{figure*}[h!tb]	
   \begin{center}
-    \includegraphics[width=0.70\textwidth]{fig/POINTS.png}
+    \includegraphics[width=0.70\textwidth]{fig/points.png}
     % Generated with plot-points.R 
     \caption{Total and partial score for all controllers in the {\em
         championship}. The two controllers introduced in
@@ -691,7 +685,7 @@ To complement the visualization of results, we have plotted the overall number o
 %
 \begin{figure}[!ht]	
 	\begin{center}
-          \includegraphics[width=8cm]{fig/HISTSD.png}
+          \includegraphics[width=8cm]{fig/histsd.png}
           % Plotted with plot-speed-damage.R
 		\caption{Bar chart with the number of races where controlled
                   cars obtain the minimum damage and where they obtain the highest MaxSpeed in a lap.}
@@ -823,7 +817,7 @@ Moreover, we could also try to generate, optimize and tune
 automatically the rule base of the fuzzy controller by means of a
 Genetic Programming algorithm.  
 
-\section*{Acknowledgments}
+\section*{Acknowledgements}
 
 This work has been supported in part by: Ministerio espa\~{n}ol de
 Econom\'{\i}a y Competitividad under project TIN2014-56494-C4-3-P
