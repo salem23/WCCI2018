@@ -12,28 +12,14 @@
 
 \title{The evolutionary race: improving the process of evaluating car
  controllers in racing simulators}
-%\title{Evolved to win: improving the process of evaluating car
-%  controllers in racing simulators}
-%\title{The evolutionary race: generating enhanced fuzzy controllers for TORCS}
-% Antonio - Check this new title, I have had an inspiration moment. ;D
-% mohammed -  keep that inspiration
-
-%\thanks{This work has been supported in part by: Ministerio espa\~{n}ol de
-%Econom\'{\i}a y Competitividad under project TIN2014-56494-C4-3-P
-%(UGR-EPHEMECH), TIN2017-85727-C4-2-P (UGR-DeepBio) and TEC2015-68752 (also funded by FEDER).}
-%}
 
 \author{\IEEEauthorblockN{Mohammed Salem\IEEEauthorrefmark{1},
 Antonio M. Mora\IEEEauthorrefmark{2} and
 Juan J. Merelo\IEEEauthorrefmark{3}}
-%and
-%Pablo Garc{\'i}a-S{\'a}nchez\IEEEauthorrefmark{4}}
-% Antonio - Pablo requested me to remove him
-\IEEEauthorblockA{\IEEEauthorrefmark{1}Department of Computer Sciences, University of Mascara, Algeria. \\Email: salem@univ-mascara.dz}
-\IEEEauthorblockA{\IEEEauthorrefmark{2}Department of Computer Sciences and Technology, ESIT, International University of La Rioja (UNIR), Spain. \\Email: antoniomiguel.mora@unir.net}
-\IEEEauthorblockA{\IEEEauthorrefmark{3}Dept. of Computer Architecture and Computer Technology. University of Granada, Spain. \\Email: jmerelo@geneura.ugr.es}
-%\IEEEauthorblockA{\IEEEauthorrefmark{4}Department of Computer Science, ESI,
-%University of C{\'a}diz, Spain. \\Email: pablo.garciasanchez@uca.es}
+\IEEEauthorblockA{\IEEEauthorrefmark{1}Dept. of Computer Sciences, University of Mascara, Algeria.}
+\IEEEauthorblockA{\IEEEauthorrefmark{2}Dept. of Signal Theory, Telematics and Communications, ESIIT - CITIC, University of Granada, Spain.}
+\IEEEauthorblockA{\IEEEauthorrefmark{3}Dept. of Computer Architecture and Computer Technology. University of Granada, Spain. 
+\\\texttt{salem@univ-mascara.dz, amorag@ugr.es, jmerelo@ugr.es}}
 }
 
 \maketitle
@@ -42,7 +28,7 @@ Juan J. Merelo\IEEEauthorrefmark{3}}
 Simulated car races have been used for a long time as an environment
 where car controlling algorithms can be tested; they are an
 interesting testbed for all kinds of algorithms, including
-metaheuristics such as evolutionary algorithms; however, the challenge
+metaheuristics such as evolutionary algorithms. However, the challenge
 in the evolutionary algorithms is to design a reliable and effective
 evaluation process for the individuals that eventually translates into
 good solutions to the car racing problem: finding a controller that is
@@ -84,7 +70,7 @@ implementation and evaluation of autonomous drivers.
 It has been used several times for the celebration of Artificial
 Intelligence (AI) competitions, where the aim is to create the best
 autonomous driver for racing
-\cite{SimulatedCarRacing-2008,oponnents2010,CarRacingCompetition_SoftwareManual13}. Besides being able to test your car against other cars that have been published, it can be used as a standalone environment to optimize driving in a solo race. 
+\cite{SimulatedCarRacing-2008,SimulatedCarRacing2009,CarRacingCompetition_SoftwareManual13}. Besides being able to test your car against other cars that have been published, it can be used as a standalone environment to optimize driving in a solo race. 
 
 Evolutionary Algorithms (EAs) \cite{EAs_Back96} have been frequently
 applied as a general-purpose optimization method in this area,
@@ -162,7 +148,7 @@ simulator, the fuzzy controllers and the Genetic Algorithm implemented in Sectio
 \section{State of the Art}
 \label{sec:soa}
 
-TORCS has become one of the main environments for research on AI since its launch in 2007 \cite{WebTORCS}. It offers different kinds of problems to solve, such as the definition of the optimal parameters for the cars (before the race) \cite{Kole-ParamCarTunning12}, and the main one, which is the design of competitive autonomous drivers aiming to win races against other cars, mainly presented in the context on the Simulated Car Racing Competition \cite{SimulatedCarRacing-2008,oponnents2010}.
+TORCS has become one of the main environments for research on AI since its launch in 2007 \cite{WebTORCS}. It offers different kinds of problems to solve, such as the definition of the optimal parameters for the cars (before the race) \cite{Kole-ParamCarTunning12}, and the main one, which is the design of competitive autonomous drivers aiming to win races against other cars, mainly presented in the context on the Simulated Car Racing Competition \cite{SimulatedCarRacing-2008,SimulatedCarRacing2009}.
 
 Evolutionary algorithms have targeted TORCS almost since its
 publication, for instance, for determining the
@@ -184,12 +170,12 @@ offline, or online (during the game)
 \cite{TanOnline08,Cardamone_Online_NN}.
 % FUZZY + EAs
 Our approach is focused in this line, proposing the application of an off-line genetic algorithm for the improvement of the parameters which determine the behavior of a controller for TORCS. We have focused on a Fuzzy-based model, as it is one of the best options for modeling human-like decisions and actions, as others authors have also used this kind of technique in the literature with good results \cite{AutopiaDriver2012}. 
-For instance, in \cite{Guadarrama2008}, a fuzzy rule-based car controller for a Car Racing Competition was built and tuned with co-evolutionary genetic algorithms. Two fuzzy sub-controllers were designed (acceleration and turning angle). But this approach was applied to a simpler simulator than TORCS which is a more realistic and time-constrained simulator. 
+For instance, in \cite{Guadarrama2008}, a fuzzy rule-based car controller for a Car Racing Competition was built and tuned with co-evolutionary genetic algorithms. Two fuzzy sub-controllers were designed (acceleration and turning angle). But this approach was applied to a simpler simulator than TORCS which is more realistic and time-constrained. 
 
 P{\'e}rez et al. introduced an evolutionary fuzzy approach for TORCS in \cite{PerezEvolvingFuzzy09}, where they applied EAs for improving fuzzy models to infer the acceleration and turning angle. However, the models were not so specialized as the proposed here, since their controller did not compute the target speed, which is a key factor for a competitive controller. 
 
 Onieva et al. \cite{LFAG} presented a parametrized modular architecture with a fuzzy system and a GA, aiming to reproduce the behavior of a human driver when controlling the steering wheel. In this line, we presented an improved approach \cite{evo17}, which evolved a fuzzy-based driver considering the target speed in addition to the steer (two fuzzy sub-controllers).
-This controller was also enhanced in a further work \cite{evo18} optimizing the parameters of the membership functions by means of a real coded genetic algorithm, obtaining a noticeable improvement in performance.
+This controller was also enhanced in a further work \cite{evo18} optimizing the parameters of the membership functions by means of a real-coded GA, obtaining a noticeably improved performance.
 
 In this paper we focus on the improvement of the evolved controllers by means of a redefinition of the fitness functions, looking for a parameter-less approach (no weights in the terms) \cite{Harik-ParameterLess99}, which will be also more focused on the real objectives for a driver during a race, rather than the overall target. In addition, a `fairer' selection process of the best individual has been implemented, aiming to focus on real good drivers in races, instead of choosing the one with the highest fitness value, which could have a poorer performance due to the uncertainty/noise present on the problem.
 
@@ -409,7 +395,7 @@ x_{1} \leq x_{2} \leq x_{3} \leq x_{4}
 \end{equation}
 This MF function is defined by four parameters $x_{1}$, $x_{2}$,
 $x_{3}$ and $x_{4}$ taking their values in the interval \textit{[a,
-  b]}.% (See Figure \ref{fig:trapeze}).
+  b]} (Figure \ref{fig:trapeze}).
 
 \begin{figure}[!ht] 
 	\begin{center}
@@ -423,8 +409,8 @@ $x_{3}$ and $x_{4}$ taking their values in the interval \textit{[a,
 And a fuzzy partition with \textit{n} trapezoidal membership functions
 is defined by \textit{2n} variables (\textit{a =} $ x_{1}$,$x_{2}
 $,. .., $x_{2n} $ \textit {= b})(Equation \ref{eq:e1}). In this case,
-the representation is given by the
-figure \ref{fig:at} 
+the representation is given by Figure \ref{fig:at}.
+%
 \begin{figure}[!ht] 
 	\begin{center}
 		\includegraphics[scale=0.4]{fig/trapezoidal.png}
@@ -432,7 +418,8 @@ figure \ref{fig:at}
 		\label{fig:at}
 	\end{center}
 \end{figure}
-with:
+%
+With:
 \begin{equation}
 a = x_{1} \leq x_{2} \leq...\leq x_{2n-1} \leq x_{2n}=b 	
 \end{equation}		
@@ -482,7 +469,7 @@ implementation in a vector that includes all variables to optimize.
 In that GA, every individual is a vector of 18 values/parameters, 6 per variable. Figure \ref {fig:cromosome} illustrates the structure of the chromosome.
 \begin{figure*}[!ht]	
   \begin{center}
-    \includegraphics[width=12cm]{fig/chromosome2.png}
+    \includegraphics[width=11cm]{fig/chromosome2.png}
     \caption{Chromosome description}
     \label{fig:cromosome}	
   \end{center}	
@@ -536,7 +523,7 @@ As it can be seen, the aim is to maximize the minimum and maximum velocities whi
 
 To evaluate every candidate controller during the evolutionary process, we will make each of them compete in a 20 laps practice race in a medium difficulty circuit without rivals. As stated, we have omitted the presence of opponents in order to avoid including additional uncertainty sources to the optimization process. In order to obtain general-behaviour controllers, the selected track for this process will be one with a combination of curves and straight parts.
 
-After this practice, the obtained output values $Damage$, $MinSpeed$, $MaxSpeed$ and $AVG(Speed)$ are collected to compute the corresponding fitness value.
+Once this practice is finished, the obtained output values $Damage$, $MinSpeed$, $MaxSpeed$ and $AVG(Speed)$ are collected to compute the corresponding fitness value.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%  RESULTS  %%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -576,7 +563,7 @@ We have evaluated the Genetic Fuzzy Controller (GFC) with the two proposed fitne
 %}
 %\end{table}
 
-The two genetic optimization processes have been run independently. However, as a difference to previous works in which we just selected as the best the individual with the highest fitness value in the last generation, in this study we have aimed to implement a better process, which we expect will yield a more competitive controller.
+The two genetic optimization processes have been run independently. However, as a difference to previous works in which we just selected as the best the individual with the highest fitness value in the last generation, in this study we have aimed to implement a better methodology, which we expect will yield a more competitive controller.
 
 To this end, once the evolutionary process is finished and for every approach, the best four individuals have competed together in 5 races (of 5 laps) in the \textbf{Alpine 2} track (used in the optimization) and 5 races (of 5 laps) in \textbf{E-Track 5} track (a new one for them). 
 % It would be interesting to add another column with the fitness of
@@ -628,7 +615,7 @@ The controllers obtained using the first fitness have also collected the points 
 
 For the following experiment, we have chosen the two - one per fitness function - best genetic-based fuzzy controllers obtained in the previous tests, which are named $GFC-MMS_1$ and $GFC-AVS_2$. They have been evaluated in a set of practice races against some selected opponents. In addition, the two best evolutionary controllers of our previous paper \cite{evo18}, $EVO1$ and $EVO2$, have been also included in the competition.
 
-This evaluation is a type of mini-championship, which also considers Formula 1 scores. It consists of 10 races, each one for 20 laps, and with a total of 10 participants per race: the best two $GFC-MMS_1$ and $GFC-AVG_2$, $EVO1$ and $EVO2$, and also 6 bots from TORCS are used to test our controllers. The first 5 races are conducted in \textbf{Alpine 2} track (trained one); and the other 5 races took place in \textbf{E-Track 5} track (not trained for the new controllers, but used in the evolution of our previous ones).
+This evaluation is a type of mini-championship, which also considers Formula 1 scores. It consists of 10 races, each one for 20 laps, and with a total of 10 participants per race: the best two $GFC-MMS_1$ and $GFC-AVG_2$, $EVO1$, $EVO2$, and also 6 bots from TORCS are used to test our controllers. The first 5 races are conducted in \textbf{Alpine 2} track (trained one); and the other 5 races took place in \textbf{E-Track 5} track (not trained for the new controllers, but used in the evolution of our previous ones). The the starting grid (initial positions of cars) on these races was set randomly.
 It is important to note that in these races there are not extra points.
 
 The results are shown in Table \ref{tab:chsresults}. 
