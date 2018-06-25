@@ -6,20 +6,31 @@
 \usepackage{algorithmic}
 \usepackage{graphicx}
 \usepackage{textcomp}
+\usepackage{xcolor}
 \def\BibTeX{{\rm B\kern-.05em{\sc i\kern-.025em b}\kern-.08em
     T\kern-.1667em\lower.7ex\hbox{E}\kern-.125emX}}
 \begin{document}
 
-\title{The evolutionary race: improving the process of evaluating car
- controllers in racing simulators}
+\title{The Evolutionary Race: Improving the Process of Evaluating Car
+ Controllers in Racing Simulators}
 
-\author{\IEEEauthorblockN{Mohammed Salem\IEEEauthorrefmark{1},
-Antonio M. Mora\IEEEauthorrefmark{2} and
-Juan J. Merelo\IEEEauthorrefmark{3}}
-\IEEEauthorblockA{\IEEEauthorrefmark{1}Dept. of Computer Sciences, University of Mascara, Algeria.}
-\IEEEauthorblockA{\IEEEauthorrefmark{2}Dept. of Signal Theory, Telematics and Communications, ESIIT - CITIC, University of Granada, Spain.}
-\IEEEauthorblockA{\IEEEauthorrefmark{3}Dept. of Computer Architecture and Computer Technology. University of Granada, Spain. 
-\\\texttt{salem@univ-mascara.dz, amorag@ugr.es, jmerelo@ugr.es}}
+\author{\IEEEauthorblockN{Mohammed Salem}
+\IEEEauthorblockA{\textit{Dept. of Computer Sciences} \\
+\textit{University of Mascara}\\
+Algeria \\
+salem@univ-mascara.dz}
+\and
+\IEEEauthorblockN{Antonio M. Mora}
+\IEEEauthorblockA{\textit{Dept. of Signal Theory, Telemat. and Communic.}\\
+\textit{ETSIIT-CITIC, University of Granada}\\
+Spain \\
+amorag@ugr.es}
+\and
+\IEEEauthorblockN{Juan J. Merelo}
+\IEEEauthorblockA{\textit{Dept. of Comp. Architect. and Technology} \\
+\textit{ETSIIT-CITIC, University of Granada}\\
+Spain \\
+jmerelo@ugr.es}
 }
 
 \maketitle
@@ -36,9 +47,7 @@ able to win in a wide range of tracks and with a good quantity of
 opponents. Evaluating individual car controllers involves not only the design of a proper fitness function representing how good the car controller would be in
 a competitive race, but also the selection of the best solution for the
 optimization problem being solved; this decision might not be
-easy when uncertainty is present in the problem
-environment; in this case, weather and track conditions as well as unpredictable
-behavior of other drivers. 
+easy when uncertainty is present in the problem environment; in this case, weather and track conditions as well as unpredictable behavior of other drivers. 
 Creating a methodology for the automatic design of  the controller of an
 autonomous driver for a car racing simulator such as TORCS is an
 optimization problem which offers all these challenges. Thus, in this
@@ -46,9 +55,11 @@ paper we describe an analysis and some proposals to improve the
 evaluation of optimized fuzzy drivers for TORCS over previous attempts
 to do so. It builds on preliminary results obtained in previous papers as a baseline and aims to obtain a more competitive autonomous driver via redesign of the fitness evaluation procedure; to this end, two different fitness functions are studied in several experiments, along with a novel race-based approach for the selection of the best individual in the evolution. 
 \end{abstract}
+
 \begin{IEEEkeywords}
-Videogames, Simulated Car Racing, TORCS, Fuzzy Controllers, Autonomous Drivers, Genetic Algorithms, Optimization, Evaluation
+simulated car racing, TORCS, fuzzy controllers, autonomous drivers, genetic algorithms, optimization, evaluation
 \end{IEEEkeywords}
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%   INTRODUCTION   %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 \section{Introduction}
@@ -148,7 +159,7 @@ simulator, the fuzzy controllers and the Genetic Algorithm implemented in Sectio
 \section{State of the Art}
 \label{sec:soa}
 
-TORCS has become one of the main environments for research on AI since its launch in 2007 \cite{WebTORCS}. It offers different kinds of problems to solve, such as the definition of the optimal parameters for the cars (before the race) \cite{Kole-ParamCarTunning12}, and the main one, which is the design of competitive autonomous drivers aiming to win races against other cars, mainly presented in the context on the Simulated Car Racing Competition \cite{SimulatedCarRacing-2008,SimulatedCarRacing2009}.
+TORCS has become one of the main environments for research on AI since its launch in 2007 \cite{WebTORCS}. It offers different kinds of problems to solve, such as the definition of the optimal parameters for the cars (before the race) \cite{Kole-ParamCarTunning12}, and the main one, the design of competitive autonomous drivers aiming to win races against other cars, mainly presented in the context on the Simulated Car Racing Competition \cite{SimulatedCarRacing-2008,SimulatedCarRacing2009}.
 
 Evolutionary algorithms have targeted TORCS almost since its
 publication, for instance, for determining the
@@ -172,9 +183,9 @@ offline, or online (during the game)
 Our approach is focused in this line, proposing the application of an off-line genetic algorithm for the improvement of the parameters which determine the behavior of a controller for TORCS. We have focused on a Fuzzy-based model, as it is one of the best options for modeling human-like decisions and actions, as others authors have also used this kind of technique in the literature with good results \cite{AutopiaDriver2012}. 
 For instance, in \cite{Guadarrama2008}, a fuzzy rule-based car controller for a Car Racing Competition was built and tuned with co-evolutionary genetic algorithms. Two fuzzy sub-controllers were designed (acceleration and turning angle). But this approach was applied to a simpler simulator than TORCS which is more realistic and time-constrained. 
 
-P{\'e}rez et al. introduced an evolutionary fuzzy approach for TORCS in \cite{PerezEvolvingFuzzy09}, where they applied EAs for improving fuzzy models to infer the acceleration and turning angle. However, the models were not so specialized as the proposed here, since their controller did not compute the target speed, which is a key factor for a competitive controller. 
+P{\'e}rez \textit{et al.} introduced an evolutionary fuzzy approach for TORCS in \cite{PerezEvolvingFuzzy09}, where they applied EAs for improving fuzzy models to infer the acceleration and turning angle. However, the models were not so specialized as the proposed here, since their controller did not compute the target speed, which is a key factor for a competitive controller. 
 
-Onieva et al. \cite{LFAG} presented a parametrized modular architecture with a fuzzy system and a GA, aiming to reproduce the behavior of a human driver when controlling the steering wheel. In this line, we presented an improved approach \cite{evo17}, which evolved a fuzzy-based driver considering the target speed in addition to the steer (two fuzzy sub-controllers).
+Onieva \textit{et al.} \cite{LFAG} presented a parametrized modular architecture with a fuzzy system and a GA, aiming to reproduce the behavior of a human driver when controlling the steering wheel. In this line, we presented an improved approach \cite{evo17}, which evolved a fuzzy-based driver considering the target speed in addition to the steer (two fuzzy sub-controllers).
 This controller was also enhanced in a further work \cite{evo18} optimizing the parameters of the membership functions by means of a real-coded GA, obtaining a noticeably improved performance.
 
 In this paper we focus on the improvement of the evolved controllers by means of a redefinition of the fitness functions, looking for a parameter-less approach (no weights in the terms) \cite{Harik-ParameterLess99}, which will be also more focused on the real objectives for a driver during a race, rather than the overall target. In addition, a `fairer' selection process of the best individual has been implemented, aiming to focus on real good drivers in races, instead of choosing the one with the highest fitness value, which could have a poorer performance due to the uncertainty/noise present on the problem.
@@ -305,7 +316,7 @@ The second is the {\em fuzzy steering sub-controller}, which aims to define the 
 %
 The structure of this sub-controller is similar to the speed one, but it has the steering as output. Thus, the set of sensors considered is the same as in the speed case.
 
-Then, as general rules: if the car is in a straight line, it will set as target position half width of the race track (central position of the lane). Whereas, if the car is near a right curve, it will approach the path leading to the right, with a space between the car and the border of the track to avoid the loss of control. The same approach is considered if the car is near a left curve.
+Then, as general rules: if the car is in a straight line, it will set as target position half width of the race track (central position of the lane). Whereas, if the car is near a right/left curve, it will approach the path leading to the right/left, with a space between the car and the border of the track to avoid the loss of control. 
 
 In order to detect the curves, the controller focuses on the sensor values (M10, M5, and Front). So, if the value on Front sensor is the longest, there is a straight road; whereas if the values of M5 and M10 with positive angles (+5 and +10) are the longest, there is right curve; and the other way round.
 
